@@ -60,7 +60,7 @@ def proc(fn) :
         #print p.p_type, p.p_offset, p.p_filesz
         b.seek(p.p_offset)
         d = b.read(p.p_filesz)
-        fn2 = '%s-%x' % (fn, p.p_offset)
+        fn2 = '%s-%x' % (fn, p.p_vaddr)
         file(fn2, 'wb').write(d)
 
 for fn in sys.argv[1:] :
