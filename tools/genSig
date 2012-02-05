@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# generate an IDA sig file for the iguana libs.
+# run from in the OKL4 build directory with IDA tools in $PATH
+# when done copy iguana.sig to the $IDA/sig/arm/ subdir and load into ida.
+#
+
+if [ $# != 1 ] ; then
+    echo "usage: $0 dirname, ie. iguana or iguana_server"
+    exit 1
+fi
+N=$1
+FS=$N/lib/*
+
+# generate patterns
+PAT=$N.pat
+rm -f $PAT
+for f in $FS ; do 
+  if [ -f $PAT ] ; then
+    pelf -a $f $PAT
+  else
+    pelf $f $PAT
+  fi
+done
+
+# generate exclusions
+EXCL=$N.exc
+SIG=$N.sig
+rm -f $EXCL
+sigmake -p13 -n"$N" $PAT $SIG
+sed 1,4d < $EXCL > ${EXCL}2 && mv ${EXCL}2 $EXCL
+
+# generate sig
+rm -f $SIG
+sigmake -p13 -n"$N" $PAT $SIG
+
