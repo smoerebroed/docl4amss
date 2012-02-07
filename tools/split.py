@@ -81,7 +81,9 @@ class PHdr(object) :
 def pr(x, pref) :
     for n in dir(x) :
         if pref == n[:len(pref)] :
-            print '%s: %r' % (n, getattr(x, n))
+            print '%s=%r' % (n, getattr(x, n)),
+    print
+    
 
 def proc(fn, addrs) :
     if len(addrs) == 0 :
@@ -94,7 +96,7 @@ def proc(fn, addrs) :
     if hdr.e_shnum != 0 or hdr.e_phoff != hdr.e_ehsize :
         raise Exception("unexpected format")
 
-    #pr(hdr, 'e_')
+    pr(hdr, 'e_')
 
     # load in program section headers and filter
     b.seek(hdr.e_phoff)
@@ -105,19 +107,29 @@ def proc(fn, addrs) :
         print 'got:', ['%x' % x.p_vaddr for x in phdrs]
         raise Exception("could not find all sections!")
 
-    # load sections we want to keep
+    # patch header
+    hdr.e_phnum = len(phdrs)
+    hdr.e_entry = addrs[0]
+
+    # load sections we want to keep, patching their offsets
+    off = hdr.e_phoff + hdr.e_phentsize * hdr.e_phnum
     for p in phdrs :
         b.seek(p.p_offset)
         p.data = b.read(p.p_filesz)
 
+        p.p_offset = off
+        off += p.p_filesz
+
+
     # reuse same header with minor patches, and write out header and
     # program sections.
     f = file(fn + '-new', 'wb')
-    hdr.e_phnum = len(phdrs)
-    hdr.e_entry = addrs[0]
     hdr.write(f)
     for p in phdrs :
+        pr(p, 'p_')
         p.write(f)
+    for p in phdrs :
+        f.write(p.data)
     f.close()
     
 
