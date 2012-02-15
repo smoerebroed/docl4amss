@@ -135,10 +135,16 @@ def main(fn) :
     split('elf', 'ig_naming', 0xb0100000, 0xb0140000)
     split('elf', 'qdms', 0xb0200000, 0xb0240000)
     split('elf', 'quartz', 0xb0300000)
-    split('elf', 'amss1', 0xb07000)
-    split('elf', 'xxx1', 0xb0a000)
-    split('elf', 'xxx2', 0x16e00000)
-    
+
+    # XXX this varies from image to image.
+    # Ideally we'd read the bootinfo to figure this out
+    # (with MAP and NEW THREAD descriptors) but for now its hardcoded.
+
+    # this is for the ota-radio-2_22_19_26I image.
+    split('elf', 'amss', 0xb07000, 0xb0a000, 0x13f5000, 0x16e00000, 0x1767e000, 0x17bfd000)
+
+    # "orig" image
+    #split('elf', 'amss', 0xb07000, 0xb0a000, 0x140a000, 0x16e00000, 0x1763b000, 0x17bb2000);
 
 if __name__ == '__main__' :
     fn, = sys.argv[1:]
