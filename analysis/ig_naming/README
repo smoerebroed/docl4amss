@@ -3,6 +3,8 @@ server.c        - reconstruction of some of the IDL generated server code
 
 ig_naming2      - elf for the ig_naming process (extracted from radio.img)
 ig_naming2.idb  - IDA analysis of ig_naming2
+hdr.h           - extraction of some iguana definitions helpful
+                  for understanding ig_naming
 
 
 The ig_naming process is compiled from open source code (although
