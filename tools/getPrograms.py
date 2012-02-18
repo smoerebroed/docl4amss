@@ -132,6 +132,7 @@ def getelf(fn, outfn) :
 
 def main(fn) :
     getelf(fn, 'elf')
+    split('elf', 'iguana', 0xb0000000, 0xb0040000)
     split('elf', 'ig_naming', 0xb0100000, 0xb0140000)
     split('elf', 'qdms', 0xb0200000, 0xb0240000)
     split('elf', 'quartz', 0xb0300000)
