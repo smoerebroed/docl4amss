@@ -1,4 +1,7 @@
 
+tag upperbits = 0xffe0.0000 then
+  iguana_ex_pagefault_impl
+
 uuid=22 dispatch_iguana_pd
   method=0 iguana_pd_mypd_impl
   method=1
