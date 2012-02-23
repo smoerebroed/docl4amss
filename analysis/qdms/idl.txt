@@ -1,0 +1,9 @@
+uuid=56 qdms server
+  method=56 register server
+  method=57 register_cmd_server
+  method=58 register_client
+  method=59 deregister_client
+  method=60 open_client
+  method=61 close_client
+  method=62 open_iguana_server_client
+
