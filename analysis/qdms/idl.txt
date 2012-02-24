@@ -1,9 +1,76 @@
+
 uuid=56 qdms server
-  method=56 register server
-  method=57 register_cmd_server
-  method=58 register_client
-  method=59 deregister_client
-  method=60 open_client
-  method=61 close_client
-  method=62 open_iguana_server_client
+  method=56 ret register_server(arg)
+  method=57 ret register_cmd_server(arg)
+  method=58 ret register_client(arg0, arg1)
+  method=59 ret deregister_client(arg)
+  method=60 ret open_client(arg0, arg1)
+  method=61 ret close_client(arg)
+  method=62 ret open_iguana_server_client()
+
+no asynch checks...
+------------
+
+This server seems to deal with setting up shared memory
+sections between clients and servers for direct memory access
+between them.  In addition to memory sections for clients and
+servers there also seems to be some global shared memory sections
+or possibly sections designed for direct interaction with iguana?
+
+
+
+register_server(obj) :
+  - creates a memsection
+  - registers qdms as server for that memsection
+  - creates a session to obj
+  - provides session access to the memsection, an "upstream_shared_queue"
+    and an "iguana_server_queue"
+  - returns the memsection
+
+register_cmd_server(obj) :
+  - creates a session to obj
+  - provides session access to the memsection of the reigstered server
+  ... more ...
+    walks some table and grants access to more things...
+  - returns 1 on success
+
+register_client(cl, srv) :
+  - if cl is zero, use the tid of the sender as cl
+  - lookup cl in client table, if it doesnt yet exist
+    - create a memory section
+    - register qdms as the server for the section
+    - create a session to srv
+    - provide the session access to the memsection
+  - return the memsection for cl, or zero
+
+deregister_client(cl) :
+  - if cl is zero, use the tid of the sender as cl
+  - find cl in the client table
+    - delete its session and memsection 
+  - return 1 on success, 0 on failure
+
+
+open_client(cl, flags) :
+  - find client in table, fail if not found
+  - if flag 2 set, share the upstream shared queue with client session
+  - if flag 1 set,
+    - create a memsection, register it, share it to session
+      (possibly sharing it to the cmdServer's session too)
+  - return the clients memsection base
+
+
+close_client(cl) :
+  - find client in table
+    - revoke access to sessions...
+    .. more
+  - return the clients memsection base or zero
+
+
+open_iguana_server_client():
+  doesnt seem terribly useful.  It records the peer, but nothing
+  ever references the data after it is stored (!?)
+  - if already registered, return 0
+  - otherwise register caller thread as the iguana_server_client
+  - return <some field>
+
 
