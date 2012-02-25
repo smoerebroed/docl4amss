@@ -1,22 +1,22 @@
 
-tag upperbits = 0xffe0.0000 then
-  iguana_ex_pagefault_impl
+tag upperbits = tag.request == -2 (0xffe0.0000) then
+  method=0 iguana_ex_pagefault(ip, sp, priv, out fp)
 
 uuid=22 dispatch_iguana_pd
-  method=0 iguana_pd_mypd_impl
-  method=1
-  method=2
-  method=3
+  method=0 iguana_pd_mypd()
+  method=1 iguana_pd_create_memsection(pd, size, base, flags, pool, out outbase)
+  method=2 iguana_pd_create_pd()
+  method=3 iguana_pd_create_thread(pd, priority, out tid)
   method=4
   method=5
-  method=6 iguana_pd_set_callback_impl
+  method=6 iguana_pd_set_callback
   method=7
-  method=8 iguana_pd_release_clist_impl
-  method=9 iguana_pd_delete_impl
+  method=8 iguana_pd_release_clist
+  method=9 iguana_pd_delete
   method=10
 
-uuid=23 iguana_pd_delete_impl
-  method=0 iguana_eas_create_thread_impl
+uuid=23 iguana_pd_delete
+  method=0 iguana_eas_create_thread
   method=1
   method=2
   method=3
@@ -33,26 +33,43 @@ uuid=24 dispatch_iguana_thread?
  
 uuid=25 dispatch_iguana_hardware
   method=0
-  method=1 iguana_hardware_back_memsection_impl
+  method=1 iguana_hardware_back_memsection
 
 uuid=26 dispatch_iguana_memsection 
-  method=0 memsection_register_server_impl
+  method=0 memsection_register_server
   method=1
   method=2
-  method=4 iguana_memsection_set_attributes_impl
+  method=4 iguana_memsection_set_attributes
   method=5
   method=6
 
 uuid=27 dispatch_iguana_session
-  method=0 iguana_session_delete_impl
-  method=1 iguana_session_revoke_impl
-  method=2 iguana_session_add_buffer_impl
+  method=0 iguana_session_delete
+  method=1 iguana_session_revoke
+  method=2 iguana_session_add_buffer
 
-uuid=28 iguana_pd_delete_impl?
+uuid=28 iguana_pd_delete?
   method=0
   method=1
 
 uuid=30 dispatch_iguana_pool ?
   method=0
+
+
+------------------
+iguana_ex_pagefault(ip, sp, priv, out fp)
+  page fault notification from kernel
+  iguana handles page faults on behalf of its clients...
+
+
+iguana_pd_mypd()
+  returns the pd associated with the caller
+
+iguana_pd_create_pd
+  create and return a capability to a new pd parented by the caller
+
+iguana_pd_create_thread(pd, priority, out tid)
+  create a new thread under pd with given priority
+  returns a capability to the new thread, and the thread id.
 
 
