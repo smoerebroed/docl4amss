@@ -1,0 +1,56 @@
+
+uuid=42 naming_write
+  method=0 naming_write_modify(nameserver, name, data, out mask)
+  method=1 naming_write_insert(nameserver, name, data, out mask)
+  method=2 naming_write_delete(nameserver, name, out mask)
+
+uuid=43 naming_read
+  method=0 naming_read_lookup(nameserver, name)
+  method=1 naming_read_notify(nameserver, name, flags, thread, out mask)
+
+uuid=44 naming_notify
+  method=0 naming_notify__cancel(notifyobj)
+
+
+------
+The naming server is used to store data by name and look it up later.
+This is useful to register servers, for example.
+
+
+naming_write_modify(nameserver, name, data, out mask)
+  ignores the nameserver arg, fills in mask with zero, 
+  looks up name and
+    remembers name=data for later. notifies anyone waiting for modifies
+  return 0 for success, -1 for error
+
+naming_write_insert(nameserver, name, data, out mask)
+  ignores nameserver arg
+  sets mask to zero, creates or modifies the value for name to data
+    and notifies anyone waiting for modifies
+  return 0 for success, -1 for error
+
+naming_write_delete(nameserver, name, out mask)
+  ignores nameserver arg
+  forgets name=value.  notifies anyone waiting for modifies
+  return 0 for success, -1 for error
+
+naming_read_lookup(nameserver, name)
+  ignores nameserver arg
+  looks up name and returns the associated data or zero
+  
+naming_read_notify(nameserver, name, flags, *thread, out mask)
+  ignores nameserver arg
+  sets mask to zero
+  looks up name, creates name if it doesnt exist, 
+  if flag #1 set and name has data:
+    sends off a notification to thread with the looked up naming info,
+    the thread and the mask.
+  returns a ref to the notification or zero
+
+
+naming_notify__cancel(notifyobj)
+  destroys an object previously returned by naming_read_notify
+  returns zero
+  
+
+
