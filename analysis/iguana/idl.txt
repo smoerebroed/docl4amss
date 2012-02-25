@@ -1,39 +1,41 @@
 
-tag upperbits = tag.request == -2 (0xffe0.0000) then
+special L4 message, tag.request (upper bits) field is -1 (ie. 0xffe0.0000)
   method=0 iguana_ex_pagefault(ip, sp, priv, out fp)
+
 
 uuid=22 dispatch_iguana_pd
   method=0 iguana_pd_mypd()
   method=1 iguana_pd_create_memsection(pd, size, base, flags, pool, out outbase)
   method=2 iguana_pd_create_pd()
   method=3 iguana_pd_create_thread(pd, priority, out tid)
-  method=4
-  method=5
-  method=6 iguana_pd_set_callback
-  method=7
-  method=8 iguana_pd_release_clist
-  method=9 iguana_pd_delete
-  method=10
+  method=4 iguana_pd_create_eas(pd, kip, utcb, pid, out id)
+  method=5 igauna_pd_create_session(pd, client, server, clist)
+  method=6 iguana_pd_set_callback(pd, cbBuf)
+  method=7 iguana_pd_add_clist(pd, clist)
+  method=8 iguana_pd_release_clist(pd, clist, slot)
+  method=9 iguana_pd_delete(pd)
+  method=10 iguana_pd_create_restricted_pd(pd)
+  [note: okl4 1.4.1.1 has methods 11 and 12]
 
-uuid=23 iguana_pd_delete
+uuid=23 dispatch_iguana_eas
   method=0 iguana_eas_create_thread
-  method=1
-  method=2
-  method=3
+  method=1 (delete?)
+  method=2 (map?)
+  method=3 (unmap?)
 
-uuid=24 dispatch_iguana_thread?
-  method=0
-  method=1
-  method=2
-  method=3
-  method=4
-  method=5
-  method=6
-  method=7
+uuid=24 dispatch_iguana_thread
+  method=0 iguana_thread_id(tidp)
+  method=1 iguana_thread_l4id(thread)
+  method=2 iguana_thread_xxx_set_name(id, name)
+  method=3 iguana_thread_xxx_get_byname(name)
+  method=4 iguana_thread_xxx_delete_name(id)
+  method=5 iguana_thread_start(thr, ip, sp)
+  method=6 iguana_thread_delete(thr)
+  method=7 iguana_thread_set_exception(thr, exc, sp, ip)
  
 uuid=25 dispatch_iguana_hardware
-  method=0
-  method=1 iguana_hardware_back_memsection
+  method=0 iguana_hardware_register_interrupt(hw, handler, irq)
+  method=1 iguana_hardware_back_memsection(hw, msection, paddr, attrs)
 
 uuid=26 dispatch_iguana_memsection 
   method=0 memsection_register_server
@@ -57,11 +59,27 @@ uuid=30 dispatch_iguana_pool ?
 
 
 ------------------
+Iguana provides several interfaces with many calls.
+Since the Iguana server is the root server it can do many
+things that other programs cannot such as create new threads,
+map pages and create address spaces. Other processes use
+these many RPC calls to ask Iguana to perform these actions
+on its behalf.
+
+Note that the Iguana API is pretty fluid and this implementation
+differs a bit from that in Okl4 1.4.1.1 and other published
+versions.  Compare this file for example with
+okl4 1.4.1.1 libs/iguana/include/interfaces/iguana.idl4
+
+
+
+---
 iguana_ex_pagefault(ip, sp, priv, out fp)
   page fault notification from kernel
   iguana handles page faults on behalf of its clients...
 
 
+---
 iguana_pd_mypd()
   returns the pd associated with the caller
 
@@ -72,4 +90,84 @@ iguana_pd_create_thread(pd, priority, out tid)
   create a new thread under pd with given priority
   returns a capability to the new thread, and the thread id.
 
+iguana_pd_create_eas(pd, kip, utcb, pid, out id)
+  create an external address space, specifying where to map
+  the kip and the utcb.  
+  Returns a capability to the external address space and the l4id in id.
+
+igauna_pd_create_session(pd, client, server, clist)
+  create a new session owned by pd from client to server using clist
+  Returns a capability to the new session
+
+iguana_pd_set_callback(pd, cbBuf)
+  associates cbBuf as the callback buffer for pd
+  returns nothing
+
+iguana_pd_add_clist(pd, clist)
+  maps the clist into the pd, adds it to the pd's clists
+  returns a reference to the clistinfo or zero
+
+iguana_pd_release_clist(pd, clist, slot)
+  ignores slot
+  removes clist from pd
+  returns nothing
+
+iguana_pd_delete(pd)
+  delete the pd
+    skips the response if the caller is pd
+  returns nothing
+
+iguana_pd_create_restricted_pd(pd)
+  create a new pd parented by pd
+  restrict its IPC to talk to itself and its parent
+  return a capability to the new pd
+
+---
+iguana_thread_id(tidp)
+  return a thread reference given an l4 thread id (pointer)
+
+iguana_thread_l4id(thread)
+  return the l4 thread id for thread
+
+iguana_thread_xxx_set_name(id, name)
+  note: if name is larger than 40 bytes a buffer overflow will occur
+  store (id,name) into a 64-entry table (or fail)
+  returns nothing
+
+iguana_thread_xxx_get_byname(name)
+  find name in the 64-entry table
+  return the matching id or 0
+
+iguana_thread_xxx_delete_name(id)
+  find id in the 64-entry table 
+    set its id to zer0
+    set its string to 40 bytes of "0" (0x30)
+  return 0 for success or -1 for failure
+
+iguana_thread_start(thr, ip, sp)
+  start a thread running
+  returns nothing
+
+iguana_thread_delete(thr)
+  delete the thread
+  returns nothing, skips the response if caller is thr
+
+iguana_thread_set_exception(thr, exc, sp, ip)
+  note: buffer overflow if exc is not zero or one!
+  sets thread's exception[exc] to (sp,ip)
+  returns nothing
+
+--
+iguana_hardware_register_interrupt(hw, handler, irq)
+  note: performs no security checks
+  ignores the hw arg
+  sets the handler for irq to handler
+  returns (whatever L4_ThreadControl returns...)
+
+iguana_hardware_back_memsection(hw, msection, paddr, attrs)
+  note: performs no security checks and can be used to access
+    any memory in the system!
+  maps physical memory at paddr into the memsection using
+  the provided attributes.
+  returns 0 for success or -1 for failure
 
