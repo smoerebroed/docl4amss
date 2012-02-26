@@ -38,24 +38,25 @@ uuid=25 dispatch_iguana_hardware
   method=1 iguana_hardware_back_memsection(hw, msection, paddr, attrs)
 
 uuid=26 dispatch_iguana_memsection 
-  method=0 memsection_register_server
-  method=1
-  method=2
-  method=4 iguana_memsection_set_attributes
-  method=5
-  method=6
+  method=0 iguana_memsection_register_server(msection, thr)
+  method=1 iguana_memsection_lookup(addr, out srv)
+  method=2 iguana_memsection_info(msection, out size)
+  method=3 iguana_memsection_delete(msection)
+  method=4 iguana_memsection_set_attributes(msection, attr)
+  method=5 iguana_memsection_map(msection, pg)
+  method=6 iguana_memsection_unmap(msection, pg)
 
 uuid=27 dispatch_iguana_session
   method=0 iguana_session_delete
   method=1 iguana_session_revoke
   method=2 iguana_session_add_buffer
 
-uuid=28 iguana_pd_delete?
-  method=0
-  method=1
+uuid=28 iguana_pd_debug
+  method=0 iguana_debug_dump_info()
+  method=1 iguana_debug_xxx(arg0, arg1, out res1)
 
-uuid=30 dispatch_iguana_pool ?
-  method=0
+uuid=30 dispatch_iguana_xxx
+  method=0 iguana_xxx_meth0?()
 
 
 ------------------
@@ -71,6 +72,12 @@ differs a bit from that in Okl4 1.4.1.1 and other published
 versions.  Compare this file for example with
 okl4 1.4.1.1 libs/iguana/include/interfaces/iguana.idl4
 
+Note that many of these calls take in handles that are
+actual pointers in the Iguana pd.  By passing in intentionally
+malicious pointers (pointing to other parts of the Iguana
+pd, invalid memory or even memory shared with Iguana) an
+attacker can cause Iguana to read and write arbitrary parts
+of its memory space.
 
 
 ---
@@ -170,4 +177,52 @@ iguana_hardware_back_memsection(hw, msection, paddr, attrs)
   maps physical memory at paddr into the memsection using
   the provided attributes.
   returns 0 for success or -1 for failure
+
+--
+iguana_memsection_register_server(msection, thread)
+  sets thread as memsection's server
+
+iguana_memsection_lookup(addr, out srv)
+  returns the memsection and server for addr
+  returns zero on failure
+
+iguana_memsection_info(msection, out size)
+  note: can be used to read arbitrary iguana memory
+  returns the memsections base and size
+
+iguana_memsection_delete(msection)
+  deletes the memory section
+  returns nothing
+
+iguana_memsection_set_attributes(msection, attr)
+  sets the memory sections attributes and map the section into iguana's pd
+
+iguana_memsection_map(msection, pg)
+  (different in okl4 1.4.1.1)
+  map phys page into msection at offset off
+  returns -1 on failure and zero on success
+
+iguana_memsection_unmap(msection, pg)
+  (different in okl4 1.4.1.1)
+  unmap page from memsection
+  returns -1 on failure and zero on success
+
+--
+iguana_debug_dump_info()
+  note: I think all the printf's got compiled out in this version
+        so this function is probably useless
+  dumps iguana state out for debugging
+  
+iguana_debug_xxx(arg0, arg1, out res1)
+  dunno - inserts and deletes pages?  has stuff about faults?
+  "unable to load page from flash"
+  looks interesting...
+
+
+
+--
+iguana_xxx_meth0?()
+  no args
+  dunno...
+  returns 0 or ...
 
