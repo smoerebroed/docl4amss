@@ -1,0 +1,33 @@
+These services do not use the normal magpie idl format for messaging.
+The services are registered with ig_naming.
+
+KxMutex (what name?!)
+  ... xxx confusing ...
+
+KxSm namer:"KXSM_SERVER"
+  label=0x4b4b ('KK')
+
+KxNaming namer:"KxNaming"
+  label=0x50
+  label=0x51
+  label=0x52
+  label=0x53
+  label=0x54
+  label=0x55
+  label=0x56
+  label=0x57
+
+KxTimer  namer:"KxTimer"
+  label=0x100
+  label=0x101
+  label=0x102
+  label=0x103
+  label=0x104
+  label=0x105
+
+KxIpc    namer:"KxIpc"
+  label=0x200
+  label=0x201
+  2abel=0x202
+  2abel=0x203
+
