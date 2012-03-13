@@ -23,9 +23,9 @@ KxTimer  namer:"KxTimer"
   label=0x105
 
 KxIpc    namer:"KxIpc"
-  label=0x200
-  label=0x201
-  2abel=0x202
+  label=0x200 kxipc_server_registerclient
+  label=0x201 kxipc_server_send
+  2abel=0x202 kxipc_server_registernode?
   2abel=0x203
 
 KxMutex (what name?!)
