@@ -86,6 +86,9 @@ threadOncrpcProxy2 0x00BD1B20 "PROXY_" created by 0x174D83F2
 ??? ??? "ROUTER_READ" created by 0x175C7A52
 threadDpcTask 0x00B411DE "DPC TASK" created by 0x00B41D04
 ??? ??? "Main Task" created by 0xB41D04
+threadFsCompatTask 0x00BD29AA "FS Compat Task" created by 0x00BD2A58
+threadXXX1 0x17022B80 ??? created by 0x17022BA4
+threadXXX2 0x17022B74 ??? created by 0x17022BA4
 
 
 These both start the same main task indirectly, not sure
