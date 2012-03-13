@@ -1,0 +1,54 @@
+The kernel has some non-standard extensions.
+--------------
+
+utcb platform_reserved[0] is used
+syscall 6 is used, but with 0xffffffe0 as sp, not 0xffffff06
+  as user_ macro would use
+
+utcb __served0 field (offset 10) is used in amss code and quartz
+
+UND     #0xFA55 <- illegal opcode used in amss code.
+   where does this fault lead to?
+
+kip->0x10c used by amss func 0xB42480
+
+
+sys_arm_misc handler switches 65 cases instead of 41
+  but the same cases except for 0xe0.
+
+a0 - kputc
+a4 - kgetc
+a8 - kgetc nb
+ac - kdebug
+(b0 - unimpl, getutcb)
+b4 - kip
+b8 - kset thread name
+bc - getcounter
+c0 - getnumtps
+c4 - get tpname
+c8 - tc ctrl
+  
+e0 - special!  (not get tick!)
+
+
+case e0 isnt gettick, its goes to a switch table of 40 entries!
+   switched on context->r1
+
+cases: 1, 3,4,5,6,7,8,9,10,
+       21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+       34, 36, 40
+
+default cases return 1.
+case 22 is used by quartz server.
+case 8 is used by amss server @0xB424C4   syscall(0,8,1,0)
+   syscall(0,1,0,0)
+   syscall(0,1,1,0)
+   syscall(0,4,x,0)
+   syscall(0,8,0,0)
+   syscall(0,8,1,0)
+   syscall(0,10,x,0)
+   syscall(0,22,x,y)  (during iguana_thread_delete)
+   syscall(0,23,x,..)
+   syscall(0,26,x,y)
+
+
