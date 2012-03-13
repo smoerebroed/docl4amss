@@ -1,4 +1,6 @@
-List of threads started by 00B25BAC startSomeThreads
+
+---
+List of threads started by 00B25BAC (startManyThreads)
 by name (chosen by me), address and thread name:
 
 threadDswcsdUi: 00b2739c "DSWCSD UI"
@@ -70,3 +72,28 @@ threadMgpmc: 00b273c4 "MGPMC"
 threadSm: 00b26e18 "SM"
 threadUi: 00b2638c "UI"
 threadDem: 00b25dec "DEM"
+
+----
+threads created by other funcs:
+
+threadTimer: 0x00B23F46 "TIMER" created by 0x00B25A62
+threadXXX: 0x00CFBD40 ??? created by 0x00CFE7D2
+threadPingMdm: 0x1724555C "PING_MDM" created by 0x172455B6
+threadOncrpcRd 0x174D81B0 "ONCRPC_RDR" created by 0x174D821C
+threadOncrpcProxy1 0x00BD1BBE "PROXY_*" and
+   threadOncrpcProxy2 0x00BD1B20 "PROXY_*" created by 0x174D83A2
+threadOncrpcProxy2 0x00BD1B20 "PROXY_" created by 0x174D83F2
+??? ??? "ROUTER_READ" created by 0x175C7A52
+threadDpcTask 0x00B411DE "DPC TASK" created by 0x00B41D04
+??? ??? "Main Task" created by 0xB41D04
+
+
+These both start the same main task indirectly, not sure
+which is used (one used only during RESTART?):
+  threadMainTask 0x00B285C0 "Main Task" by 0x00B0A928 
+      by calling 0xb41d04
+or
+  threadMainTask 0x00B285C0 "Main Task" by 0x00B23118
+      by calling 0xb41d04
+
+
