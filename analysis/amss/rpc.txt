@@ -1,0 +1,68 @@
+list of RPC services started (names from src filenames):
+  adsprtosatom audmgr batt_atom clkctl_rpc clkrgm_sec
+  cm dsucsdappif_apis gpio_rpc gsdi_exp gstk_exp
+  htc_api mmgsdilib mvs nv oem_rapi pdapi pd_comms_api
+  pd_comms_client_api pdsm_atl ping_mdm_rpc pmapp_gen
+  pm_lib pm_strobe_flash snd time_remote_atom tlmm_remote_atom
+  uim wms wmspm
+
+
+
+--- 
+startup code:
+
+LOAD:1714A738 startRpcServices                        ; CODE XREF: j_startRpcServicesj
+LOAD:1714A738                                         ; DATA XREF: j_startRpcServiceso ...
+LOAD:1714A738                 PUSH    {R4,LR}
+LOAD:1714A73A                 BLX     j_nullsub_37
+LOAD:1714A73E                 BLX     sub_171E9330    ; adsprtosatom_svc.c stuff
+LOAD:1714A742                 BLX     sub_171E9338    ; cm_svc.c stuff
+LOAD:1714A746                 BL      sub_17161EB6    ; pmapp_gen_svc.c
+LOAD:1714A74A                 BL      sub_16F3C29C    ; pm_lib_svc.c
+LOAD:1714A74E                 BL      sub_174B4FFA    ; gsdi_exp_svc.c
+LOAD:1714A752                 BL      sub_1705665E    ; mmgsdilib_svc.c
+LOAD:1714A756                 BLX     sub_171E9340    ; uim_svc.c
+LOAD:1714A75A                 BLX     sub_171E9348    ; gstk_exp_svc.c
+LOAD:1714A75E                 BL      sub_171656D0    ; snd_svc.c
+LOAD:1714A762                 BL      sub_1738A59A    ; mvs_svc.c
+LOAD:1714A766                 BL      sub_174C0622    ; audmgr_svc.c
+LOAD:1714A76A                 BL      sub_1746EF84    ; clkrgm_sec_svc.c
+LOAD:1714A76E                 BL      sub_174C95EA    ; wms_svc.c
+LOAD:1714A772                 BLX     sub_171E9350    ; pdapi_svc.c
+LOAD:1714A776                 BL      sub_17391980    ; pdsm_atl_svc.c
+LOAD:1714A77A                 BL      sub_1738FEF2    ; pd_comms_api_svc.c
+LOAD:1714A77E                 BL      sub_172734AC    ; pd_comms_client_api_svc.c
+LOAD:1714A782                 BL      nulSub
+LOAD:1714A786                 BL      nulSub2
+LOAD:1714A78A                 BL      nulSub3
+LOAD:1714A78E                 BLX     sub_171E9358    ; time_remote_atom_svc.c
+LOAD:1714A792                 BL      nulsub4
+LOAD:1714A796                 BL      nulsub5
+LOAD:1714A79A                 BL      nulsub6
+LOAD:1714A79E                 BL      nulsub7
+LOAD:1714A7A2                 BL      sub_172726C2    ; nv_svc.c
+LOAD:1714A7A6                 BL      nulsub8
+LOAD:1714A7AA                 BL      nulsub9
+LOAD:1714A7AE                 BL      nulsub10
+LOAD:1714A7B2                 BL      sub_174C9A7C    ; pm_strobe_flash_svc.c
+LOAD:1714A7B6                 BL      nulsub11
+LOAD:1714A7BA                 BL      nullsub_36
+LOAD:1714A7BE                 BL      nulsub12
+LOAD:1714A7C2                 BLX     j_nulsub13
+LOAD:1714A7C6                 BLX     sub_171E9368    ; dsucsdappif_apis_svc.c
+LOAD:1714A7CA                 BL      nullsub_35
+LOAD:1714A7CE                 BL      nulsub14
+LOAD:1714A7D2                 BL      sub_1713DC8C    ; tlmm_remote_atom_svc.c
+LOAD:1714A7D6                 BLX     j_nulsub15
+LOAD:1714A7DA                 BL      nulsub16
+LOAD:1714A7DE                 BL      nulsub17
+LOAD:1714A7E2                 BL      sub_16F44FCE    ; oem_rapi_svc.c
+LOAD:1714A7E6                 BL      sub_16F406F8    ; wmspm_svc.c
+LOAD:1714A7EA                 BL      sub_1738B7A8    ; clkctl_rpc_svc.c
+LOAD:1714A7EE                 BLX     sub_171E9378    ; gpio_rpc_svc.c
+LOAD:1714A7F2                 BL      sub_1705A46E    ; ping_mdm_rpc_svc.c
+LOAD:1714A7F6                 BL      sub_174CA45E    ; htc_api_svc.c
+LOAD:1714A7FA                 BLX     sub_171E9380    ; batt_atom_svc.c
+LOAD:1714A7FE                 BL      nulsub18
+LOAD:1714A802                 POP     {R4,PC}
+LOAD:1714A802 ; End of function startRpcServices
