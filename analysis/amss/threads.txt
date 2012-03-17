@@ -1,6 +1,6 @@
 
 ---
-List of threads started by 00B25BAC (startManyThreads)
+List of threads started by 00B25BAC (createManyThreads)
 by name (chosen by me), address and thread name:
 
 threadDswcsdUi: 00b2739c "DSWCSD UI"
@@ -89,6 +89,8 @@ threadDpcTask 0x00B411DE "DPC TASK" created by 0x00B41D04
 threadFsCompatTask 0x00BD29AA "FS Compat Task" created by 0x00BD2A58
 threadXXX1 0x17022B80 ??? created by 0x17022BA4
 threadXXX2 0x17022B74 ??? created by 0x17022BA4
+threadK1Timer 0x16FCDCE4 "k1Timer" created by 0x176262B0
+threadK1ExHandler 0x1756D656 "k1ExHandler" created by 0x1756D660
 
 
 These both start the same main task indirectly, not sure
@@ -98,5 +100,4 @@ which is used (one used only during RESTART?):
 or
   threadMainTask 0x00B285C0 "Main Task" by 0x00B23118
       by calling 0xb41d04
-
 
