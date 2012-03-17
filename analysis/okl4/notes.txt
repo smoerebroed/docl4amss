@@ -10,7 +10,8 @@ utcb __served0 field (offset 10) is used in amss code and quartz
 UND     #0xFA55 <- illegal opcode used in amss code.
    where does this fault lead to?
 
-kip->0x10c used by amss func 0xB42480
+kip->0x10c used by amss func 0xB42480 (see "kip10c")
+kip->0x108 used by amss (see "kip108")
 
 
 sys_arm_misc handler switches 65 cases instead of 41

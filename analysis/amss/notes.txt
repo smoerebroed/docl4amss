@@ -1,2 +1,51 @@
 
 BuildId: M7201J-SDCAALZM-6220
+(same in all of our radio images, so not that useful)
+
+
+-----
+
+17C1D098 + n * 0x18010   seems important.
+   sometimes "DATA ERR" is stored at offset 8 there to mark important states
+   buffer at offset 0x14 has 0x18000 bytes of storage for error reporting
+
+
+user defined handle is used to store the "rex_curr_task"
+
+----
+
+
+several error logging mechanisms exist
+XXX fill out details
+
+  - captured error state including registers and stack
+  - two error log with string messages
+  - a log buffer with unformatted error messages
+    (ie. fmt plus each of the args is saved there)
+
+XXX fill out details of debugging flags
+   globBufPos
+   globBufPos2
+storeErr
+
+   dbgBuf , dbgBufPos, dbgBufPos2
+
+
+----
+global addr 0x1FFC000 ?
+0xC2000100
+0xC3650880
+0xC3300000
+0xC5000100
+0x1F00000
+
+
+-----
+
+has a dpc thread that calls defered procedure calls
+
+
+
+
+
+

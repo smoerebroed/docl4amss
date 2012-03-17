@@ -1,0 +1,38 @@
+The boot info structure passes in some parameters to amss.
+these are available through iguana_getenv
+
+EXPORT (thread: 28, obj: 31, local_key: 4, type: 2)         stack
+EXPORT (thread: 28, obj: 30, local_key: 5, type: 3)         heap_base
+EXPORT (thread: 28, obj: 524288, local_key: 6, type: 1)     heap_size=512k
+EXPORT (thread: 28, obj: 29, local_key: 7, type: 3)         callback
+EXPORT (thread: 28, obj: 2, local_key: 8, type: 3)          default pool
+EXPORT (thread: 28, obj: 7, local_key: 256, type: 3)        handle on ig_naming
+EXPORT (thread: 28, obj: 23, local_key: 2000, type: 3)      ram?
+EXPORT (thread: 28, obj: 24, local_key: 2003, type: 3)      ram?
+EXPORT (thread: 28, obj: 25, local_key: 2004, type: 3)      ram?
+EXPORT (thread: 28, obj: 26, local_key: 2005, type: 3)      ram?
+
+
+here are the lines that created these values:
+
+NEW MS (owner: 27, base: 0x0, size: 0x10000, flags 0x1, attr: 0x0) = 31
+NEW MS (owner: 27, base: 0x0, size: 0x80000, flags 0x1, attr: 0x0) = 30
+NEW MS (owner: 27, base: 0x0, size: 0x1000, flags 0x1, attr: 0x0) = 29
+REGISTER CALLBACK (pd: 27, ms: 29)
+NEW MS (owner: 0, base: 0xb0e00000, size: 0x4000, flags 0x12, attr: 0x0) = 2
+NEW MS (owner: 3, base: 0x0, size: 0x4000, flags 0x1, attr: 0x0) = 7
+   (this is ig_naming's)
+NEW MS (owner: 0, base: 0x1f00000, size: 0x100000, flags 0x20, attr: 0x6) = 23
+NEW MS (owner: 0, base: 0x10000000, size: 0x100000, flags 0x20, attr: 0x2) = 24
+NEW MS (owner: 0, base: 0x900000, size: 0x100000, flags 0x20, attr: 0x2) = 25
+NEW MS (owner: 0, base: 0x80000000, size: 0x100000, flags 0x20, attr: 0x2) = 26
+
+
+
+
+
+stack 0x10000 bytes
+heap 0x80000 bytes
+
+callback 29 
+
