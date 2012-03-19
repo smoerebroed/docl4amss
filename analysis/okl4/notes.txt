@@ -1,7 +1,7 @@
 The kernel has some non-standard extensions.
 --------------
 
-utcb platform_reserved[0] is used
+utcb platform_reserved[0] is used - XXX this is the preemption flag!
 syscall 6 is used, but with 0xffffffe0 as sp, not 0xffffff06
   as user_ macro would use
 
@@ -52,4 +52,21 @@ case 8 is used by amss server @0xB424C4   syscall(0,8,1,0)
    syscall(0,23,x,..)
    syscall(0,26,x,y)
 
+
+---
+the dispatch for standard syscalls (./arch/arm/v5/src/traps.spp)
+is just "ldr pc, [pc,r12]"  where r12 has been bounds checked.
+What happens if r12 is misaligned?  can we force it to jump
+to our own code in supervisor mode?  or will this just fault?
+
+   if so, maybe by prepping the addr space we can get
+   the kernel to jump right to our code in supervisor mode?
+
+---------------
+the kernel has kdb and lots of tracing built in.
+these can be used to get lots of info on internal data structures
+and the code.
+
+    XXX review kip/utcb/etc. dumping functions to see if they
+    talk about extension fields
 
