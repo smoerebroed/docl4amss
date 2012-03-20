@@ -67,6 +67,89 @@ static Segments(void) {
 static Enums(void) {
         auto id;
         BeginTypeUpdating(UTP_ENUM);
+        EndTypeUpdating(UTP_ENUM);
+}
+
+static Structures_0(id) {
+        auto mid;
+
+	id = AddStrucEx(-1,"arm_irq_context_t",0);
+	id = AddStrucEx(-1,"tcb",0);
+	id = AddStrucEx(-1,"ring_list_t",0);
+	
+	id = GetStrucIdByName("arm_irq_context_t");
+	mid = AddStrucMember(id,"klr",	0,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r0",	0X4,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r1",	0X8,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r2",	0XC,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r3",	0X10,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r4",	0X14,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r5",	0X18,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r6",	0X1C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r7",	0X20,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r8",	0X24,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r9",	0X28,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r10",	0X2C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r11",	0X30,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"r12",	0X34,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"sp",	0X38,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"lr",	0X3C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"pc",	0X40,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"cpsr",	0X44,	0x20000400,	-1,	4);
+	
+	id = GetStrucIdByName("ring_list_t");
+	mid = AddStrucMember(id,"next",	0,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"prev",	0X4,	0x20000400,	-1,	4);
+	
+	id = GetStrucIdByName("tcb");
+	mid = AddStrucMember(id,"myself_global",	0,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"utcb_location",	0X4,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"utcb",	0X8,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"space",	0XC,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"space_id",	0X10,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"ipc_control_bitmap",	0X14,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"page_directory",	0X18,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"pager",	0X1C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"thread_state",	0X20,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"partner",	0X24,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"exception_handler",	0X28,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"resource_bits",	0X2C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"send_head",	0X30,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"cont",	0X34,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"arch",	0X38,	0x60000400,	GetStrucIdByName("arm_irq_context_t"),	72);
+	mid = AddStrucMember(id,"field_80",	0X80,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_84",	0X84,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_88",	0X88,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_8C",	0X8C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_90",	0X90,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_94",	0X94,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_98",	0X98,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_9C",	0X9C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_A0",	0XA0,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_A4",	0XA4,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_A8",	0XA8,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"queue_state",	0XAC,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"ready_list",	0XB0,	0x60000400,	GetStrucIdByName("ring_list_t"),	8);
+	mid = AddStrucMember(id,"send_list",	0XB8,	0x60000400,	GetStrucIdByName("ring_list_t"),	8);
+	mid = AddStrucMember(id,"present_list",	0XC0,	0x60000400,	GetStrucIdByName("ring_list_t"),	8);
+	mid = AddStrucMember(id,"field_C8",	0XC8,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"total_quantum",	0XCC,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"timeslice_length",	0XD0,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"current_timeslice",	0XD4,	0x30000400,	-1,	8);
+	mid = AddStrucMember(id,"priority",	0XDC,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"context_bitmask",	0XE0,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"scheduler",	0XE4,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"saved_partner",	0X108,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"saved_state",	0X10C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_110",	0X110,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_114",	0X114,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_118",	0X118,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"debug_name",	0X11C,	0x000400,	-1,	16);
+	mid = AddStrucMember(id,"field_12C",	0X12C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"preemption_continuation",	0X15C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_160",	0X160,	0x000400,	-1,	1);
+	SetMemberComment(id,	0X160,	"... and more ...",	1);
+	return id;
 }
 
 //------------------------------------------------------------------------
@@ -74,7 +157,8 @@ static Enums(void) {
 
 static Structures(void) {
         auto id;
-        BeginTypeUpdating(UTP_STRUCT);}
+        BeginTypeUpdating(UTP_STRUCT);	id = Structures_0(id);
+}
 
 //------------------------------------------------------------------------
 // Information about bytes
@@ -7093,6 +7177,8 @@ static Bytes_1(void) {
 	MakeCode	(0XF000A3B4);
 	MakeCode	(0XF000A3B8);
 	MakeName	(0XF000A3B8,	"sys_arm_misc");
+	MakeCode	(x=0XF000A3BC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeComm	(0XF000A3D0,	"switch 65 cases ");
 	MakeComm	(0XF000A3D4,	"switch jump");
 	MakeComm	(0XF000A3DC,	"jump table for switch statement");
@@ -7340,7 +7426,7 @@ static Bytes_1(void) {
 	MakeDword	(0XF000AA4C);
 	MakeDword	(0XF000AA50);
 	MakeCode	(0XF000AA54);
-	MakeName	(0XF000AA54,	"setAlignmentBit");
+	MakeName	(0XF000AA54,	"enableAlignmentCheck");
 	MakeCode	(x=0XF000AA58);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000AA64);
@@ -7364,7 +7450,7 @@ static Bytes_1(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF000AA88);
-	MakeName	(0XF000AA88,	"clrAlignmentBit");
+	MakeName	(0XF000AA88,	"disableAlignmentCheck");
 	MakeCode	(x=0XF000AA8C);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000AA98);
@@ -7958,12 +8044,14 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000B7F4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeName	(0XF000B7F4,	"misc_e0_24_2_set");
 	MakeDword	(x=0XF000B804);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(x=0XF000B808);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeName	(0XF000B808,	"misc_e0_24_2_clr");
 	MakeDword	(x=0XF000B818);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -8981,6 +9069,7 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000D084);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XF000D0A0,	"tcb");
 	MakeCode	(x=0XF000D0C8);
 	OpOff		(x,	1,	0XF0000000);
 	OpOff		(x,	129,	0XF0000000);
@@ -9033,6 +9122,7 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000D260);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XF000D270,	"tcb");
 	MakeCode	(x=0XF000D298);
 	OpOff		(x,	1,	0XF0000000);
 	OpOff		(x,	129,	0XF0000000);
@@ -9254,8 +9344,6 @@ static Bytes_1(void) {
 	MakeCode	(0XF000E300);
 	MakeName	(0XF000E300,	"init_cpu");
 	MakeCode	(0XF000E314);
-	MakeRptCmt	(0XF000E318,	"0xf9100000");
-	MakeRptCmt	(0XF000E320,	"0xf910010c = 1");
 	MakeCode	(0XF000E328);
 	MakeCode	(x=0XF000E32C);
 	OpHex		(x,	1);
@@ -9267,7 +9355,7 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000E348);
 	OpHex		(x,	1);
 	MakeCode	(0XF000E350);
-	MakeName	(0XF000E350,	"extraFunction");
+	MakeName	(0XF000E350,	"addRecentThread");
 	MakeCode	(x=0XF000E368);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -9285,9 +9373,22 @@ static Bytes_1(void) {
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF000E3A8);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000E3AC,	"multiply by 8 for sz");
+	MakeRptCmt	(0XF000E3B4,	"if bit2 set, its scaled by 24");
 	MakeCode	(x=0XF000E3B8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF000E3C4,	"save r0 into table[idx]");
+	MakeCode	(x=0XF000E3C8);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeRptCmt	(0XF000E3CC,	"and save sp");
+	MakeRptCmt	(0XF000E3D4,	"and optionally log more stuff\n(based on user flag)");
+	MakeRptCmt	(0XF000E3D8,	"debug_name[4..7]");
+	MakeRptCmt	(0XF000E3E0,	"debug_name[8..11]");
+	MakeRptCmt	(0XF000E3E8,	"debug_name[12..15]");
+	MakeRptCmt	(0XF000E3F8,	"0xff00.010c");
+	MakeCode	(x=0XF000E404);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeDword	(0XF000E424);
 	MakeDword	(x=0XF000E428);
 	OpOff		(x,	0,	0);
@@ -9306,6 +9407,8 @@ static Bytes_1(void) {
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF000E43C);
 	MakeName	(0XF000E43C,	"misc_call_e0");
+	MakeCode	(x=0XF000E440);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeComm	(0XF000E44C,	"switch 40 cases ");
 	MakeComm	(0XF000E450,	"switch jump");
 	MakeComm	(0XF000E458,	"jump table for switch statement");
@@ -9320,7 +9423,7 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000E530);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeRptCmt	(0XF000E538,	"jumptable F000E450 default case");
+	MakeRptCmt	(0XF000E538,	"jumptable F000E450 default case\nreturn 1");
 	MakeRptCmt	(0XF000E540,	"jumptable F000E450 case 35");
 	MakeCode	(x=0XF000E540);
 	OpOff		(x,	1,	0);
@@ -9404,13 +9507,23 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000E8B8);
 	OpHex		(x,	1);
 	MakeRptCmt	(0XF000E8E0,	"jumptable F000E450 case 25");
-	MakeCode	(0XF000E8E0);
+	MakeCode	(x=0XF000E8E0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000E8EC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000E8F4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF000E904);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000E908);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000E90C);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF000E91C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeRptCmt	(0XF000E928,	"returns zero in ctx->r0");
+	MakeCode	(x=0XF000E928);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeRptCmt	(0XF000E930,	"jumptable F000E450 case 24");
 	MakeCode	(0XF000E930);
 	MakeCode	(x=0XF000E954);
@@ -9419,12 +9532,21 @@ static Bytes_1(void) {
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000E95C);
 	OpHex		(x,	1);
-	MakeRptCmt	(0XF000E978,	"jumptable F000E450 case 7");
+	MakeRptCmt	(0XF000E978,	"jumptable F000E450 case 7\nenable and disable thread tracing");
 	MakeCode	(x=0XF000E978);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF000E97C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000E984);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeRptCmt	(0XF000E990,	"jumptable F000E450 case 21");
-	MakeCode	(0XF000E990);
+	MakeCode	(x=0XF000E990);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000E99C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000E9A4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF000E9B4);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000E9B8);
@@ -9440,11 +9562,15 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000EA04);
 	OpHex		(x,	1);
 	MakeRptCmt	(0XF000EA1C,	"jumptable F000E450 case 9");
-	MakeCode	(0XF000EA1C);
+	MakeCode	(x=0XF000EA1C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeRptCmt	(0XF000EA20,	"ctx->r2[0]");
+	MakeRptCmt	(0XF000EA30,	"0xf94ef800");
 	MakeCode	(x=0XF000EA3C);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000EA50);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000EA64,	"ctx->r2[1]");
 	MakeCode	(x=0XF000EA6C);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000EA80);
@@ -9454,19 +9580,33 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000EAA4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeRptCmt	(0XF000EAB0,	"jumptable F000E450 case 23");
-	MakeCode	(0XF000EAB0);
+	MakeRptCmt	(0XF000EAB0,	"jumptable F000E450 case 23\nctx->r1 == 24");
+	MakeCode	(x=0XF000EAB0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000EAC0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeRptCmt	(0XF000EAD8,	"jumptable F000EB48 default case");
+	MakeCode	(x=0XF000EADC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeRptCmt	(0XF000EAE4,	"jumptable F000E450 case 22");
-	MakeCode	(0XF000EAE4);
+	MakeCode	(x=0XF000EAE4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF000EAEC);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000EAF0);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000EAF4);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF000EAFC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeRptCmt	(0XF000EB24,	"jumptable F000E450 case 3");
-	MakeCode	(0XF000EB24);
+	MakeCode	(x=0XF000EB24);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000EB2C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000EB38);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeRptCmt	(0XF000EB3C,	"switch on ctx->r2[0] - 1");
 	MakeComm	(0XF000EB44,	"switch 16 cases ");
 	MakeComm	(0XF000EB48,	"switch jump");
 	MakeComm	(0XF000EB50,	"jump table for switch statement");
@@ -9497,19 +9637,28 @@ static Bytes_1(void) {
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000EC18);
 	OpHex		(x,	1);
-	MakeRptCmt	(0XF000EC30,	"jumptable F000E450 case 0");
-	MakeCode	(0XF000EC30);
+	MakeRptCmt	(0XF000EC30,	"jumptable F000E450 case 0\nset or clear the IRQ bit in CPSR");
+	MakeCode	(x=0XF000EC30);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF000EC34);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF000EC3C);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF000EC44);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF000EC48);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF000EC4C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF000EC58);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF000EC5C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeRptCmt	(0XF000EC64,	"jumptable F000E450 case 39");
 	MakeCode	(x=0XF000EC64);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeRptCmt	(0XF000EC70,	"jumptable F000EB48 cases 1,3");
+	MakeRptCmt	(0XF000EC70,	"jumptable F000EB48 cases 1,3\ntest/clean/invalidate all of d-cache");
 	MakeRptCmt	(0XF000EC7C,	"jumptable F000E770 case 23");
 	MakeCode	(0XF000EC7C);
 	MakeRptCmt	(0XF000EC90,	"jumptable F000E770 default case");
@@ -9525,9 +9674,14 @@ static Bytes_1(void) {
 	MakeCode	(0XF000ECD4);
 	MakeRptCmt	(0XF000ECE8,	"jumptable F000E770 case 0");
 	MakeCode	(0XF000ECE8);
-	MakeCode	(0XF000ECFC);
+	MakeRptCmt	(0XF000ECFC,	"r1==24, r2[0] == 2");
+	MakeCode	(x=0XF000ECFC);
+	OpHex		(x,	1);
+	MakeRptCmt	(0XF000ED08,	"r1==24, *r2 == 2, r0 != 0");
 	MakeRptCmt	(0XF000ED10,	"jumptable F000EB48 cases 2,13");
+	ExtLinA		(0XF000ED10,	0,	"invalidate i-cache");
 	MakeCode	(0XF000ED10);
+	MakeRptCmt	(0XF000ED14,	"invalidate i-cache");
 	MakeRptCmt	(0XF000ED1C,	"jumptable F000E7EC case 6");
 	MakeCode	(0XF000ED1C);
 	MakeCode	(x=0XF000ED28);
@@ -9585,26 +9739,46 @@ static Bytes_1(void) {
 	MakeRptCmt	(0XF000EED0,	"jumptable F000E7EC case 7");
 	MakeCode	(0XF000EED0);
 	MakeRptCmt	(0XF000EEDC,	"jumptable F000EB48 case 0");
+	ExtLinA		(0XF000EEDC,	0,	"invalidate dcache and drain write buffer");
 	MakeCode	(0XF000EEDC);
+	MakeRptCmt	(0XF000EEE0,	"clean entire dcache");
+	MakeRptCmt	(0XF000EEE8,	"invalidate icache");
+	ExtLinB		(0XF000EEE8,	0,	"       vvvvv  fall through");
 	MakeRptCmt	(0XF000EEEC,	"jumptable F000EB48 case 10");
+	ExtLinA		(0XF000EEEC,	0,	"drain the write buffer");
+	MakeRptCmt	(0XF000EEF0,	"drain write buffer");
 	MakeRptCmt	(0XF000EEF8,	"jumptable F000EB48 case 11");
+	ExtLinA		(0XF000EEF8,	0,	"cleans a single dcache entry");
 	MakeCode	(0XF000EEF8);
+	MakeRptCmt	(0XF000EEFC,	"clean singe dcache entry");
 	MakeRptCmt	(0XF000EF04,	"jumptable F000EB48 case 12");
+	ExtLinA		(0XF000EF04,	0,	"cleans a range of dcache");
 	MakeCode	(0XF000EF04);
 	MakeCode	(x=0XF000EF10);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000EF18,	"clean single dcache entry");
 	MakeRptCmt	(0XF000EF28,	"jumptable F000EB48 case 15");
+	ExtLinA		(0XF000EF28,	0,	"waits for an interrupt");
 	MakeCode	(0XF000EF28);
+	MakeRptCmt	(0XF000EF2C,	"wait for interrupt");
 	MakeRptCmt	(0XF000EF34,	"jumptable F000EB48 case 14");
+	ExtLinA		(0XF000EF34,	0,	"invalidates a range of dcache entries");
 	MakeCode	(0XF000EF34);
 	MakeCode	(x=0XF000EF40);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000EF48,	"invalidate single dcache entry");
 	MakeRptCmt	(0XF000EF58,	"jumptable F000EB48 case 5");
+	ExtLinA		(0XF000EF58,	0,	"enable or disable caches");
 	MakeCode	(0XF000EF58);
+	MakeRptCmt	(0XF000EF64,	"read control register");
+	ExtLinA		(0XF000EF64,	0,	"enables caches");
+	MakeRptCmt	(0XF000EF68,	"enable I-cache");
 	MakeCode	(x=0XF000EF68);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000EF6C,	"enable D-cache");
 	MakeCode	(x=0XF000EF6C);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000EF70,	"write control register");
 	MakeDword	(0XF000EF78);
 	MakeArray	(0XF000EF78,	0X2);
 	MakeDword	(x=0XF000EF80);
@@ -9648,48 +9822,81 @@ static Bytes_1(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeRptCmt	(0XF000EFB8,	"jumptable F000EB48 case 4");
+	ExtLinA		(0XF000EFB8,	0,	"clean/invalidate range of d-cache");
 	MakeCode	(0XF000EFB8);
 	MakeCode	(x=0XF000EFC0);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000EFC8);
 	OpHex		(x,	1);
-	MakeRptCmt	(0XF000EFE0,	"jumptable F000EB48 case 9");
+	MakeRptCmt	(0XF000EFCC,	"clean/invalidate d-cache entry");
+	MakeRptCmt	(0XF000EFE0,	"jumptable F000EB48 case 9\ntest and clean all dcache");
 	MakeCode	(0XF000EFE0);
 	MakeRptCmt	(0XF000EFEC,	"jumptable F000EB48 case 8");
+	ExtLinA		(0XF000EFEC,	0,	"invalidate a range of i- and d-cache");
 	MakeCode	(0XF000EFEC);
 	MakeCode	(x=0XF000EFF4);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000EFFC);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000F000,	"invalidate i-cache entry");
+	MakeRptCmt	(0XF000F004,	"invalidate d-cache entry");
 	MakeRptCmt	(0XF000F018,	"jumptable F000EB48 case 7");
+	ExtLinA		(0XF000F018,	0,	"enable or disable i-cache");
 	MakeCode	(0XF000F018);
+	MakeRptCmt	(0XF000F024,	"read control");
+	MakeRptCmt	(0XF000F028,	"enable i-cache");
 	MakeCode	(x=0XF000F028);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000F02C,	"write control");
 	MakeRptCmt	(0XF000F034,	"jumptable F000EB48 case 6");
+	ExtLinA		(0XF000F034,	0,	"enable or disable the d-cache");
 	MakeCode	(0XF000F034);
+	MakeRptCmt	(0XF000F040,	"read control register");
+	MakeRptCmt	(0XF000F044,	"enable d-cache");
 	MakeCode	(x=0XF000F044);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000F048,	"write control register");
 	MakeCode	(0XF000F050);
 	MakeCode	(x=0XF000F05C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeCode	(0XF000F068);
+	MakeRptCmt	(0XF000F068,	"r1==24, r2[0] == 1");
+	MakeCode	(x=0XF000F068);
+	OpHex		(x,	1);
+	MakeRptCmt	(0XF000F074,	"r1=24, r2[0] == 1, r2[1] != 0");
 	MakeCode	(x=0XF000F074);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF000F080,	"r1=24, r2[0] == 1, r2[1] == 0");
 	MakeCode	(x=0XF000F080);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF000F08C,	"r1==24, *r2 == 2, r0 == 0");
 	MakeCode	(0XF000F08C);
+	MakeRptCmt	(0XF000F094,	"test/clean/invalidate all d-cache");
 	MakeCode	(0XF000F094);
+	MakeRptCmt	(0XF000F09C,	"read control");
+	MakeRptCmt	(0XF000F0A0,	"disable d-cache");
 	MakeCode	(x=0XF000F0A0);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000F0A4,	"write control");
+	MakeRptCmt	(0XF000F0AC,	"disable caches after flush/clear\ntest/clean/invalidate all d-cache");
+	ExtLinA		(0XF000F0AC,	0,	"disable caches after flush/clear");
 	MakeCode	(0XF000F0AC);
+	MakeRptCmt	(0XF000F0B8,	"invalidate i-cache");
+	MakeRptCmt	(0XF000F0C0,	"drain write buffer");
+	MakeRptCmt	(0XF000F0C4,	"read control register");
+	MakeRptCmt	(0XF000F0C8,	"disable d-cache");
 	MakeCode	(x=0XF000F0C8);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000F0CC,	"disable i-cache");
 	MakeCode	(x=0XF000F0CC);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF000F0D0,	"write control register");
+	MakeRptCmt	(0XF000F0D8,	"disable i-cache");
 	MakeCode	(0XF000F0D8);
+	MakeRptCmt	(0XF000F0DC,	"invalidate i-cache");
+	MakeRptCmt	(0XF000F0E4,	"diable i-cache");
 	MakeCode	(x=0XF000F0E4);
 	OpHex		(x,	1);
 	MakeCode	(0XF000F0F0);
@@ -10313,6 +10520,15 @@ static Bytes_1(void) {
 	MakeArray	(0XF000FE5D,	0X3);
 	MakeStr		(0XF000FE60,	0XF000FE7B);
 	MakeName	(0XF000FE60,	"aFinish_undefined_exception");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_2(void) {
+        auto x;
+#define id x
+
 	MakeByte	(0XF000FE7B);
 	MakeStr		(0XF000FE7C,	0XF000FE9A);
 	MakeName	(0XF000FE7C,	"aFinish_unhandled_memory_abort");
@@ -10505,15 +10721,6 @@ static Bytes_1(void) {
 	MakeWord	(0XF0010712);
 	MakeStr		(0XF0010714,	0XF001077B);
 	MakeName	(0XF0010714,	"aSys_scheduleCurrTDestTQuantumXHwtidMask08lx");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_2(void) {
-        auto x;
-#define id x
-
 	MakeByte	(0XF001077B);
 	MakeStr		(0XF001077C,	0XF001078D);
 	MakeName	(0XF001077C,	"aSyscall_schedule");
@@ -13083,6 +13290,10 @@ static Bytes_2(void) {
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF00148FC);
 	MakeName	(0XF00148FC,	"_Z8dump_tcbP5tcb_t");
+	MakeCode	(x=0XF0014918);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014920);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014924);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -13094,17 +13305,41 @@ static Bytes_2(void) {
 	MakeCode	(x=0XF001493C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0014944);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014948);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF001494C);
+	OpChr		(x,	1);
+	MakeCode	(x=0XF0014950);
+	OpChr		(x,	1);
+	MakeCode	(x=0XF0014954);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014958);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF001495C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF0014960);
+	OpChr		(x,	1);
+	MakeCode	(x=0XF0014964);
+	OpChr		(x,	1);
 	MakeCode	(x=0XF0014968);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF001496C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014970);
+	OpChr		(x,	1);
+	MakeCode	(x=0XF0014974);
+	OpChr		(x,	1);
 	MakeCode	(x=0XF0014978);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF001497C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0014980);
+	OpChr		(x,	1);
+	MakeCode	(x=0XF0014984);
+	OpChr		(x,	1);
 	MakeCode	(x=0XF0014988);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF001498C);
@@ -13114,53 +13349,103 @@ static Bytes_2(void) {
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF0014998);
 	OpStkvar	(x,	1);
+	MakeCode	(x=0XF00149A0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF00149A8);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF00149AC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF00149B8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF00149C0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF00149C4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF00149C8);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF00149CC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF00149D0);
-	OpStkvar	(x,	1);
+	OpHex		(x,	1);
 	MakeCode	(x=0XF00149D4);
 	OpStkvar	(x,	1);
+	MakeCode	(x=0XF00149DC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF00149E4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF00149EC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF00149F0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF00149F8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF00149FC);
 	OpStkvar	(x,	1);
+	MakeCode	(x=0XF0014A04);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014A0C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014A18);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF0014A1C);
 	OpStkvar	(x,	1);
+	MakeCode	(x=0XF0014A24);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014A28);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0014A30);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014A34);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF0014A38);
+	OpChr		(x,	1);
+	MakeCode	(x=0XF0014A3C);
+	OpChr		(x,	1);
 	MakeCode	(x=0XF0014A40);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF0014A44);
+	OpChr		(x,	1);
+	MakeCode	(x=0XF0014A48);
+	OpChr		(x,	1);
 	MakeCode	(x=0XF0014A4C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF0014A54);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0014A5C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014A64);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014A68);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014A74);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF0014A88);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0014A90);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014A94);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014A98);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF0014AA0);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0014AA4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014AA8);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014AB0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014AB8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -13176,6 +13461,10 @@ static Bytes_2(void) {
 	MakeCode	(x=0XF0014AE8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0014AEC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0014AF0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0014AF4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14491,6 +14780,15 @@ static Bytes_2(void) {
 	MakeDword	(x=0XF0016654);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_3(void) {
+        auto x;
+#define id x
+
 	MakeDword	(x=0XF0016658);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -14951,15 +15249,6 @@ static Bytes_2(void) {
 	MakeDword	(0XF0017500);
 	MakeCode	(0XF0017504);
 	MakeName	(0XF0017504,	"_Z9do_printfPKcPv");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_3(void) {
-        auto x;
-#define id x
-
 	MakeCode	(x=0XF0017508);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -17359,12 +17648,16 @@ static Bytes_3(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0019E44);
+	MakeName	(0XF0019E44,	"initRecentThreads");
 	MakeCode	(x=0XF0019E48);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF0019E4C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF0019E5C,	"size");
+	MakeCode	(x=0XF0019E60);
+	OpDecimal	(x,	1);
 	MakeCode	(x=0XF0019E6C);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF0019E74);
@@ -17830,13 +18123,18 @@ static Bytes_3(void) {
 	MakeDword	(0XF001B678);
 	MakeDword	(0XF001B67C);
 	MakeDword	(0XF001B680);
+	MakeName	(0XF001B680,	"xxxBack");
 	MakeDword	(0XF001B684);
 	MakeDword	(x=0XF001B688);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+	MakeRptCmt	(0XF001B68C,	"selects verbose tracing if set to 2.");
 	MakeDword	(0XF001B68C);
+	MakeName	(0XF001B68C,	"traceFlags");
 	MakeDword	(0XF001B690);
+	MakeName	(0XF001B690,	"xxxFront");
 	MakeDword	(0XF001B694);
+	MakeName	(0XF001B694,	"xxxBase");
 	MakeDword	(0XF001B698);
 	MakeDword	(0XF001B69C);
 	MakeDword	(0XF001B6A0);
@@ -17845,7 +18143,15 @@ static Bytes_3(void) {
 	MakeDword	(0XF001B6AC);
 	MakeDword	(0XF001B6B0);
 	MakeDword	(0XF001B6B4);
-	MakeArray	(0XF001B6B4,	0X4);
+	MakeDword	(x=0XF001B6B8);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001B6BC);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001B6C0);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
 	MakeDword	(x=0XF001B6C4);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -18774,6 +19080,7 @@ static Bytes_3(void) {
 	MakeDword	(0XF001D3D0);
 	MakeDword	(0XF001D3D4);
 	MakeDword	(0XF001D3D8);
+	MakeName	(0XF001D3D8,	"userSetableVariable2");
 	MakeDword	(0XF001D3DC);
 	MakeArray	(0XF001D3DC,	0X811);
 	MakeDword	(0XF001F420);
@@ -18786,6 +19093,7 @@ static Bytes_3(void) {
 	MakeName	(0XF001F450,	"timer");
 	MakeDword	(0XF001F454);
 	MakeDword	(0XF001F458);
+	MakeName	(0XF001F458,	"recent_threads");
 	MakeRptCmt	(0XF001F45C,	"gets set to 0xff300000\n((signed)0xCC000000 >> 6)");
 	MakeDword	(0XF001F45C);
 	MakeDword	(0XF001F460);
@@ -19205,7 +19513,7 @@ static Bytes_3(void) {
 	MakeCode	(x=0XF0025664);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeName	(0XF0025664,	"sys_exchange_registers_exargs_0");
+	MakeName	(0XF0025664,	"sys_exchange_registers_exargs");
 	MakeCode	(x=0XF0025670);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -19299,6 +19607,12 @@ static Bytes_3(void) {
 	OpHex		(x,	1);
 	MakeCode	(0XF0025A94);
 	MakeName	(0XF0025A94,	"arm_misc_syscall");
+	MakeCode	(x=0XF0025AA0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF0025AA4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+	MakeCode	(x=0XF0025AAC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF0025AB8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -19692,6 +20006,7 @@ static Functions_0(void) {
 	SetFunctionFlags(0XF000A0F4,0x1);
 	MakeFunction    (0XF000A3B8,0XF000A844);
 	SetFunctionFlags(0XF000A3B8,0);
+	SetType(0XF000A3B8, "int __cdecl sys_arm_misc(struct arm_irq_context_t *ctx);");
 	MakeFrame(0XF000A3B8, 0X28, 0, 0);
 	MakeFunction    (0XF000A87C,0XF000A914);
 	SetFunctionFlags(0XF000A87C,0);
@@ -19706,7 +20021,7 @@ static Functions_0(void) {
 	SetFunctionFlags(0XF000AC24,0);
 	MakeFunction    (0XF000AC30,0XF000B27C);
 	SetFunctionFlags(0XF000AC30,0);
-	SetType(0XF000AC30, "int __cdecl ZN7space_t11add_mappingEPvS0_N7pgent_t8pgsize_eENS_5rwx_eEb11memattrib_e(void *addr, void *paddr, int sz, int rwx, int kernel, int attrib);");
+	SetType(0XF000AC30, "int __cdecl space_t__add_mapping(void *addr, void *paddr, int sz, int rwx, int kernel, int attrib);");
 	MakeFrame(0XF000AC30, 0X3C, 0, 0);
 	MakeLocal(0XF000AC30, 0XF000B27C, "[bp+0]", "kernel");
 	MakeLocal(0XF000AC30, 0XF000B27C, "[bp+0X4]", "attrib");
@@ -19828,12 +20143,52 @@ static Functions_0(void) {
 	MakeFrame(0XF000E2C8, 0X8, 0, 0);
 	MakeFunction    (0XF000E300,0XF000E314);
 	SetFunctionFlags(0XF000E300,0);
+	MakeFunction    (0XF000E314,0XF000E328);
+	SetFunctionFlags(0XF000E314,0);
 	MakeFunction    (0XF000E350,0XF000E424);
 	SetFunctionFlags(0XF000E350,0);
+	SetType(0XF000E350, "int __cdecl addRecentThread(struct tcb *tcb);");
 	MakeFunction    (0XF000E43C,0XF000F0F0);
 	SetFunctionFlags(0XF000E43C,0);
+	SetType(0XF000E43C, "int __cdecl misc_call_e0(struct arm_irq_context_t *ctx);");
 	MakeFrame(0XF000E43C, 0X24, 0, 0);
-	MakeNameEx(0XF000E990, "_case_0x16", SN_LOCAL);
+	MakeNameEx(0XF000E4F8, "e0_3", SN_LOCAL);
+	MakeNameEx(0XF000E538, "e0_default", SN_LOCAL);
+	MakeNameEx(0XF000E540, "e0_36", SN_LOCAL);
+	MakeNameEx(0XF000E714, "e0_34", SN_LOCAL);
+	MakeNameEx(0XF000E75C, "e0_30", SN_LOCAL);
+	MakeNameEx(0XF000E7D8, "e0_29", SN_LOCAL);
+	MakeNameEx(0XF000E850, "e0_28", SN_LOCAL);
+	MakeNameEx(0XF000E8A8, "e0_27", SN_LOCAL);
+	MakeNameEx(0XF000E8E0, "e0_26", SN_LOCAL);
+	MakeNameEx(0XF000E930, "e0_25", SN_LOCAL);
+	MakeNameEx(0XF000E978, "e0_8", SN_LOCAL);
+	MakeNameEx(0XF000E990, "e0_22", SN_LOCAL);
+	MakeNameEx(0XF000E9E0, "e0_21", SN_LOCAL);
+	MakeNameEx(0XF000EA1C, "e0_10", SN_LOCAL);
+	MakeNameEx(0XF000EAA0, "e0_9", SN_LOCAL);
+	MakeNameEx(0XF000EAB0, "e0_24", SN_LOCAL);
+	MakeNameEx(0XF000EAE4, "e0_23", SN_LOCAL);
+	MakeNameEx(0XF000EB24, "e0_4", SN_LOCAL);
+	MakeNameEx(0XF000EB90, "e0_6", SN_LOCAL);
+	MakeNameEx(0XF000EBB0, "e0_7", SN_LOCAL);
+	MakeNameEx(0XF000EC08, "e0_5", SN_LOCAL);
+	MakeNameEx(0XF000EC30, "e0_1", SN_LOCAL);
+	MakeNameEx(0XF000EC64, "e0_40", SN_LOCAL);
+	MakeNameEx(0XF000EC70, "e0_4_2", SN_LOCAL);
+	MakeNameEx(0XF000ED10, "e0_4_3", SN_LOCAL);
+	MakeNameEx(0XF000EEDC, "e0_4_1", SN_LOCAL);
+	MakeNameEx(0XF000EEEC, "e0_4_11", SN_LOCAL);
+	MakeNameEx(0XF000EEF8, "e0_4_12", SN_LOCAL);
+	MakeNameEx(0XF000EF04, "e0_4_13", SN_LOCAL);
+	MakeNameEx(0XF000EF28, "e0_4_16", SN_LOCAL);
+	MakeNameEx(0XF000EF34, "e0_4_15", SN_LOCAL);
+	MakeNameEx(0XF000EF58, "e0_4_6", SN_LOCAL);
+	MakeNameEx(0XF000EFB8, "e0_4_5", SN_LOCAL);
+	MakeNameEx(0XF000EFE0, "e0_4_10", SN_LOCAL);
+	MakeNameEx(0XF000EFEC, "e0_4_9", SN_LOCAL);
+	MakeNameEx(0XF000F018, "e0_4_8", SN_LOCAL);
+	MakeNameEx(0XF000F034, "e0_4_7", SN_LOCAL);
 	MakeFunction    (0XF000F0F0,0XF000F134);
 	SetFunctionFlags(0XF000F0F0,0);
 	MakeFrame(0XF000F0F0, 0X8, 0, 0);
@@ -20080,7 +20435,7 @@ static Functions_0(void) {
 	MakeFrame(0XF0018334, 0X1C, 0, 0);
 	MakeFunction    (0XF0018434,0XF0018684);
 	SetFunctionFlags(0XF0018434,0);
-	SetType(0XF0018434, "int __cdecl Z22setup_initial_mappingsP7space_t();");
+	SetType(0XF0018434, "int __cdecl setup_initial_mappings();");
 	MakeFrame(0XF0018434, 0X34, 0, 0);
 	MakeFunction    (0XF00186A0,0XF00188AC);
 	SetFunctionFlags(0XF00186A0,0);
