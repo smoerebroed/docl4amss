@@ -50,9 +50,15 @@ calle0(0,8,x) :
        otherwise it just stores the first four bytes.
 
 calle0(0,10,)
-    some mmu stuff? 
+    TLB lockdown control
+    add 0xf94ef800 to tlb lockdown
+    if r2[0] then add r2[1] to tlb lockdown too
+    (keeping standard locked tlb entries in place)
 
-calle0(0,22,...)
+calle0(0,22, tid, int *x)
+    given tid and x, both nonzero
+    return the first thread local store item from thread tid in x[0].
+    XXX writes to arbitrary address from kernel domain!
 
 calle0(0,24, x[]) 
     if x[0] == 1 :

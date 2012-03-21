@@ -65,3 +65,50 @@ and the code.
     XXX review kip/utcb/etc. dumping functions to see if they
     talk about extension fields
 
+------
+
+the undefined instruction handler has two "backdoor" functions:
+
+   if r12 == 0xfffffff6 : /* -10 */
+      clear bit 0x80 of SPSR
+      return with r0 = SPSR with 0x80 set
+   if r12 == 0xffffff1c : /* -0xe4 */
+      set or clear it 0x40 of SPSR (ie. IRQ) based on r0 bit 0
+      return with r0 = old SPSR
+
+(see code at 0xF002513C in (F00250A0 arm_undefined_inst_exception)).
+
+---
+normal undefined exception handler doesnt run with irq/fiq disabled
+as is done in pub srcs.
+
+
+
+-----------
+XXX figure this out more...
+
+dword_F001F570 is a flag that sets a mode.
+if set, during return to userland, 
+pulls a value from utcb->user_reserved[0] (or 0x100 if not set)
+and stores it at (short*)0xF9504282 if its not already set to the value
+
+settable by misc call e0, r1==9
+
+also if set, then misc call e0, r1 == 5 will
+store r2 into (short*)0xF9504282
+
+
+
+----------------
+
+tcbs are stored at 0xe000.0000 in a table indexed by
+certain bits in the tid.  see check_other_tcb for an
+example of constructing an addr from a tid.
+
+---------
+0xff00.0000 stores user kip page
+0xff00.0ff0 refers to utcb
+
+----
+sys_processor_control is implemented.  its a nop in std code
+
