@@ -66,3 +66,9 @@ calle0(0,24, x[])
     if x[0] == 2 :
         set or clear some user settable variable for x[1] !=0 or == 0
 
+calle0(0, 39)
+    set someFlag in kernel that enables some handlers in
+    undefined instruction handler.
+    Once enabled it cannot be disabled...
+    XXX investigate more.
+

@@ -78,6 +78,10 @@ the undefined instruction handler has two "backdoor" functions:
 
 (see code at 0xF002513C in (F00250A0 arm_undefined_inst_exception)).
 
+
+XXX more undefined handlers are enabled when a misc syscall
+is used to enable them.. figure this out more XXX
+
 ---
 normal undefined exception handler doesnt run with irq/fiq disabled
 as is done in pub srcs.
@@ -111,4 +115,8 @@ example of constructing an addr from a tid.
 
 ----
 sys_processor_control is implemented.  its a nop in std code
+
+----
+utcb.byte[10] is normally reserved, but is used by
+arm_irq_exception.  If flag 0x2 is set, the irq is ignored.
 
