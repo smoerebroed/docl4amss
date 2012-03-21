@@ -76,11 +76,13 @@ the undefined instruction handler has two "backdoor" functions:
       set or clear it 0x40 of SPSR (ie. IRQ) based on r0 bit 0
       return with r0 = old SPSR
 
-(see code at 0xF002513C in (F00250A0 arm_undefined_inst_exception)).
+and there's a special mode set up by the misc syscall call with r1=40
+that causes the undefined instruction handler to process three
+special cache instructions:
 
-
-XXX more undefined handlers are enabled when a misc syscall
-is used to enable them.. figure this out more XXX
+   0xEE070F15 - inv i-cache
+   0xee070f9a - drain write buffer
+   0xEE17FF7A - test and clean d-cache
 
 ---
 normal undefined exception handler doesnt run with irq/fiq disabled
