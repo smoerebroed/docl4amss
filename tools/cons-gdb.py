@@ -11,6 +11,10 @@ to run okl4 from "elf" file:
 
 then in another window run this program:
  $ ./cons-gdb.py
+
+
+notes:
+   http://davis.lbl.gov/Manuals/GDB/gdb_31.html
 """
 
 import socket, sys
@@ -110,38 +114,57 @@ def stepBpt(s, addr) :
     step(s)
     bpt(s, addr)
 
-PC=15
-LR=14
-SP=13
-
-GETC = 0xf000f3f8
-PUTC = 0xf000f3bc
-
-s = connect()
-print bpt(s, GETC)
-print bpt(s, PUTC)
-
-while 1 :
-    cont(s)
-    reg = getRegs(s)
-    if reg[PC] == PUTC :
-        sys.stdout.write(chr(reg[0]))
-        sys.stdout.flush()
-    elif reg[PC] == GETC :
+def getCh() :
+    """Get char in raw mode."""
+    import tty, termios
+    fd = sys.stdin.fileno()
+    orig = termios.tcgetattr(fd)
+    try :
+        tty.setraw(fd)
         ch = sys.stdin.read(1)
-        if not ch :
+    finally :
+        termios.tcsetattr(fd, termios.TCSADRAIN, orig)
+    return ch
+
+def runCons() :
+    PC=15
+    LR=14
+    SP=13
+    
+    GETC = 0xf000f3f8
+    PUTC = 0xf000f3bc
+    
+    s = connect()
+    print bpt(s, GETC)
+    print bpt(s, PUTC)
+    
+    while 1 :
+        cont(s)
+        reg = getRegs(s)
+        if reg[PC] == PUTC :
+            sys.stdout.write(chr(reg[0]))
+            sys.stdout.flush()
+        elif reg[PC] == GETC :
+            ch = getCh()
+            if ch in ['', '\x03', '\x04'] : # eof, ^c or ^d quits
+                break
+            reg[0] = ord(ch)
+            reg[PC] = reg[LR]
+            setRegs(s, reg)
+            continue
+    
+        else :
+            print 'done at %x' % reg[PC]
             break
-        reg[0] = ord(ch)
-        reg[PC] = reg[LR]
-        setRegs(s, reg)
-        continue
+        stepBpt(s, reg[PC])
+    
+    print 'done...'
+    
+    # XXX gdb somehow signals qemu to start down but I'm not sure
+    # which packet does that..  for now we have to manuall stop qemu
 
-    else :
-        print 'done at %x' % reg[PC]
-        break
-    stepBpt(s, reg[PC])
+try :
+    runCons()
+except Exception, e :
+    print 'exception: %r' % e
 
-print 'done...'
-
-# XXX gdb somehow signals qemu to start down but I'm not sure
-# which packet does that..  for now we have to manuall stop qemu
