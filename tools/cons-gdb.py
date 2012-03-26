@@ -101,8 +101,8 @@ def getReg(s, r) :
 def step(s) :
     return sendCmd(s, 's')
 
-def detach(s) :
-    s.send(pkt('D'))
+def kill(s) :
+    s.send(pkt('k'))
 
 def connect(port=1234) :
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -138,33 +138,33 @@ def runCons() :
     print bpt(s, GETC)
     print bpt(s, PUTC)
     
-    while 1 :
-        cont(s)
-        reg = getRegs(s)
-        if reg[PC] == PUTC :
-            sys.stdout.write(chr(reg[0]))
-            sys.stdout.flush()
-        elif reg[PC] == GETC :
-            ch = getCh()
-            if ch in ['', '\x03', '\x04'] : # eof, ^c or ^d quits
+    try :
+        while 1 :
+            cont(s)
+            reg = getRegs(s)
+            if reg[PC] == PUTC :
+                sys.stdout.write(chr(reg[0]))
+                sys.stdout.flush()
+            elif reg[PC] == GETC :
+                ch = getCh()
+                if ch in ['', '\x03', '\x04'] : # eof, ^c or ^d quits
+                    break
+                reg[0] = ord(ch)
+                reg[PC] = reg[LR]
+                setRegs(s, reg)
+                continue
+        
+            else :
+                print 'done at %x' % reg[PC]
                 break
-            reg[0] = ord(ch)
-            reg[PC] = reg[LR]
-            setRegs(s, reg)
-            continue
+            stepBpt(s, reg[PC])
+    except Error, e :    
+        print 'exception: %r' % e
+    except KeyboardInterrupt :
+        pass
+    finally :
+        print 'done...'
+        kill(s)
     
-        else :
-            print 'done at %x' % reg[PC]
-            break
-        stepBpt(s, reg[PC])
-    
-    print 'done...'
-    
-    # XXX gdb somehow signals qemu to start down but I'm not sure
-    # which packet does that..  for now we have to manuall stop qemu
-
-try :
-    runCons()
-except Exception, e :
-    print 'exception: %r' % e
+runCons()
 
