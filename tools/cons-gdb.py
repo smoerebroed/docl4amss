@@ -6,7 +6,7 @@ gdb proto implemention is quick and hackish
 
 ---
 to run okl4 from "elf" file:
- $ qemu-system-arm -M versatileab -s -S -kernel elf -m 256 \
+ $ qemu-system-arm -M versatileab -s -S -kernel elf -m 512 \
        -curses -monitor stdio 
 
 then in another window run this program:
