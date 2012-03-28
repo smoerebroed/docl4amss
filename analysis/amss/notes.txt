@@ -39,13 +39,27 @@ global addr 0x1FFC000 ?
 0xC5000100
 0x1F00000
 
+0xf910010c (in okl4)
+
 
 -----
 
 has a dpc thread that calls defered procedure calls
 
+-------------------
+
+16E6458C initHeapInfo  
+   sets up heap at 0x01f0.0000 and expects it to have some info
+   but in emulator I'm getting it all zero'd.  Is the loader
+   or APP supposed to be initializing these fields for us?
 
 
+-----------------
+smem stuff is partially documented in linux code
+arch/arm/mach-msm/smd*.[ch]
 
-
+ie. smd.c smem_alloc, smem_item and smem_find have
+direct correspondants in the amss code, though the
+amss code sets up some data structs with tables that
+are not needed inthe linux code...
 
