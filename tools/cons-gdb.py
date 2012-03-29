@@ -9,6 +9,9 @@ to run okl4 from "elf" file:
  $ qemu-system-arm -M versatileab -s -S -kernel elf -m 512 \
        -curses -monitor stdio 
 
+(XXX will crash in quartz unless you use tools/sortelf.py
+on your elf binary.)
+
 then in another window run this program:
  $ ./cons-gdb.py
 
@@ -98,6 +101,32 @@ def getRegs(s) :
 def getReg(s, r) :
     return getRegs(s)[r]
 
+def getBytes(s, addr, l) :
+    x = sendCmd(s, 'm%x,%x' % (addr, l))
+    return [int(x[n:n+2],16) for n in xrange(0, len(x), 2)]
+    
+def getHalfs(s, addr, l) :
+    bs = getBytes(s, addr, 2*l)
+    return [(bs[n] | (bs[n+1]<<8)) for n in xrange(0, len(bs), 2)]
+
+def getWords(s, addr, l) :
+    x = sendCmd(s, 'm%x,%x' % (addr, 4*l))
+    return [unlehex(v) for v in splitn(x, 8)]
+
+def putWords(s, addr, vs) :
+    mem = ''.join(lehex(v) for v in vs)
+    return sendCmd(s, 'M%x,%x:%s' % (addr, 4*len(vs), mem))
+
+def getCStr(s, addr) :
+    r = []
+    while addr :
+        ch = getBytes(s, addr, 1)[0]
+        addr += 1
+        if ch == 0 :
+            break
+        r.append(chr(ch))
+    return ''.join(r)
+
 def step(s) :
     return sendCmd(s, 's')
 
@@ -133,10 +162,19 @@ def runCons() :
     
     GETC = 0xf000f3f8
     PUTC = 0xf000f3bc
+    ERR = 0x16E42D4C
+    ERR2 = 0x16E43024
+    LOG = 0x00B0CEC0
     
     s = connect()
     print bpt(s, GETC)
     print bpt(s, PUTC)
+    print bpt(s, ERR)
+    print bpt(s, ERR2)
+    print bpt(s, LOG)
+
+    # XXX
+    #print putWords(s, 0x01f000c0, [1])  # heap init in smem
     
     try :
         while 1 :
@@ -153,6 +191,13 @@ def runCons() :
                 reg[PC] = reg[LR]
                 setRegs(s, reg)
                 continue
+
+            elif reg[PC] in [ERR, ERR2] :
+                print '%x - Err: %d line %r %r @ 0x%08x' % (reg[PC], reg[0], getCStr(s, reg[1]), getCStr(s, reg[2]), reg[LR])
+
+            elif reg[PC] == LOG :
+                ws = getWords(s, reg[0], 5)
+                print '%x - Debug: %d %d %r %r %d @ 0x%08x' % (reg[PC], ws[0], ws[1], getCStr(s, ws[2]), getCStr(s, ws[3]), ws[4], reg[LR])
         
             else :
                 print 'done at %x' % reg[PC]
