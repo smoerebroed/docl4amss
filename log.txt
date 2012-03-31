@@ -1,0 +1,21 @@
+
+Fri Mar 30 19:45:55 HST 2012
+  - looking at partition table, efs
+
+earlier this week
+  - investigate smem, found lots of info in linux-msm
+  - play with booting in qemu
+    - use gdb proto to simulate jtag console
+    - dump some info about page tables during boot
+
+previous weeks
+  - investigate okl4 customization
+    - custom syscall
+    - custom illegal opcode handler
+    - custom mappings...
+
+last month and earlier...
+  - analysis of quartz
+  - analysis of qdms
+  - analysis of iguana
+  - analysis of ig_naming (open src)
