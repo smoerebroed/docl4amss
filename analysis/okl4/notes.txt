@@ -122,3 +122,40 @@ sys_processor_control is implemented.  its a nop in std code
 utcb.byte[10] is normally reserved, but is used by
 arm_irq_exception.  If flag 0x2 is set, the irq is ignored.
 
+utcb.byte[11] ? XXX
+
+
+-----
+kernel mappings
+
+vaddr       paddr
+0xF9000000, 0xB0000000         modem subsystem, modem regs
+0xF9100000, 0xB8000000  ?      modem subsystem, mss periph
+0xF9400000, 0xFFF00000         reserved?
+0xF9500000, 0x9C000000  ?      ebi2_cs_n(5) (nor mem? lcd?)  (1MB of 64Mb)
+
+
+
+0xff300000, paddr(phys_addr_ram)    4k of ram 
+
+
+256M gets mapped starting at 0xffff0000, wrapping around...
+0xffff0000, paddr(phys_addr_ram+148k)   64k of ram
+0x00000000, paddr(phys_addr_ram+212k)   256M - 212k, ending: 0x0ffcb000 
+
+
+note: 0xff30.0000 is stored in kip->0x108
+which gets mapped to the first page of phys_addr_ram.
+----
+
+dword f910.1200[0x20] = 0    // f910.1280
+i cant find this in docs
+
+phys_addr_ram = 0xA00000
+
+
+
+------
+kdb is enabled, current console is set to "jtag"
+
+
