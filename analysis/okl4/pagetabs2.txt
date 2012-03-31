@@ -1,0 +1,189 @@
+> listspaces
+f001c000: (idle)
+f0075e1c: roottask
+f0075da8: ig_namin
+f0075d34: qdms
+f0075cc0: quartz_s
+f0075c4c: AMSS
+> ptab
+Space [current]: f001c000
+b0000000 [f4022c00]: tree=f4022c00
+b0000000 [00a7b5e1]:   tree=f407b400
+b0000000 [00a61ffa]:     tree=f407b400
+b0000000 [00a61ffa]:       phys=00a61000 pg=f407b400   4KB rwx (RWX) user   WT domain = 15
+b0001000 [00a62ffa]:       phys=00a62000 pg=f407b404   4KB rwx (RWX) user   WT domain = 15
+b0002000 [00a63ffa]:       phys=00a63000 pg=f407b408   4KB rwx (RWX) user   WT domain = 15
+b0003000 [00a64ffa]:       phys=00a64000 pg=f407b40c   4KB rwx (RWX) user   WT domain = 15
+b0004000 [00a65ffa]:       phys=00a65000 pg=f407b410   4KB rwx (RWX) user   WT domain = 15
+b0005000 [00a66ffa]:       phys=00a66000 pg=f407b414   4KB rwx (RWX) user   WT domain = 15
+b0006000 [00a67ffa]:       phys=00a67000 pg=f407b418   4KB rwx (RWX) user   WT domain = 15
+b0007000 [00a68ffa]:       phys=00a68000 pg=f407b41c   4KB rwx (RWX) user   WT domain = 15
+b0008000 [00a69ffa]:       phys=00a69000 pg=f407b420   4KB rwx (RWX) user   WT domain = 15
+b0009000 [00a6affa]:       phys=00a6a000 pg=f407b424   4KB rwx (RWX) user   WT domain = 15
+b000a000 [00a6bffa]:       phys=00a6b000 pg=f407b428   4KB rwx (RWX) user   WT domain = 15
+b000b000 [00a6cffa]:       phys=00a6c000 pg=f407b42c   4KB rwx (RWX) user   WT domain = 15
+b000c000 [00a6dffa]:       phys=00a6d000 pg=f407b430   4KB rwx (RWX) user   WT domain = 15
+b000d000 [00a6effa]:       phys=00a6e000 pg=f407b434   4KB rwx (RWX) user   WT domain = 15
+b000e000 [00a6fffa]:       phys=00a6f000 pg=f407b438   4KB rwx (RWX) user   WT domain = 15
+b000f000 [17c07ffa]:       phys=17c07000 pg=f407b43c   4KB rwx (RWX) user   WT domain = 15
+b0040000 [00af0ff2]:     tree=f407b500
+b0040000 [00af0ff2]:       phys=00af0000 pg=f407b500   4KB rwx (RWX) user   NC domain = 15
+b0041000 [00af1ff2]:       phys=00af1000 pg=f407b504   4KB rwx (RWX) user   NC domain = 15
+b0042000 [00af2ff2]:       phys=00af2000 pg=f407b508   4KB rwx (RWX) user   NC domain = 15
+b0043000 [00af3ffa]:       phys=00af3000 pg=f407b50c   4KB rwx (RWX) user   WT domain = 15
+b0044000 [00af4ffa]:       phys=00af4000 pg=f407b510   4KB rwx (RWX) user   WT domain = 15
+b0045000 [00af5ff2]:       phys=00af5000 pg=f407b514   4KB rwx (RWX) user   NC domain = 15
+b0046000 [00af6ff2]:       phys=00af6000 pg=f407b518   4KB rwx (RWX) user   NC domain = 15
+b0047000 [00af7ff2]:       phys=00af7000 pg=f407b51c   4KB rwx (RWX) user   NC domain = 15
+b0048000 [00af8ff2]:       phys=00af8000 pg=f407b520   4KB rwx (RWX) user   NC domain = 15
+b0049000 [00af9ff2]:       phys=00af9000 pg=f407b524   4KB rwx (RWX) user   NC domain = 15
+b004a000 [00afaff2]:       phys=00afa000 pg=f407b528   4KB rwx (RWX) user   NC domain = 15
+b004b000 [00afbff2]:       phys=00afb000 pg=f407b52c   4KB rwx (RWX) user   NC domain = 15
+b004c000 [00afcff2]:       phys=00afc000 pg=f407b530   4KB rwx (RWX) user   NC domain = 15
+b004d000 [00afdff2]:       phys=00afd000 pg=f407b534   4KB rwx (RWX) user   NC domain = 15
+b004e000 [00afeff2]:       phys=00afe000 pg=f407b538   4KB rwx (RWX) user   NC domain = 15
+b004f000 [00affff2]:       phys=00aff000 pg=f407b53c   4KB rwx (RWX) user   NC domain = 15
+b0050000 [00b00ffa]:     tree=f407b540
+b0050000 [00b00ffa]:       phys=00b00000 pg=f407b540   4KB rwx (RWX) user   WT domain = 15
+b0051000 [00b01ffa]:       phys=00b01000 pg=f407b544   4KB rwx (RWX) user   WT domain = 15
+b0052000 [00b02ffa]:       phys=00b02000 pg=f407b548   4KB rwx (RWX) user   WT domain = 15
+b0053000 [00b03ffa]:       phys=00b03000 pg=f407b54c   4KB rwx (RWX) user   WT domain = 15
+b0054000 [00b04ffa]:       phys=00b04000 pg=f407b550   4KB rwx (RWX) user   WT domain = 15
+b0055000 [00b05ffa]:       phys=00b05000 pg=f407b554   4KB rwx (RWX) user   WT domain = 15
+b0056000 [00b06ffa]:       phys=00b06000 pg=f407b558   4KB rwx (RWX) user   WT domain = 15
+b0057000 [17c04ffa]:       phys=17c04000 pg=f407b55c   4KB rwx (RWX) user   WT domain = 15
+b0100000 [00a7d1e1]:   tree=f407d000
+b0100000 [00a26aaa]:     tree=f407d000
+b0100000 [00a26aaa]:       phys=00a26000 pg=f407d000   4KB r~x (RWX) user   WT domain = 15
+b0101000 [00a27aaa]:       phys=00a27000 pg=f407d004   4KB r~x (RWX) user   WT domain = 15
+b0102000 [00a28aaa]:       phys=00a28000 pg=f407d008   4KB r~x (RWX) user   WT domain = 15
+b0103000 [00a29aaa]:       phys=00a29000 pg=f407d00c   4KB r~x (RWX) user   WT domain = 15
+b0104000 [00a2aaaa]:       phys=00a2a000 pg=f407d010   4KB r~x (RWX) user   WT domain = 15
+b0105000 [00a2baaa]:       phys=00a2b000 pg=f407d014   4KB r~x (RWX) user   WT domain = 15
+b0106000 [00a2caaa]:       phys=00a2c000 pg=f407d018   4KB r~x (RWX) user   WT domain = 15
+b0107000 [17c05ffa]:       phys=17c05000 pg=f407d01c   4KB rwx (RWX) user   WT domain = 15
+b0140000 [00a2dffa]:     tree=f407d100
+b0140000 [00a2dffa]:       phys=00a2d000 pg=f407d100   4KB rwx (RWX) user   WT domain = 15
+b0141000 [00a3effa]:       phys=00a3e000 pg=f407d104   4KB rwx (RWX) user   WT domain = 15
+b0144000 [17c10ffa]:       phys=17c10000 pg=f407d110   4KB rwx (RWX) user   WT domain = 15
+b0145000 [17c11ffa]:       phys=17c11000 pg=f407d114   4KB rwx (RWX) user   WT domain = 15
+b0146000 [17c12ffa]:       phys=17c12000 pg=f407d118   4KB rwx (RWX) user   WT domain = 15
+b0147000 [17c13ffa]:       phys=17c13000 pg=f407d11c   4KB rwx (RWX) user   WT domain = 15
+b0200000 [00a7dde1]:   tree=f407dc00
+b0200000 [00a2eaaa]:     tree=f407dc00
+b0200000 [00a2eaaa]:       phys=00a2e000 pg=f407dc00   4KB r~x (RWX) user   WT domain = 15
+b0201000 [00a2faaa]:       phys=00a2f000 pg=f407dc04   4KB r~x (RWX) user   WT domain = 15
+b0202000 [00a30aaa]:       phys=00a30000 pg=f407dc08   4KB r~x (RWX) user   WT domain = 15
+b0203000 [00a31aaa]:       phys=00a31000 pg=f407dc0c   4KB r~x (RWX) user   WT domain = 15
+b0204000 [00a32aaa]:       phys=00a32000 pg=f407dc10   4KB r~x (RWX) user   WT domain = 15
+b0205000 [00a33aaa]:       phys=00a33000 pg=f407dc14   4KB r~x (RWX) user   WT domain = 15
+b0206000 [00a34aaa]:       phys=00a34000 pg=f407dc18   4KB r~x (RWX) user   WT domain = 15
+b0207000 [00a35aaa]:       phys=00a35000 pg=f407dc1c   4KB r~x (RWX) user   WT domain = 15
+b0208000 [00a36aaa]:       phys=00a36000 pg=f407dc20   4KB r~x (RWX) user   WT domain = 15
+b0209000 [17c06ffa]:       phys=17c06000 pg=f407dc24   4KB rwx (RWX) user   WT domain = 15
+b020c000 [17c1cffa]:       phys=17c1c000 pg=f407dc30   4KB rwx (RWX) user   WT domain = 15
+b020d000 [17c1dffa]:       phys=17c1d000 pg=f407dc34   4KB rwx (RWX) user   WT domain = 15
+b020e000 [17c1effa]:       phys=17c1e000 pg=f407dc38   4KB rwx (RWX) user   WT domain = 15
+b020f000 [17c1fffa]:       phys=17c1f000 pg=f407dc3c   4KB rwx (RWX) user   WT domain = 15
+b0240000 [00a37ffa]:     tree=f407dd00
+b0240000 [00a37ffa]:       phys=00a37000 pg=f407dd00   4KB rwx (RWX) user   WT domain = 15
+b0241000 [00a3fffa]:       phys=00a3f000 pg=f407dd04   4KB rwx (RWX) user   WT domain = 15
+b0244000 [17c18ffa]:       phys=17c18000 pg=f407dd10   4KB rwx (RWX) user   WT domain = 15
+b0245000 [17c19ffa]:       phys=17c19000 pg=f407dd14   4KB rwx (RWX) user   WT domain = 15
+b0246000 [17c1affa]:       phys=17c1a000 pg=f407dd18   4KB rwx (RWX) user   WT domain = 15
+b0247000 [17c1bffa]:       phys=17c1b000 pg=f407dd1c   4KB rwx (RWX) user   WT domain = 15
+b0300000 [00a7bde1]:   tree=f407bc00
+b0300000 [00a40ff9]:     phys=00a40000 pg=f407bc00    64KB rwx (RWX) user   WT domain = 15
+b0310000 [00a50ff9]:     phys=00a50000 pg=f407bc40    64KB rwx (RWX) user   WT domain = 15
+b0320000 [00a60ffa]:     tree=f407bc80
+b0320000 [00a60ffa]:       phys=00a60000 pg=f407bc80   4KB rwx (RWX) user   WT domain = 15
+b0321000 [17c03ffa]:       phys=17c03000 pg=f407bc84   4KB rwx (RWX) user   WT domain = 15
+b0322000 [17c14ffa]:       phys=17c14000 pg=f407bc88   4KB rwx (RWX) user   WT domain = 15
+b0323000 [17c15ffa]:       phys=17c15000 pg=f407bc8c   4KB rwx (RWX) user   WT domain = 15
+b0324000 [17c08ffa]:       phys=17c08000 pg=f407bc90   4KB rwx (RWX) user   WT domain = 15
+b0325000 [17c09ffa]:       phys=17c09000 pg=f407bc94   4KB rwx (RWX) user   WT domain = 15
+b0326000 [17c0affa]:       phys=17c0a000 pg=f407bc98   4KB rwx (RWX) user   WT domain = 15
+b0327000 [17c0bffa]:       phys=17c0b000 pg=f407bc9c   4KB rwx (RWX) user   WT domain = 15
+b0328000 [01e68ffa]:       phys=01e68000 pg=f407bca0   4KB rwx (RWX) user   WT domain = 15
+b0329000 [01e69ffa]:       phys=01e69000 pg=f407bca4   4KB rwx (RWX) user   WT domain = 15
+b032a000 [01e6affa]:       phys=01e6a000 pg=f407bca8   4KB rwx (RWX) user   WT domain = 15
+b032b000 [01e6bffa]:       phys=01e6b000 pg=f407bcac   4KB rwx (RWX) user   WT domain = 15
+b0d00000 [00a7b9e1]:   tree=f407b800
+b0d00000 [00a38ffa]:     tree=f407b800
+b0d00000 [00a38ffa]:       phys=00a38000 pg=f407b800   4KB rwx (RWX) user   WT domain = 15
+b0d01000 [00a39ffa]:       phys=00a39000 pg=f407b804   4KB rwx (RWX) user   WT domain = 15
+b0d02000 [17c16ffa]:       phys=17c16000 pg=f407b808   4KB rwx (RWX) user   WT domain = 15
+b0d04000 [17c0cffa]:       phys=17c0c000 pg=f407b810   4KB rwx (RWX) user   WT domain = 15
+b0d05000 [17c0dffa]:       phys=17c0d000 pg=f407b814   4KB rwx (RWX) user   WT domain = 15
+b0d06000 [17c0effa]:       phys=17c0e000 pg=f407b818   4KB rwx (RWX) user   WT domain = 15
+b0d07000 [17c0fffa]:       phys=17c0f000 pg=f407b81c   4KB rwx (RWX) user   WT domain = 15
+b0e00000 [00a7d5e1]:   tree=f407d400
+b0e00000 [00a3affa]:     tree=f407d400
+b0e00000 [00a3affa]:       phys=00a3a000 pg=f407d400   4KB rwx (RWX) user   WT domain = 15
+b0e01000 [00a3bffa]:       phys=00a3b000 pg=f407d404   4KB rwx (RWX) user   WT domain = 15
+b0e02000 [00a3cffa]:       phys=00a3c000 pg=f407d408   4KB rwx (RWX) user   WT domain = 15
+b0e03000 [00a3dffa]:       phys=00a3d000 pg=f407d40c   4KB rwx (RWX) user   WT domain = 15
+b0e04000 [01e5cffa]:       phys=01e5c000 pg=f407d410   4KB rwx (RWX) user   WT domain = 15
+b0e05000 [01e5dffa]:       phys=01e5d000 pg=f407d414   4KB rwx (RWX) user   WT domain = 15
+b0e06000 [01e5effa]:       phys=01e5e000 pg=f407d418   4KB rwx (RWX) user   WT domain = 15
+b0e07000 [01e5fffa]:       phys=01e5f000 pg=f407d41c   4KB rwx (RWX) user   WT domain = 15
+b0e08000 [01e60ffa]:       phys=01e60000 pg=f407d420   4KB rwx (RWX) user   WT domain = 15
+b0e09000 [01e61ffa]:       phys=01e61000 pg=f407d424   4KB rwx (RWX) user   WT domain = 15
+b0e0a000 [01e62ffa]:       phys=01e62000 pg=f407d428   4KB rwx (RWX) user   WT domain = 15
+b0e0b000 [01e63ffa]:       phys=01e63000 pg=f407d42c   4KB rwx (RWX) user   WT domain = 15
+b0e0c000 [01e64ffa]:       phys=01e64000 pg=f407d430   4KB rwx (RWX) user   WT domain = 15
+b0e0d000 [01e65ffa]:       phys=01e65000 pg=f407d434   4KB rwx (RWX) user   WT domain = 15
+b0e0e000 [01e66ffa]:       phys=01e66000 pg=f407d438   4KB rwx (RWX) user   WT domain = 15
+b0e0f000 [01e67ffa]:       phys=01e67000 pg=f407d43c   4KB rwx (RWX) user   WT domain = 15
+b0e10000 [01e70ff9]:     phys=01e70000 pg=f407d440    64KB rwx (RWX) user   WT domain = 15
+b0e20000 [17c20ff9]:     phys=17c20000 pg=f407d480    64KB rwx (RWX) user   WT domain = 15
+b0e30000 [17c30ff9]:     phys=17c30000 pg=f407d4c0    64KB rwx (RWX) user   WT domain = 15
+b0e80000 [17c80ff9]:     phys=17c80000 pg=f407d600    64KB rwx (RWX) user   WT domain = 15
+b0e90000 [17c90ff9]:     phys=17c90000 pg=f407d640    64KB rwx (RWX) user   WT domain = 15
+b0ea0000 [17ca0ff9]:     phys=17ca0000 pg=f407d680    64KB rwx (RWX) user   WT domain = 15
+b0eb0000 [17cb0ff9]:     phys=17cb0000 pg=f407d6c0    64KB rwx (RWX) user   WT domain = 15
+b0ec0000 [17cc0ff9]:     phys=17cc0000 pg=f407d700    64KB rwx (RWX) user   WT domain = 15
+b0ed0000 [17cd0ff9]:     phys=17cd0000 pg=f407d740    64KB rwx (RWX) user   WT domain = 15
+b0ee0000 [17ce0ff9]:     phys=17ce0000 pg=f407d780    64KB rwx (RWX) user   WT domain = 15
+b0ef0000 [17cf0ff9]:     phys=17cf0000 pg=f407d7c0    64KB rwx (RWX) user   WT domain = 15
+d0000000 [f4023400]: tree=f4023400
+d1b00000 [00a84561]:   tree=f4084400
+d1b00000 [00000000]:     tree=f4084400
+d1b01000 [00a85ffe]:       phys=00a85000 pg=f4084404   4KB rwx (RWX) user   WB domain = 11
+d1c00000 [00a82581]:   tree=f4082400
+d1c00000 [00000000]:     tree=f4082400
+d1c01000 [00a83ffe]:       phys=00a83000 pg=f4082404   4KB rwx (RWX) user   WB domain = 12
+d1d00000 [00a811a1]:   tree=f4081000
+d1d00000 [00000000]:     tree=f4081000
+d1d01000 [00a80ffe]:       phys=00a80000 pg=f4081004   4KB rwx (RWX) user   WB domain = 13
+d1e00000 [00a7d9c1]:   tree=f407d800
+d1e00000 [00000000]:     tree=f407d800
+d1e01000 [00a7effe]:       phys=00a7e000 pg=f407d804   4KB rwx (RWX) user   WB domain = 14
+d1f00000 [00a7b1e1]:   tree=f407b000
+d1f00000 [00000000]:     tree=f407b000
+d1f01000 [00a7affe]:       phys=00a7a000 pg=f407b004   4KB rwx (RWX) user   WB domain = 15
+e0000000 [f4023800]: tree=f4023800
+e0000000 [00a70c01]:   tree=f4070c00
+e0000000 [00a7100e]:     tree=f4070c00
+e0000000 [00a7100e]:       phys=00a71000 pg=f4070c00   4KB ~~~ (RWX) kernel WB domain = 0
+e0005000 [00a7955e]:       phys=00a79000 pg=f4070c14   4KB ~~~ (RWX) kernel WB domain = 0
+f0000000 [f4023c00]: tree=f4023c00
+f0000000 [00a0040e]:   phys=00a00000 pg=f4023c00       1MB ~~~ (RWX) kernel WB domain = 0
+f4000000 [f4023d00]: tree=f4023d00
+f4000000 [00a0040a]:   phys=00a00000 pg=f4023d00       1MB ~~~ (RWX) kernel WT domain = 0
+f8000000 [f4023e00]: tree=f4023e00
+f9000000 [b0000c02]:   phys=b0000000 pg=f4023e40       1MB rwx (RWX) user   NC domain = 0
+f9100000 [b8000c02]:   phys=b8000000 pg=f4023e44       1MB rwx (RWX) user   NC domain = 0
+f9400000 [fff00c02]:   phys=fff00000 pg=f4023e50       1MB rwx (RWX) user   NC domain = 0
+f9500000 [9c000c02]:   phys=9c000000 pg=f4023e54       1MB rwx (RWX) user   NC domain = 0
+f9a00000 [00a00002]:   phys=00a00000 pg=f4023e68       1MB ~~~ (RWX) kernel NC domain = 0
+fc000000 [f4023f00]: tree=f4023f00
+fef00000 [00a70401]:   tree=f4070400
+fef00000 [00a72ffe]:     tree=f4070400
+fef00000 [00a72ffe]:       phys=00a72000 pg=f4070400   4KB rwx (RWX) user   WB domain = 0
+ff000000 [00a70001]:   tree=f4070000
+ff000000 [00a24aae]:     tree=f4070000
+ff000000 [00a24aae]:       phys=00a24000 pg=f4070000   4KB r~x (RWX) user   WB domain = 0
+fff00000 [00a74c01]:   tree=f4074c00
+ffff0000 [00a2555e]:     tree=f4074fc0
+ffff0000 [00a2555e]:       phys=00a25000 pg=f4074fc0   4KB ~~~ (RWX) kernel WB domain = 0
