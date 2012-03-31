@@ -1,29 +1,33 @@
 this smem stuff might be used to pass in information during boot to amss?
 page 0x01f00000 is mapped with virt=phys, 1MB in size.
+no pointers in this page, only offsets, since the page is
+  shared and possibly mapped in other locations in other programs
+
+
+smem info, pointers into smem:
+
++0   
++4  01f0.0000   proc comm
++8  01f0.0080   version
++c  01f0.00c0   heap info
++10 01f0.00d0   alloc tab
++14 01f0.21cf   barrier
++...
 
 -------------------------
-01f0.0000
+01f0.0000  smem
 +0                           type 0, 0x40 bytes
-       [first byte set to 1 after init done]
-+4     base, 01f0.0000     off for SMEM_PROC_COMM
-+8     off3, 01f0.0080     off for SMEM_VERSION_INFO
-+c     off1, 01f0.00c0     off for SMEM_HEAP_INFO
-
-+10    off2, 01f0.00d0     off for SMEM_ALLOCATION_TABLE
-+14    off8, 01f0.21c4     off for SMEM_MEMORY_BARRIER_LOCATION
-
-+24    0xa003
-
        first 40 bytes are four commands:
        struct smem_proc_comm {
            uint32 cmd, status, data1, data2;
        } proc_comm[4];
-       it looks like the first 2 are used for offsets instead?
-       and the third has cmd set to 0xa003?
+
 
 +40                           type 3, 0x80 bytes, 0x20 records of 4bytes
       [0x20 records of 4 bytes, low halfword must be 0 or 0xa000 at init]
       int version[32];
+
+      version[9] = 0xa003;
 +c0                           type 1, 0x10 bytes
       [word must be 1 at init]
       struct smem_heap_info {
@@ -40,11 +44,11 @@ page 0x01f00000 is mapped with virt=phys, 1MB in size.
           uint32 allocated, offset, size, reserved;
       } arr[512];
 
-+20d0                         type 4, 8 bytes
-+20d8                         type 5, 4 bytes
-+20dc                         type 6, 0xc8 bytes
-+21a4                         type 7, 0x20 bytes
-+21c4                         type 8, 0x4 bytes
++20d0                         type 4, 8 bytes      SMEM_HW_RESET_DETECT
++20d8                         type 5, 4 bytes      SMEM_AARM_WARM_BOOT
++20dc                         type 6, 0xc8 bytes   SMEM_DIAG_ERR_MESSAGE
++21a4                         type 7, 0x20 bytes   SMEM_SPINLOCK_ARRAY
++21c4                         type 8, 0x4 bytes    SMEM_MEMORY_BARRIER_LOCATION
 +21c8 ...end
 ---------------------
 
@@ -83,4 +87,45 @@ ie. smd.c smem_alloc, smem_item and smem_find have
 direct correspondants in the amss code, though the
 amss code sets up some data structs with tables that
 are not needed inthe linux code...
+
+
+----
+At startup, AMSS expects smem to be initialized
+
+  1) heap[0] must be initialized with smem that can be allocated
+  2) there must be an smem item for SMEM_SLEEP_STATIC
+     with a value at offset 0xc.
+
+init heap[0]?
+  .initialized = 1
+  .free_offset = 0x21c8
+  .heap_remaining = 0xfde38
+
+
+--------------------
+
+SMEM_AARM_PARTITION_TABLE  464bytes:
+
+struct flash_partition_table {
+    u32 magic1;
+    u32 magic2;
+    u32 version;
+    u32 numparts;
+    struct flash_partition_entry part_entry[16];
+};
+
+struct flash_partition_entry {
+    char name[16];
+    u32 offset; /* Offset in blocks from beginning of device */
+    u32 length; /* Length of the partition in blocks */
+    u8 attrib1;
+    u8 attrib2;
+    u8 attrib3;
+    u8 which_flash; /* Numeric ID (first = 0, second = 1) */
+};
+
+
+offset = ent->offset * 64 * 2048
+sz = ent->length * 64 * 2048
+
 
