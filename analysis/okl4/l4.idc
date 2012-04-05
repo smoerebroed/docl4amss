@@ -61,12 +61,23 @@ static Segments(void) {
 	HighVoids(0xF0026000);
 }
 
+static Enums_0(id) {
+
+	id = AddEnum(-1,"pgsize_e",0x1100000);
+	AddConstEx(id,"size_4k",	0,	-1);
+	AddConstEx(id,"size_64k",	0X1,	-1);
+	AddConstEx(id,"size_1m",	0X2,	-1);
+	AddConstEx(id,"size_4g",	0X3,	-1);
+	return id;
+}
+
 //------------------------------------------------------------------------
 // Information about enum types
 
 static Enums(void) {
         auto id;
         BeginTypeUpdating(UTP_ENUM);
+	id = Enums_0(id);
         EndTypeUpdating(UTP_ENUM);
 }
 
@@ -79,6 +90,7 @@ static Structures_0(id) {
 	id = AddStrucEx(-1,"arm_globals_t",0);
 	id = AddStrucEx(-1,"space_t",0);
 	id = AddStrucEx(-1,"utcb_t",0);
+	id = AddStrucEx(-1,"dbgCmd",0);
 	
 	id = GetStrucIdByName("arm_irq_context_t");
 	mid = AddStrucMember(id,"klr",	0,	0x20000400,	-1,	4);
@@ -150,36 +162,42 @@ static Structures_0(id) {
 	mid = AddStrucMember(id,"debug_name",	0X11C,	0x000400,	-1,	16);
 	mid = AddStrucMember(id,"field_12C",	0X12C,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"preemption_continuation",	0X15C,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_160",	0X160,	0x000400,	-1,	1);
+	mid = AddStrucMember(id,"field_160",	0X160,	0x20000400,	-1,	4);
 	SetMemberComment(id,	0X160,	"... and more ...",	1);
+	mid = AddStrucMember(id,"field_164",	0X164,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"irq_stack",	0X168,	0x20000400,	-1,	4);
 	
 	id = GetStrucIdByName("arm_globals_t");
 	mid = AddStrucMember(id,"kernel_space",	0,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"current_tcb",	0X4,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_8",	0X8,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"cpd",	0X8,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"current_domain",	0XC,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"domain_dirty",	0X10,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_14",	0X14,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_18",	0X18,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_1C",	0X1C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"arm_fass",	0X14,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"tracepoints_enabled",	0X18,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"phys_addr_ram",	0X1C,	0x20000400,	-1,	4);
 	
 	id = GetStrucIdByName("space_t");
-	mid = AddStrucMember(id,"field_0",	0,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"thread_count",	0,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"field_4",	0X4,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"field_8",	0X8,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_C",	0XC,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_10",	0X10,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_14",	0X14,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_18",	0X18,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_1C",	0X1C,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_20",	0X20,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"thread_list",	0XC,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"kip_area",	0X10,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"utcb_area",	0X14,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"space_id",	0X18,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"ipc_control_bitmap_id",	0X1C,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"pdir",	0X20,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"domain",	0X24,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"pid",	0X28,	0x20000400,	-1,	4);
 	
 	id = GetStrucIdByName("utcb_t");
 	mid = AddStrucMember(id,"field_0",	0,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"field_4",	0X4,	0x20000400,	-1,	4);
-	mid = AddStrucMember(id,"field_8",	0X8,	0x20000400,	-1,	4);
+	mid = AddStrucMember(id,"field_8",	0X8,	0x000400,	-1,	1);
+	mid = AddStrucMember(id,"field_9",	0X9,	0x000400,	-1,	1);
+	mid = AddStrucMember(id,"irq_disable",	0XA,	0x000400,	-1,	1);
+	SetMemberComment(id,	0XA,	"ignore irq if 0x2 is set",	1);
+	mid = AddStrucMember(id,"field_B",	0XB,	0x000400,	-1,	1);
 	mid = AddStrucMember(id,"acceptor",	0XC,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"notify_mask",	0X10,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"notify_bits",	0X14,	0x20000400,	-1,	4);
@@ -194,6 +212,12 @@ static Structures_0(id) {
 	mid = AddStrucMember(id,"field_38",	0X38,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"field_3C",	0X3C,	0x20000400,	-1,	4);
 	mid = AddStrucMember(id,"field_40",	0X40,	0x20000400,	-1,	4);
+	
+	id = GetStrucIdByName("dbgCmd");
+	mid = AddStrucMember(id,"field_0",	0,	0x20300400,	-1,	4);
+	mid = AddStrucMember(id,"field_4",	0X4,	0x25500400,	0XFFFFFFFF,	4,	0XFFFFFFFF,	0,	0x000002);
+	mid = AddStrucMember(id,"field_8",	0X8,	0x25500400,	0XFFFFFFFF,	4,	0XFFFFFFFF,	0,	0x000002);
+	mid = AddStrucMember(id,"field_C",	0XC,	0x25500400,	0XFFFFFFFF,	4,	0XFFFFFFFF,	0,	0x000002);
 	return id;
 }
 
@@ -328,14 +352,25 @@ static Bytes_0(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF000023C);
+	MakeName	(0XF000023C,	"halt_thread");
 	MakeCode	(x=0XF0000244);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
+	MakeCode	(x=0XF0000250);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0000254);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0000260);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0000264);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF000026C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0000280);
-	OpStkvar	(x,	1);
+	OpHex		(x,	1);
+	MakeRptCmt	(0XF0000288,	"halted state");
+	MakeCode	(x=0XF000028C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeDword	(x=0XF0000298);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -347,8 +382,9 @@ static Bytes_0(void) {
 	MakeCode	(0XF000029C);
 	MakeName	(0XF000029C,	"_Z20finish_perform_exregv");
 	MakeCode	(x=0XF00002A0);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
+	MakeRptCmt	(0XF00002B0,	"halted state");
+	MakeRptCmt	(0XF00002C4,	"tail call");
 	MakeCode	(x=0XF00002D0);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF00002D4);
@@ -4907,6 +4943,7 @@ static Bytes_0(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF00071F4);
+	MakeName	(0XF00071F4,	"deallocate_stack");
 	MakeCode	(x=0XF00071F8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -5508,6 +5545,15 @@ static Bytes_0(void) {
 	MakeRptCmt	(0XF0007D7C,	"jumptable F0007D64 case 3");
 	MakeCode	(0XF0007D7C);
 	MakeComm	(0XF0007D90,	"switch 4 cases ");
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_1(void) {
+        auto x;
+#define id x
+
 	MakeComm	(0XF0007D94,	"switch jump");
 	MakeComm	(0XF0007D9C,	"jump table for switch statement");
 	MakeDword	(x=0XF0007D9C);
@@ -5526,15 +5572,6 @@ static Bytes_0(void) {
 	OpHex		(x,	1);
 	MakeRptCmt	(0XF0007DDC,	"jumptable F0007D64 default case");
 	MakeCode	(0XF0007DDC);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_1(void) {
-        auto x;
-#define id x
-
 	MakeRptCmt	(0XF0007DE4,	"jumptable F0007D94 default case");
 	MakeCode	(0XF0007DE4);
 	MakeCode	(x=0XF0007E18);
@@ -7613,6 +7650,10 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000AC4C);
 	OpOff		(x,	1,	0XF000FD04);
 	OpOff		(x,	129,	0XF000FD04);
+	MakeCode	(x=0XF000AC58);
+	OpStroffEx	(x,	1,	GetStrucIdByName("space_t"),	0);
+	MakeCode	(x=0XF000AC60);
+	OpStroffEx	(x,	1,	GetStrucIdByName("space_t"),	0);
 	MakeCode	(x=0XF000AC6C);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000AC74);
@@ -7872,18 +7913,19 @@ static Bytes_1(void) {
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF000B2A4);
 	OpHex		(x,	1);
-	MakeComm	(0XF000B2A8,	"sz");
-	MakeComm	(0XF000B2AC,	"addr");
-	MakeComm	(0XF000B2B0,	"kernel");
+	MakeComm	(0XF000B2A8,	"paddr");
+	MakeComm	(0XF000B2AC,	"space");
+	MakeComm	(0XF000B2B0,	"rwx");
 	MakeCode	(x=0XF000B2BC);
 	OpHex		(x,	1);
-	MakeComm	(0XF000B2C0,	"rwx");
+	MakeComm	(0XF000B2C0,	"sz");
+	MakeComm	(0XF000B2C4,	"attrib");
 	MakeCode	(x=0XF000B2C4);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF000B2CC,	"attrib");
+	MakeComm	(0XF000B2CC,	"kernel");
 	MakeCode	(x=0XF000B2CC);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF000B2D0,	"kernel");
+	MakeComm	(0XF000B2D0,	"rwx");
 	MakeCode	(x=0XF000B2D0);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF000B2DC);
@@ -7912,7 +7954,7 @@ static Bytes_1(void) {
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF000B324);
 	MakeName	(0XF000B324,	"_ZN15generic_space_t12readmem_physEPvS0_");
-	MakeComm	(0XF000B32C,	"kernel");
+	MakeComm	(0XF000B32C,	"rwx");
 	MakeCode	(x=0XF000B3B0);
 	OpOff		(x,	1,	0XF000B3C0);
 	OpOff		(x,	129,	0XF000B3C0);
@@ -7934,11 +7976,11 @@ static Bytes_1(void) {
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000B41C);
 	OpHex		(x,	1);
-	MakeComm	(0XF000B438,	"addr");
-	MakeComm	(0XF000B43C,	"paddr");
-	MakeComm	(0XF000B440,	"sz");
-	MakeComm	(0XF000B444,	"rwx");
-	MakeComm	(0XF000B44C,	"kernel");
+	MakeComm	(0XF000B438,	"space");
+	MakeComm	(0XF000B43C,	"addr");
+	MakeComm	(0XF000B440,	"paddr");
+	MakeComm	(0XF000B444,	"sz");
+	MakeComm	(0XF000B44C,	"rwx");
 	MakeCode	(x=0XF000B44C);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF000B454);
@@ -8900,7 +8942,7 @@ static Bytes_1(void) {
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000CB5C);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF000CB70,	"kernel");
+	MakeComm	(0XF000CB70,	"rwx");
 	MakeCode	(x=0XF000CB74);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -8920,13 +8962,20 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000CBD8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF000CC10);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF000CC14);
 	OpHex		(x,	1);
-	MakeComm	(0XF000CC1C,	"addr");
+	MakeComm	(0XF000CC1C,	"space");
+	MakeCode	(x=0XF000CC1C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF000CC20);
 	OpHex		(x,	1);
-	MakeComm	(0XF000CC28,	"rwx");
-	MakeComm	(0XF000CC30,	"sz");
+	MakeComm	(0XF000CC28,	"sz");
+	MakeCode	(x=0XF000CC28);
+	OpEnumEx		(x,	1,	GetEnum("pgsize_e"),0);
+	MakeComm	(0XF000CC30,	"paddr");
+	MakeComm	(0XF000CC34,	"attrib");
 	MakeCode	(x=0XF000CC34);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF000CC44);
@@ -8955,7 +9004,7 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000CCC4);
 	OpOff		(x,	1,	0XF0000000);
 	OpOff		(x,	129,	0XF0000000);
-	MakeComm	(0XF000CCDC,	"kernel");
+	MakeComm	(0XF000CCDC,	"rwx");
 	MakeCode	(0XF000CCE0);
 	MakeCode	(x=0XF000CD00);
 	OpHex		(x,	1);
@@ -9010,17 +9059,18 @@ static Bytes_1(void) {
 	OpOff		(x,	129,	0XF0000000);
 	MakeCode	(x=0XF000CE20);
 	OpHex		(x,	1);
-	MakeComm	(0XF000CE24,	"rwx");
-	MakeComm	(0XF000CE28,	"sz");
-	MakeComm	(0XF000CE30,	"addr");
+	MakeComm	(0XF000CE24,	"sz");
+	MakeComm	(0XF000CE28,	"paddr");
+	MakeComm	(0XF000CE30,	"space");
 	MakeCode	(x=0XF000CE34);
 	OpHex		(x,	1);
+	MakeComm	(0XF000CE38,	"attrib");
 	MakeCode	(x=0XF000CE38);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF000CE3C,	"kernel");
+	MakeComm	(0XF000CE3C,	"rwx");
 	MakeCode	(x=0XF000CE3C);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF000CE40,	"attrib");
+	MakeComm	(0XF000CE40,	"kernel");
 	MakeCode	(x=0XF000CE40);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF000CE48);
@@ -9315,16 +9365,23 @@ static Bytes_1(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF000E0A4);
+	MakeName	(0XF000E0A4,	"returnNine");
 	MakeCode	(0XF000E0AC);
+	MakeName	(0XF000E0AC,	"initTramp");
 	MakeCode	(x=0XF000E0B4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF000E0D0,	"0xf900.1280");
 	MakeCode	(x=0XF000E0D8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF000E0DC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF000E0E0,	"kip+256");
+	MakeRptCmt	(0XF000E0E4,	"zero nonstd intctrl_t fields");
+	MakeRptCmt	(0XF000E0F8,	"kip+0x104");
+	MakeRptCmt	(0XF000E100,	"kip+0x100");
 	MakeDword	(x=0XF000E108);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -9349,6 +9406,7 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000E168);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeName	(0XF000E168,	"arm_irq");
 	MakeCode	(x=0XF000E178);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF000E1A8);
@@ -9398,6 +9456,8 @@ static Bytes_1(void) {
 	OpHex		(x,	1);
 	MakeCode	(0XF000E300);
 	MakeName	(0XF000E300,	"init_cpu");
+	MakeRptCmt	(0XF000E304,	"invalidate d-cache");
+	MakeRptCmt	(0XF000E30C,	"invalidate tlb");
 	MakeCode	(0XF000E314);
 	MakeCode	(0XF000E328);
 	MakeCode	(x=0XF000E32C);
@@ -9742,6 +9802,9 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000EC5C);
 	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeRptCmt	(0XF000EC64,	"jumptable F000E450 case 39");
+	ExtLinA		(0XF000EC64,	0,	"sets cacheInsnFlag to true");
+	ExtLinA		(0XF000EC64,	1,	"enabling handling of special cache instructions");
+	ExtLinA		(0XF000EC64,	2,	"by the undefined instruction handler code");
 	MakeCode	(x=0XF000EC64);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -10089,6 +10152,7 @@ static Bytes_1(void) {
 	MakeCode	(x=0XF000F3BC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeName	(0XF000F3BC,	"putc_jtag");
 	MakeCode	(x=0XF000F3C4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -10100,8 +10164,9 @@ static Bytes_1(void) {
 	OpOff		(x,	128,	0);
 	MakeCode	(x=0XF000F3EC);
 	OpHex		(x,	1);
+	MakeName	(0XF000F3EC,	"getc_jtag");
 	MakeCode	(0XF000F3FC);
-	MakeName	(0XF000F3FC,	"nullsub_6");
+	MakeName	(0XF000F3FC,	"consoleinit_jtag");
 	MakeCode	(0XF000F400);
 	MakeName	(0XF000F400,	"_ZN11macro_set_t5printEv");
 	MakeCode	(x=0XF000F410);
@@ -10426,6 +10491,15 @@ static Bytes_1(void) {
 	MakeArray	(x,	0X4);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_2(void) {
+        auto x;
+#define id x
+
 	MakeRptCmt	(0XF000FB08,	"jumptable F000FA50 default case");
 	MakeCode	(x=0XF000FB08);
 	OpOff		(x,	1,	0);
@@ -10500,15 +10574,6 @@ static Bytes_1(void) {
 	MakeDword	(x=0XF000FBB0);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_2(void) {
-        auto x;
-#define id x
-
 	MakeDword	(x=0XF000FBB4);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -13855,6 +13920,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0014E80);
+	MakeName	(0XF0014E80,	"cmd_dump_bootinfo");
 	MakeCode	(x=0XF0014E84);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14110,6 +14176,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF001530C);
+	MakeName	(0XF001530C,	"cmd");
 	MakeCode	(x=0XF0015310);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14189,6 +14256,7 @@ static Bytes_2(void) {
 	OpOff		(x,	128,	0);
 	MakeCode	(x=0XF0015538);
 	OpStkvar	(x,	1);
+	MakeName	(0XF0015538,	"cmd_3");
 	MakeCode	(x=0XF001553C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14204,6 +14272,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF001556C);
+	MakeName	(0XF001556C,	"cmd_0");
 	MakeCode	(x=0XF0015570);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14217,6 +14286,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF00155B8);
+	MakeName	(0XF00155B8,	"cmd_1");
 	MakeCode	(x=0XF00155BC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14236,6 +14306,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0015610);
+	MakeName	(0XF0015610,	"cmd_2");
 	MakeCode	(x=0XF0015614);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14348,6 +14419,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0015B74);
+	MakeName	(0XF0015B74,	"cmd_9");
 	MakeCode	(x=0XF0015B78);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14358,9 +14430,12 @@ static Bytes_2(void) {
 	MakeCode	(x=0XF0015BBC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0015BC0);
+	OpStkvar	(x,	1);
 	MakeCode	(x=0XF0015BCC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XF0015BD4,	"char *");
 	MakeCode	(x=0XF0015BD4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14380,6 +14455,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0015C14);
+	MakeName	(0XF0015C14,	"cmd_8");
 	MakeCode	(x=0XF0015C1C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14411,9 +14487,12 @@ static Bytes_2(void) {
 	MakeCode	(x=0XF0015CF4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0015CF8);
+	OpStkvar	(x,	1);
 	MakeCode	(x=0XF0015D04);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XF0015D0C,	"char *");
 	MakeCode	(x=0XF0015D0C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14436,6 +14515,7 @@ static Bytes_2(void) {
 	MakeCode	(x=0XF0015DA4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XF0015DB4,	"char *");
 	MakeCode	(x=0XF0015DB4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14479,6 +14559,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0015DF4);
+	MakeName	(0XF0015DF4,	"cmd_7");
 	MakeCode	(x=0XF0015DF8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14512,6 +14593,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0015E80);
+	MakeName	(0XF0015E80,	"cmd_6");
 	MakeCode	(x=0XF0015E84);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14520,10 +14602,12 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0015EB4);
+	MakeName	(0XF0015EB4,	"cmd_5");
 	MakeCode	(x=0XF0015EC0);
 	OpOff		(x,	1,	0XF0000000);
 	OpOff		(x,	129,	0XF0000000);
 	MakeCode	(0XF0015EC8);
+	MakeName	(0XF0015EC8,	"cmd_4");
 	MakeCode	(x=0XF0015ED0);
 	OpOff		(x,	1,	0XF0000000);
 	OpOff		(x,	129,	0XF0000000);
@@ -14606,6 +14690,15 @@ static Bytes_2(void) {
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF00161E0);
 	OpStkvar	(x,	1);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_3(void) {
+        auto x;
+#define id x
+
 	MakeDword	(x=0XF00161F4);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -14650,6 +14743,7 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0016290);
+	MakeName	(0XF0016290,	"cmd_12");
 	MakeCode	(x=0XF00162B0);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14667,6 +14761,7 @@ static Bytes_2(void) {
 	MakeCode	(x=0XF001633C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XF0016348,	"char *");
 	MakeCode	(x=0XF0016348);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14712,17 +14807,12 @@ static Bytes_2(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF00163B4);
+	MakeName	(0XF00163B4,	"cmd_11");
 	MakeCode	(0XF00163BC);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_3(void) {
-        auto x;
-#define id x
-
-	MakeCode	(0XF00163C4);
+	MakeName	(0XF00163BC,	"cmd_10");
+	MakeCode	(x=0XF00163C4);
+	OpStkvar	(x,	1);
+	MakeName	(0XF00163C4,	"cmd_13");
 	MakeCode	(x=0XF00163C8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14732,6 +14822,8 @@ static Bytes_3(void) {
 	MakeCode	(x=0XF00163E4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF00163F0);
+	OpStkvar	(x,	1);
 	MakeDword	(x=0XF00163F4);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -14795,7 +14887,9 @@ static Bytes_3(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF00164A0);
+	MakeName	(0XF00164A0,	"cmd_17");
 	MakeCode	(0XF00164A8);
+	MakeName	(0XF00164A8,	"cmd_16");
 	MakeCode	(x=0XF00164AC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14809,6 +14903,7 @@ static Bytes_3(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF00164C0);
+	MakeName	(0XF00164C0,	"cmd_15");
 	MakeCode	(x=0XF00164C4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -14822,6 +14917,7 @@ static Bytes_3(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF00164D8);
+	MakeName	(0XF00164D8,	"cmd_14");
 	MakeCode	(x=0XF00164DC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -16062,6 +16158,7 @@ static Bytes_3(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0018114);
+	MakeName	(0XF0018114,	"kmem_init");
 	MakeCode	(x=0XF001815C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -16917,7 +17014,7 @@ static Bytes_3(void) {
 	MakeCode	(x=0XF0018EE8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeComm	(0XF0018EEC,	"kernel");
+	MakeComm	(0XF0018EEC,	"rwx");
 	MakeCode	(x=0XF0018EFC);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF0018F2C);
@@ -16929,13 +17026,33 @@ static Bytes_3(void) {
 	MakeCode	(x=0XF0018F58);
 	OpStkvar	(x,	1);
 	MakeCode	(0XF0018F7C);
+	MakeComm	(0XF0018FB0,	"paddr");
+	MakeComm	(0XF0018FB4,	"vaddr");
+	MakeComm	(0XF0018FB8,	"pgdir");
+	MakeComm	(0XF0018FBC,	"attrib");
+	MakeComm	(0XF0018FCC,	"paddr");
+	MakeComm	(0XF0018FD0,	"vaddr");
+	MakeComm	(0XF0018FD8,	"pgdir");
+	MakeComm	(0XF0018FDC,	"attrib");
 	MakeCode	(0XF0018FF4);
 	MakeCode	(0XF0018FF8);
 	MakeCode	(0XF0019044);
+	MakeComm	(0XF001904C,	"paddr");
+	MakeComm	(0XF0019050,	"vaddr");
+	MakeComm	(0XF0019054,	"pgdir");
+	MakeComm	(0XF0019058,	"attrib");
+	MakeComm	(0XF0019068,	"paddr");
+	MakeComm	(0XF001906C,	"vaddr");
+	MakeComm	(0XF0019074,	"pgdir");
+	MakeComm	(0XF0019078,	"attrib");
 	MakeCode	(x=0XF001909C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XF00190BC,	"vaddr");
 	MakeCode	(0XF00190BC);
+	MakeComm	(0XF00190C0,	"paddr");
+	MakeComm	(0XF00190C4,	"pgdir");
+	MakeComm	(0XF00190C8,	"attrib");
 	MakeCode	(x=0XF00190F4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -16948,7 +17065,9 @@ static Bytes_3(void) {
 	MakeCode	(x=0XF0019108);
 	OpOff		(x,	1,	0XF001C26C);
 	OpOff		(x,	129,	0XF001C26C);
+	MakeRptCmt	(0XF001911C,	"fall through to mmuOn");
 	MakeCode	(0XF0019120);
+	MakeName	(0XF0019120,	"mmuOn");
 	MakeCode	(x=0XF0019130);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -16961,14 +17080,14 @@ static Bytes_3(void) {
 	MakeCode	(x=0XF001916C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeComm	(0XF0019170,	"addr");
-	MakeComm	(0XF0019184,	"sz");
-	MakeComm	(0XF0019188,	"paddr");
+	MakeComm	(0XF0019170,	"space");
+	MakeComm	(0XF0019184,	"paddr");
+	MakeComm	(0XF0019188,	"addr");
 	MakeCode	(x=0XF0019188);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeComm	(0XF001918C,	"rwx");
-	MakeComm	(0XF0019190,	"kernel");
+	MakeComm	(0XF001918C,	"sz");
+	MakeComm	(0XF0019190,	"rwx");
 	MakeCode	(x=0XF0019190);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF00191A0);
@@ -17319,6 +17438,7 @@ static Bytes_3(void) {
 	MakeCode	(x=0XF00196F8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XF0019700,	"self");
 	MakeCode	(x=0XF0019700);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -17352,6 +17472,7 @@ static Bytes_3(void) {
 	MakeDword	(x=0XF0019754);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+	MakeName	(0XF0019754,	"tbirq");
 	MakeDword	(x=0XF0019758);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -17367,21 +17488,32 @@ static Bytes_3(void) {
 	MakeCode	(0XF0019768);
 	MakeName	(0XF0019768,	"_ZN9intctrl_t8init_cpuEv");
 	MakeCode	(x=0XF0019770);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF0019774);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeComm	(0XF0019790,	"kernel");
-	MakeComm	(0XF00197A8,	"addr");
-	MakeComm	(0XF00197AC,	"paddr");
-	MakeComm	(0XF00197B0,	"sz");
-	MakeComm	(0XF00197B4,	"rwx");
+	MakeRptCmt	(0XF001977C,	"phys_addr_ram");
+	MakeRptCmt	(0XF0019780,	"phys_addr_ram + 148k");
+	MakeRptCmt	(0XF0019784,	"phys_addr_ram + 256M");
+	MakeComm	(0XF0019790,	"rwx");
+	MakeRptCmt	(0XF0019798,	"0xffff0000");
+	MakeComm	(0XF00197A8,	"space");
+	MakeRptCmt	(0XF00197A8,	"kern space");
+	MakeCode	(x=0XF00197A8);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
+	MakeComm	(0XF00197AC,	"addr");
+	MakeComm	(0XF00197B0,	"paddr");
+	MakeComm	(0XF00197B4,	"sz");
+	MakeCode	(x=0XF00197B4);
+	OpEnumEx		(x,	1,	GetEnum("pgsize_e"),0);
+	MakeComm	(0XF00197BC,	"attrib");
 	MakeCode	(x=0XF00197BC);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF00197C4);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
+	MakeRptCmt	(0XF00197D0,	"phys_addr_ram + 256m");
+	MakeComm	(0XF00197E0,	"this");
+	MakeRptCmt	(0XF00197EC,	"disable alignment exception");
 	MakeCode	(x=0XF00197EC);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF00197F8);
@@ -17634,42 +17766,57 @@ static Bytes_3(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XF0019C34);
-	MakeName	(0XF0019C34,	"figureThisOut");
+	MakeName	(0XF0019C34,	"initSomePhysMemMappings");
+	MakeRptCmt	(0XF0019C3C,	"kernel space");
+	MakeCode	(x=0XF0019C3C);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF0019C40);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeComm	(0XF0019C44,	"kernel");
-	MakeComm	(0XF0019C70,	"addr");
-	MakeComm	(0XF0019C74,	"rwx");
-	MakeComm	(0XF0019C80,	"sz");
-	MakeComm	(0XF0019C88,	"paddr");
-	MakeComm	(0XF0019C8C,	"kernel");
+	MakeComm	(0XF0019C44,	"rwx");
+	MakeRptCmt	(0XF0019C50,	"0xF9000000");
+	MakeRptCmt	(0XF0019C5C,	"0xfa1fffff");
+	MakeRptCmt	(0XF0019C60,	"0x1ffffe");
+	MakeComm	(0XF0019C70,	"space");
+	MakeComm	(0XF0019C74,	"sz");
+	MakeCode	(x=0XF0019C74);
+	OpEnumEx		(x,	1,	GetEnum("pgsize_e"),0);
+	MakeComm	(0XF0019C80,	"paddr");
+	MakeComm	(0XF0019C88,	"addr");
+	MakeComm	(0XF0019C8C,	"rwx");
 	MakeCode	(x=0XF0019C8C);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF0019C90,	"attrib");
+	MakeComm	(0XF0019C90,	"kernel");
 	MakeCode	(x=0XF0019C90);
 	OpStkvar	(x,	1);
+	MakeComm	(0XF0019C94,	"attrib");
 	MakeCode	(x=0XF0019C94);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF0019CA4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
-	MakeComm	(0XF0019CD0,	"addr");
-	MakeComm	(0XF0019CD4,	"rwx");
-	MakeComm	(0XF0019CE0,	"sz");
-	MakeComm	(0XF0019CE8,	"paddr");
-	MakeComm	(0XF0019CEC,	"kernel");
+	MakeComm	(0XF0019CD0,	"space");
+	MakeComm	(0XF0019CD4,	"sz");
+	MakeCode	(x=0XF0019CD4);
+	OpEnumEx		(x,	1,	GetEnum("pgsize_e"),0);
+	MakeComm	(0XF0019CE0,	"paddr");
+	MakeComm	(0XF0019CE8,	"addr");
+	MakeComm	(0XF0019CEC,	"rwx");
 	MakeCode	(x=0XF0019CEC);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF0019CF0,	"attrib");
+	MakeComm	(0XF0019CF0,	"kernel");
 	MakeCode	(x=0XF0019CF0);
 	OpStkvar	(x,	1);
+	MakeComm	(0XF0019CF4,	"attrib");
 	MakeCode	(x=0XF0019CF4);
 	OpStkvar	(x,	1);
+	ExtLinA		(0XF0019D04,	0,	"insert some memory descriptors into kip");
+	ExtLinA		(0XF0019D04,	1,	"(are we reading out of some page table or something?)");
 	MakeCode	(x=0XF0019D04);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(0XF0019D0C);
+	ExtLinA		(0XF0019D18,	0,	"loop over 16 entries x 16bytes");
 	MakeCode	(x=0XF0019D28);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -17684,28 +17831,32 @@ static Bytes_3(void) {
 	MakeCode	(x=0XF0019D84);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XF0019D90);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF0019D94);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeRptCmt	(0XF0019DA8,	"store 0xff300000");
+	MakeRptCmt	(0XF0019DB0,	"test/clean/invalidate dcache");
+	MakeRptCmt	(0XF0019DBC,	"invalidate icache");
+	MakeRptCmt	(0XF0019DC4,	"drain write buffer");
 	MakeCode	(x=0XF0019DC8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF0019DDC,	"R5=0");
 	MakeComm	(0XF0019DE0,	"size_t");
 	MakeComm	(0XF0019DE4,	"void *");
 	MakeComm	(0XF0019DE8,	"int");
-	MakeComm	(0XF0019DF0,	"paddr");
-	MakeComm	(0XF0019DF8,	"addr");
-	MakeComm	(0XF0019DFC,	"sz");
-	MakeComm	(0XF0019E00,	"rwx");
+	MakeComm	(0XF0019DF0,	"addr");
+	MakeComm	(0XF0019DF8,	"space");
+	MakeComm	(0XF0019DFC,	"paddr");
+	MakeComm	(0XF0019E00,	"sz");
+	MakeComm	(0XF0019E04,	"attrib");
 	MakeCode	(x=0XF0019E04);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF0019E08,	"kernel");
+	MakeComm	(0XF0019E08,	"rwx");
 	MakeCode	(x=0XF0019E08);
 	OpStkvar	(x,	1);
-	MakeComm	(0XF0019E0C,	"attrib");
+	MakeComm	(0XF0019E0C,	"kernel");
 	MakeCode	(x=0XF0019E0C);
 	OpStkvar	(x,	1);
 	MakeCode	(0XF0019E1C);
@@ -17872,6 +18023,7 @@ static Bytes_3(void) {
 	MakeDword	(x=0XF0019FFC);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+	MakeRptCmt	(0XF001A000,	"addr/paddr table");
 	ExtLinA		(0XF001A000,	0,	"");
 	ExtLinA		(0XF001A000,	1,	"");
 	ExtLinA		(0XF001A000,	2,	"-------------");
@@ -17879,8 +18031,11 @@ static Bytes_3(void) {
 	ExtLinA		(0XF001A000,	4,	"------------");
 	MakeDword	(0XF001A000);
 	MakeArray	(0XF001A000,	0X4);
+	MakeName	(0XF001A000,	"physTable2");
+	MakeRptCmt	(0XF001A010,	"addr/paddr table");
 	MakeDword	(0XF001A010);
 	MakeArray	(0XF001A010,	0X4);
+	MakeName	(0XF001A010,	"physTable1");
 	MakeDword	(0XF001A020);
 	MakeArray	(0XF001A020,	0XF8);
 	MakeDword	(0XF001A400);
@@ -17917,6 +18072,7 @@ static Bytes_3(void) {
 	MakeArray	(0XF001B11C,	0X39);
 	MakeDword	(0XF001B200);
 	MakeArray	(0XF001B200,	0X36);
+	MakeName	(0XF001B200,	"__idle_utcb");
 	MakeDword	(0XF001B2D8);
 	MakeDword	(0XF001B2DC);
 	MakeArray	(0XF001B2DC,	0X9);
@@ -18211,6 +18367,7 @@ static Bytes_3(void) {
 	MakeDword	(0XF001B67C);
 	MakeDword	(0XF001B680);
 	MakeName	(0XF001B680,	"xxxBack");
+	MakeRptCmt	(0XF001B684,	"initializes to 0x2000");
 	MakeDword	(0XF001B684);
 	MakeDword	(x=0XF001B688);
 	OpOff		(x,	0,	0);
@@ -18413,9 +18570,13 @@ static Bytes_3(void) {
 	MakeDword	(x=0XF001B7A8);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
-	MakeDword	(0XF001B7AC);
-	MakeArray	(0XF001B7AC,	0X10);
-	MakeDword	(0XF001B7EC);
+	MakeStruct	(0XF001B7AC,	"dbgCmd");
+	MakeStruct	(0XF001B7BC,	"dbgCmd");
+	MakeStruct	(0XF001B7CC,	"dbgCmd");
+	MakeStruct	(0XF001B7DC,	"dbgCmd");
+	MakeDword	(x=0XF001B7EC);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
 	MakeName	(0XF001B7EC,	"kdb_consoles");
 	MakeDword	(x=0XF001B7F0);
 	OpOff		(x,	0,	0);
@@ -18428,62 +18589,184 @@ static Bytes_3(void) {
 	OpOff		(x,	128,	0);
 	MakeDword	(0XF001B7FC);
 	MakeArray	(0XF001B7FC,	0X4);
-	MakeDword	(0XF001B80C);
-	MakeArray	(0XF001B80C,	0X11);
+	MakeStruct	(0XF001B80C,	"dbgCmd");
+	MakeStruct	(0XF001B81C,	"dbgCmd");
+	MakeStruct	(0XF001B82C,	"dbgCmd");
+	MakeStruct	(0XF001B83C,	"dbgCmd");
+	MakeDword	(0XF001B84C);
 	MakeDword	(x=0XF001B850);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
-	MakeDword	(0XF001B854);
-	MakeArray	(0XF001B854,	0X10);
+	MakeStruct	(0XF001B854,	"dbgCmd");
+	MakeStruct	(0XF001B864,	"dbgCmd");
+	MakeStruct	(0XF001B874,	"dbgCmd");
+	MakeStruct	(0XF001B884,	"dbgCmd");
 	MakeDword	(0XF001B894);
-	MakeDword	(0XF001B898);
-	MakeArray	(0XF001B898,	0X28);
+	MakeStruct	(0XF001B898,	"dbgCmd");
+	MakeStruct	(0XF001B8A8,	"dbgCmd");
+	MakeStruct	(0XF001B8B8,	"dbgCmd");
+	MakeStruct	(0XF001B8C8,	"dbgCmd");
+	MakeStruct	(0XF001B8D8,	"dbgCmd");
+	MakeStruct	(0XF001B8E8,	"dbgCmd");
+	MakeStruct	(0XF001B8F8,	"dbgCmd");
+	MakeStruct	(0XF001B908,	"dbgCmd");
+	MakeStruct	(0XF001B918,	"dbgCmd");
+	MakeStruct	(0XF001B928,	"dbgCmd");
 	MakeDword	(x=0XF001B938);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
-	MakeName	(0XF001B938,	"tracepoints");
 	MakeDword	(0XF001B93C);
-	MakeArray	(0XF001B93C,	0X2);
+	MakeDword	(0XF001B940);
 	MakeDword	(x=0XF001B944);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
-	MakeName	(0XF001B944,	"tp_list");
+	MakeStruct	(0XF001B948,	"dbgCmd");
+	MakeStruct	(0XF001B958,	"dbgCmd");
+	MakeStruct	(0XF001B968,	"dbgCmd");
+	MakeStruct	(0XF001B978,	"dbgCmd");
+	MakeStruct	(0XF001B988,	"dbgCmd");
+	MakeStruct	(0XF001B998,	"dbgCmd");
+	MakeStruct	(0XF001B9A8,	"dbgCmd");
+	MakeStruct	(0XF001B9B8,	"dbgCmd");
 	MakeDword	(x=0XF001B9C8);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
-	MakeDword	(0XF001B9CC);
-	MakeArray	(0XF001B9CC,	0X2);
-	MakeDword	(0XF001B9D4);
-	MakeArray	(0XF001B9D4,	0XC);
+	MakeDword	(x=0XF001B9CC);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(0XF001B9D0);
+	MakeStruct	(0XF001B9D4,	"dbgCmd");
+	MakeStruct	(0XF001B9E4,	"dbgCmd");
+	MakeStruct	(0XF001B9F4,	"dbgCmd");
 	MakeDword	(x=0XF001BA04);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
-	MakeArray	(0XF001BA08,	0X8);
-	MakeDword	(0XF001BA10);
-	MakeArray	(0XF001BA10,	0XC);
+	MakeDword	(0XF001BA08);
+	MakeDword	(0XF001BA0C);
+	MakeStruct	(0XF001BA10,	"dbgCmd");
+	MakeStruct	(0XF001BA20,	"dbgCmd");
+	MakeStruct	(0XF001BA30,	"dbgCmd");
 	MakeDword	(x=0XF001BA40);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeDword	(0XF001BA44);
-	MakeArray	(0XF001BA44,	0X2);
-	MakeDword	(0XF001BA4C);
-	MakeArray	(0XF001BA4C,	0XC);
-	MakeDword	(x=0XF001BA7C);
+	MakeDword	(0XF001BA48);
+	MakeStruct	(0XF001BA4C,	"dbgCmd");
+	MakeStruct	(0XF001BA5C,	"dbgCmd");
+	MakeStruct	(0XF001BA6C,	"dbgCmd");
+	MakeDword	(0XF001BA7C);
+	MakeDword	(0XF001BA80);
+	MakeDword	(0XF001BA84);
+	MakeStruct	(0XF001BA88,	"dbgCmd");
+	MakeByte	(0XF001BA98);
+	MakeArray	(0XF001BA98,	0X1F);
+	MakeDword	(0XF001BAB8);
+	MakeStruct	(0XF001BABC,	"dbgCmd");
+	MakeStruct	(0XF001BACC,	"dbgCmd");
+	MakeDword	(x=0XF001BADC);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
-	MakeDword	(0XF001BA80);
-	MakeArray	(0XF001BA80,	0X2);
-	MakeDword	(0XF001BA88);
-	MakeArray	(0XF001BA88,	0XC);
-	MakeDword	(0XF001BAB8);
-	MakeDword	(0XF001BABC);
-	MakeArray	(0XF001BABC,	0X4);
-	MakeDword	(0XF001BACC);
-	MakeName	(0XF001BACC,	"kdb_tid_format");
-	MakeDword	(0XF001BAD0);
-	MakeArray	(0XF001BAD0,	0X1F);
+	MakeStruct	(0XF001BAE0,	"dbgCmd");
+	MakeStruct	(0XF001BAF0,	"dbgCmd");
+	MakeStruct	(0XF001BB00,	"dbgCmd");
+	MakeStruct	(0XF001BB10,	"dbgCmd");
+	MakeDword	(0XF001BB20);
+	MakeDword	(x=0XF001BB24);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB28);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB2C);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB30);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB34);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB38);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB3C);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB40);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB44);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(0XF001BB48);
 	MakeDword	(0XF001BB4C);
-	MakeArray	(0XF001BB4C,	0X18);
+	MakeDword	(x=0XF001BB50);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB54);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB58);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB5C);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB60);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB64);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB68);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB6C);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB70);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB74);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB78);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB7C);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB80);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB84);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB88);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB8C);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB90);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB94);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB98);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BB9C);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BBA0);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(x=0XF001BBA4);
+	OpOff		(x,	0,	0);
+	OpOff		(x,	128,	0);
+	MakeDword	(0XF001BBA8);
 	MakeDword	(0XF001BBAC);
 	MakeArray	(0XF001BBAC,	0X3);
 	MakeDword	(0XF001BBB8);
@@ -19157,7 +19440,7 @@ static Bytes_3(void) {
 	MakeWord	(0XF001C37A);
 	MakeDword	(0XF001C37C);
 	MakeArray	(0XF001C37C,	0XD);
-	MakeName	(0XF001C37C,	"tb_irq");
+	MakeName	(0XF001C37C,	"intctrl");
 	MakeDword	(0XF001C3B0);
 	MakeName	(0XF001C3B0,	"dummy_tcb_phys");
 	MakeDword	(0XF001C3B4);
@@ -19183,16 +19466,20 @@ static Bytes_3(void) {
 	MakeName	(0XF001F458,	"recent_threads");
 	MakeRptCmt	(0XF001F45C,	"gets set to 0xff300000\n((signed)0xCC000000 >> 6)");
 	MakeDword	(0XF001F45C);
+	MakeName	(0XF001F45C,	"vaddrSomeRam");
 	MakeDword	(0XF001F460);
 	MakeArray	(0XF001F460,	0X44);
 	MakeRptCmt	(0XF001F570,	"user settable");
 	MakeDword	(0XF001F570);
+	MakeName	(0XF001F570,	"enablesSomeExtension");
 	MakeDword	(0XF001F574);
 	MakeDword	(0XF001F578);
 	MakeName	(0XF001F578,	"kdb_current_console");
 	MakeDword	(0XF001F57C);
+	MakeName	(0XF001F57C,	"jtagConsoleOutPtr");
 	MakeDword	(0XF001F580);
 	MakeArray	(0XF001F580,	0X200);
+	MakeName	(0XF001F580,	"jtagConsoleOutBuf");
 	MakeDword	(0XF001FD80);
 	MakeName	(0XF001FD80,	"kdb");
 	MakeDword	(0XF001FD84);
@@ -19212,6 +19499,7 @@ static Bytes_3(void) {
 	MakeDword	(0XF001FDD0);
 	MakeName	(0XF001FDD0,	"_ZZ9do_printfPKcPvE5count");
 	MakeDword	(0XF001FDD4);
+	MakeName	(0XF0020000,	"kspace_phys");
 	ExtLinA		(0XF0024000,	0,	"-----------------------------");
 	ExtLinA		(0XF0024000,	1,	"");
 	ExtLinA		(0XF0024000,	2,	"KIP section");
@@ -19284,9 +19572,9 @@ static Bytes_3(void) {
 	MakeDword	(0XF00240C4);
 	MakeDword	(0XF00240C8);
 	MakeWord	(0XF00240CC);
-	MakeRptCmt	(0XF0024108,	"set to 0xff300000?\n((signed)0xCC000000 >> 6)");
+	MakeRptCmt	(0XF0024108,	"kip offset 0x108 (nonstd)\nset to 0xff300000\n((signed)0xCC000000 >> 6)");
 	MakeDword	(0XF0024108);
-	MakeName	(0XF0024108,	"kip108");
+	MakeName	(0XF0024108,	"kip_vaddrRam");
 	MakeDword	(0XF002410C);
 	MakeName	(0XF002410C,	"kip10c");
 	MakeName	(0XF0024150,	"processor_descriptors");
@@ -19422,18 +19710,26 @@ static Bytes_3(void) {
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeArray	(0XF0025088,	0X18);
+	MakeRptCmt	(0XF00250A0,	"nonstandard code starts here..\nenter undefined mode with fiq/irq disabled");
 	MakeCode	(0XF00250A0);
 	MakeName	(0XF00250A0,	"arm_undefined_inst_exception");
-	MakeRptCmt	(0XF00250B0,	"never reached...");
+	MakeComm	(0XF00250A4,	"cacheInsnFlag");
+	MakeName	(0XF00250B0,	"cacheInsnMode");
 	MakeCode	(x=0XF00250C0);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF00250E4,	"invalidate i-cache");
 	MakeRptCmt	(0XF00250E8,	"tmp_r12");
 	MakeCode	(0XF00250F0);
+	MakeRptCmt	(0XF0025104,	"drain write buffer");
+	MakeRptCmt	(0XF0025108,	"tmp_r12");
 	MakeCode	(0XF0025110);
+	MakeRptCmt	(0XF002511C,	"test and clean dcache");
 	MakeCode	(x=0XF0025128);
 	OpHex		(x,	1);
-	MakeRptCmt	(0XF0025138,	"... end \"never reached\" code..");
+	MakeRptCmt	(0XF0025130,	"tmp_r12");
+	MakeComm	(0XF0025138,	"tmp_r12");
 	MakeCode	(0XF0025138);
+	MakeRptCmt	(0XF0025140,	"0xffff.fff6");
 	MakeRptCmt	(0XF0025148,	"if r12 == -0x10 then clear bit 0x80 of SPSR\nand return its old value");
 	MakeCode	(x=0XF0025148);
 	OpHex		(x,	1);
@@ -19450,7 +19746,8 @@ static Bytes_3(void) {
 	OpHex		(x,	1);
 	MakeCode	(x=0XF002516C);
 	OpHex		(x,	1);
-	ExtLinA		(0XF0025178,	0,	"normal handler for undefined instruction");
+	ExtLinA		(0XF0025178,	0,	"end nonstd code...");
+	ExtLinA		(0XF0025178,	1,	"normal handler for undefined instruction");
 	MakeCode	(0XF0025178);
 	MakeRptCmt	(0XF002517C,	"thumb bit");
 	MakeCode	(x=0XF002517C);
@@ -19462,6 +19759,15 @@ static Bytes_3(void) {
 	MakeRptCmt	(0XF00251A4,	"kernel_access");
 	MakeCode	(x=0XF00251A8);
 	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_4(void) {
+        auto x;
+#define id x
+
 	MakeCode	(x=0XF00251B0);
 	OpStroffEx	(x,	1,	GetStrucIdByName("arm_irq_context_t"),	0);
 	MakeCode	(x=0XF00251B4);
@@ -19720,15 +20026,6 @@ static Bytes_3(void) {
 	MakeRptCmt	(0XF00255D8,	"kernel_access");
 	MakeName	(0XF00255D8,	"ipc_slowpath");
 	MakeRptCmt	(0XF00255E0,	"utcb access");
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_4(void) {
-        auto x;
-#define id x
-
 	MakeCode	(x=0XF00255E4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -20086,77 +20383,143 @@ static Bytes_4(void) {
 	MakeCode	(x=0XF0025B88);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF0025B90,	"LOAD_CONTEXT_INTO_SP");
 	ExtLinA		(0XF0025B90,	0,	"");
 	ExtLinA		(0XF0025B90,	1,	"XXX next few code segments arent analyzed yet..");
 	ExtLinA		(0XF0025B90,	2,	"");
 	ExtLinA		(0XF0025B90,	3,	"");
 	MakeName	(0XF0025B90,	"arm_abort_return");
 	MakeCode	(x=0XF0025B94);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF0025B98);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF0025BA0,	"end LOAD_CONTEXT_INTO_SP");
+	MakeCode	(x=0XF0025BA0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	ExtLinA		(0XF0025BA8,	0,	"nonstd code here");
 	MakeCode	(x=0XF0025BA8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF0025BC0);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
+	MakeCode	(x=0XF0025BC4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeRptCmt	(0XF0025BD4,	"utcb->user_reserved[0]");
+	MakeRptCmt	(0XF0025BF4,	"SET_USER_DACR");
+	ExtLinA		(0XF0025BF4,	0,	"end nonstd code");
 	MakeCode	(x=0XF0025BF8);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
+	MakeRptCmt	(0XF0025C08,	"end SET_USER_DACR");
+	MakeRptCmt	(0XF0025C0C,	"RESTORE_ALL_ABT\ncpsr");
+	MakeName	(0XF0025C0C,	"arm_abort_return_kernel");
+	MakeRptCmt	(0XF0025C1C,	"pc");
+	MakeRptCmt	(0XF0025C24,	"end RESTORE_ALL_ABT");
+	MakeRptCmt	(0XF0025C2C,	"abort mode, fiq/irq disabled");
+	MakeRptCmt	(0XF0025C30,	"tmp_spsr");
+	MakeRptCmt	(0XF0025C34,	"tmp_r14");
 	MakeCode	(0XF0025C40);
 	MakeName	(0XF0025C40,	"arm_fiq_exception");
+	MakeRptCmt	(0XF0025C50,	"sup mode, irq/fiq disabled");
+	MakeRptCmt	(0XF0025C54,	"klr");
+	MakeRptCmt	(0XF0025C58,	"tmp_r14");
+	MakeRptCmt	(0XF0025C5C,	"SAVE_ALL_INT_TMP_LINKED_DACR");
+	MakeRptCmt	(0XF0025C64,	"tmp_spsr");
+	MakeRptCmt	(0XF0025C68,	"kernel_access");
+	MakeRptCmt	(0XF0025C6C,	"pc");
+	MakeRptCmt	(0XF0025C74,	"cpsr");
 	MakeCode	(x=0XF0025C78);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF0025C7C,	"end SAVE_ALL_INT_TMP_LINKED_DACR");
 	MakeCode	(x=0XF0025C7C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeArray	(0XF0025C88,	0X18);
+	MakeRptCmt	(0XF0025CA0,	"this code doesnt match std srcs");
 	MakeCode	(0XF0025CA0);
 	MakeName	(0XF0025CA0,	"arm_irq_exception");
+	MakeRptCmt	(0XF0025CA4,	"utcb");
+	MakeCode	(x=0XF0025CB0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("utcb_t"),	0);
 	MakeCode	(x=0XF0025CB4);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF0025CBC);
+	OpStroffEx	(x,	1,	GetStrucIdByName("utcb_t"),	0);
 	MakeCode	(x=0XF0025CC8);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF0025CD0,	"return quickly");
+	ExtLinA		(0XF0025CD4,	0,	"end nonstd code");
 	MakeCode	(0XF0025CD4);
+	MakeRptCmt	(0XF0025CDC,	"sup with irq/fiq disabled");
+	MakeRptCmt	(0XF0025CE0,	"klr");
+	MakeRptCmt	(0XF0025CE4,	"tmp_r14");
+	MakeRptCmt	(0XF0025CE8,	"SAVE_ALL_INT_TMP_LINKED_DACR");
+	MakeRptCmt	(0XF0025CF0,	"tmp_spsr");
+	MakeRptCmt	(0XF0025CF4,	"kernel_access");
+	MakeRptCmt	(0XF0025CF8,	"pc");
+	MakeRptCmt	(0XF0025D00,	"cpsr");
 	MakeCode	(x=0XF0025D04);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XF0025D08,	"end SAVE_ALL_INT_TMP_LINKED_DACR");
 	MakeCode	(x=0XF0025D08);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF0025D10,	"SET_KERNEL_DACR_LINKED");
+	MakeName	(0XF0025D10,	"generic_irq");
 	MakeCode	(x=0XF0025D14);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeName	(0XF0025D1C,	"kernel_do_interrupt");
 	MakeCode	(x=0XF0025D24);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF0025D28);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
+	MakeCode	(x=0XF0025D38);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeRptCmt	(0XF0025D3C,	"set DACR");
+	MakeRptCmt	(0XF0025D40,	"RESTORE_ALL_ABT\ncpsr");
+	MakeName	(0XF0025D40,	"continue_interrupt_return");
+	MakeRptCmt	(0XF0025D50,	"pc");
+	MakeRptCmt	(0XF0025D58,	"end RESTORE_ALL_ABT");
+	MakeRptCmt	(0XF0025D5C,	"klr");
+	MakeRptCmt	(0XF0025D60,	"irq mode, fiq/irq disabled");
+	MakeRptCmt	(0XF0025D64,	"tmp_spsr");
+	MakeRptCmt	(0XF0025D68,	"tmp_r14");
 	MakeCode	(0XF0025D74);
+	MakeName	(0XF0025D74,	"kernel_interrupt");
 	MakeCode	(x=0XF0025D78);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF0025D7C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeCode	(x=0XF0025D80);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0025D94);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeRptCmt	(0XF0025D9C,	"#STACK_TOP");
 	MakeCode	(x=0XF0025D9C);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF0025DA0);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	ExtLinA		(0XF0025DB0,	0,	"");
+	ExtLinA		(0XF0025DB0,	1,	"we get here through a continuation, and all");
+	ExtLinA		(0XF0025DB0,	2,	"previous register state is lost and needs to be restored");
 	MakeCode	(x=0XF0025DB4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XF0025DB8);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
+	MakeRptCmt	(0XF0025DBC,	"#STACK_TOP");
 	MakeCode	(x=0XF0025DBC);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF0025DC4);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
+	MakeCode	(x=0XF0025DC8);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeCode	(x=0XF0025DCC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XF0025DD0,	"#STACK_TOP");
 	MakeCode	(x=0XF0025DD0);
 	OpHex		(x,	1);
 	MakeCode	(x=0XF0025DD4);
@@ -20165,11 +20528,13 @@ static Bytes_4(void) {
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(0XF0025DE0);
+	MakeName	(0XF0025DE0,	"continuation_interrupt");
 	MakeCode	(x=0XF0025DE8);
-	OpOff		(x,	1,	0XF0000000);
-	OpOff		(x,	129,	0XF0000000);
+	OpStroffEx	(x,	1,	GetStrucIdByName("arm_globals_t"),	0);
 	MakeCode	(x=0XF0025DEC);
 	OpHex		(x,	1);
+	MakeCode	(x=0XF0025DF0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("tcb"),	0);
 	MakeArray	(0XF0025DF4,	0XC);
 	MakeDword	(0XF0025E00);
 	MakeName	(0XF0025E00,	"tmp_r14");
@@ -20180,15 +20545,19 @@ static Bytes_4(void) {
 	MakeDword	(0XF0025E0C);
 	MakeDword	(0XF0025E10);
 	MakeDword	(0XF0025E14);
+	MakeRptCmt	(0XF0025E18,	"XXX settable, used in undefined_instruction handler");
 	MakeDword	(0XF0025E18);
+	MakeName	(0XF0025E18,	"cacheInsnFlag");
 	MakeDword	(0XF0025E1C);
 	MakeName	(0XF0025E1C,	"kernel_access");
 	MakeDword	(x=0XF0025E20);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+	MakeRptCmt	(0XF0025E24,	"XXX why is there a separate stack_top used?\norig code has only one stack_top");
 	MakeDword	(x=0XF0025E24);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+	MakeName	(0XF0025E24,	"stack_top_1");
 	MakeDword	(x=0XF0025E28);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -20254,6 +20623,12 @@ static Functions_0(void) {
 	MakeFunction    (0XF000023C,0XF0000298);
 	SetFunctionFlags(0XF000023C,0);
 	MakeFrame(0XF000023C, 0XC, 0, 0);
+	MakeFunction    (0XF000029C,0XF000038C);
+	SetFunctionFlags(0XF000029C,0x1);
+	MakeFrame(0XF000029C, 0X8, 0, 0);
+	MakeFunction    (0XF0000390,0XF00004A4);
+	SetFunctionFlags(0XF0000390,0x1);
+	MakeFrame(0XF0000390, 0, 0, 0);
 	MakeFunction    (0XF00004B8,0XF0000DEC);
 	SetFunctionFlags(0XF00004B8,0x1);
 	MakeFrame(0XF00004B8, 0X84, 0, 0);
@@ -20476,19 +20851,21 @@ static Functions_0(void) {
 	SetFunctionFlags(0XF000AC24,0);
 	MakeFunction    (0XF000AC30,0XF000B27C);
 	SetFunctionFlags(0XF000AC30,0);
-	SetType(0XF000AC30, "int __cdecl space_t__add_mapping(void *addr, void *paddr, int sz, int rwx, int kernel, int attrib);");
+	SetType(0XF000AC30, "int __cdecl space_t__add_mapping(space_t *space, void *addr, void *paddr, int sz, int rwx, int kernel, int attrib);");
 	MakeFrame(0XF000AC30, 0X3C, 0, 0);
-	MakeLocal(0XF000AC30, 0XF000B27C, "[bp+0]", "kernel");
-	MakeLocal(0XF000AC30, 0XF000B27C, "[bp+0X4]", "attrib");
+	MakeLocal(0XF000AC30, 0XF000B27C, "[bp+0]", "rwx");
+	MakeLocal(0XF000AC30, 0XF000B27C, "[bp+0X4]", "kernel");
+	MakeLocal(0XF000AC30, 0XF000B27C, "[bp+0X8]", "attrib");
 	MakeFunction    (0XF000B298,0XF000B314);
 	SetFunctionFlags(0XF000B298,0);
 	MakeFrame(0XF000B298, 0X18, 0, 0);
-	MakeLocal(0XF000B298, 0XF000B314, "[bp-0X18]", "kernel");
-	MakeLocal(0XF000B298, 0XF000B314, "[bp-0X14]", "attrib");
+	MakeLocal(0XF000B298, 0XF000B314, "[bp-0X18]", "rwx");
+	MakeLocal(0XF000B298, 0XF000B314, "[bp-0X14]", "kernel");
+	MakeLocal(0XF000B298, 0XF000B314, "[bp-0X10]", "attrib");
 	MakeFunction    (0XF000B324,0XF000B594);
 	SetFunctionFlags(0XF000B324,0);
 	MakeFrame(0XF000B324, 0X2C, 0, 0);
-	MakeLocal(0XF000B324, 0XF000B594, "[bp-0X2C]", "kernel");
+	MakeLocal(0XF000B324, 0XF000B594, "[bp-0X2C]", "rwx");
 	MakeFunction    (0XF000B618,0XF000B68C);
 	SetFunctionFlags(0XF000B618,0);
 	SetType(0XF000B618, "void *memset(void *, int, size_t);");
@@ -20544,11 +20921,13 @@ static Functions_0(void) {
 	MakeFunction    (0XF000CB30,0XF000CC80);
 	SetFunctionFlags(0XF000CB30,0);
 	MakeFrame(0XF000CB30, 0X40, 0, 0);
+	MakeLocal(0XF000CB30, 0XF000CC80, "[bp-0X38]", "attrib");
 	MakeFunction    (0XF000CC8C,0XF000CF64);
 	SetFunctionFlags(0XF000CC8C,0);
 	MakeFrame(0XF000CC8C, 0X30, 0, 0);
-	MakeLocal(0XF000CC8C, 0XF000CF64, "[bp-0X30]", "kernel");
-	MakeLocal(0XF000CC8C, 0XF000CF64, "[bp-0X2C]", "attrib");
+	MakeLocal(0XF000CC8C, 0XF000CF64, "[bp-0X30]", "rwx");
+	MakeLocal(0XF000CC8C, 0XF000CF64, "[bp-0X2C]", "kernel");
+	MakeLocal(0XF000CC8C, 0XF000CF64, "[bp-0X28]", "attrib");
 	MakeFunction    (0XF000CF7C,0XF000CFAC);
 	SetFunctionFlags(0XF000CF7C,0);
 	MakeFunction    (0XF000CFAC,0XF000D044);
@@ -20572,6 +20951,7 @@ static Functions_0(void) {
 	SetFunctionFlags(0XF000E0A4,0);
 	MakeFunction    (0XF000E0AC,0XF000E108);
 	SetFunctionFlags(0XF000E0AC,0);
+	SetType(0XF000E0AC, "int __cdecl initTramp(struct intctrl_t *this);");
 	MakeFrame(0XF000E0AC, 0X8, 0, 0);
 	MakeFunction    (0XF000E114,0XF000E118);
 	SetFunctionFlags(0XF000E114,0x40);
@@ -20745,6 +21125,12 @@ static Functions_0(void) {
 	MakeFunction    (0XF001556C,0XF00155B0);
 	SetFunctionFlags(0XF001556C,0);
 	MakeFrame(0XF001556C, 0X8, 0, 0);
+	MakeFunction    (0XF00155B8,0XF0015604);
+	SetFunctionFlags(0XF00155B8,0);
+	MakeFrame(0XF00155B8, 0XC, 0, 0);
+	MakeFunction    (0XF0015610,0XF0015660);
+	SetFunctionFlags(0XF0015610,0);
+	MakeFrame(0XF0015610, 0X8, 0, 0);
 	MakeFunction    (0XF001566C,0XF001567C);
 	SetFunctionFlags(0XF001566C,0);
 	MakeFunction    (0XF001567C,0XF001570C);
@@ -20772,6 +21158,22 @@ static Functions_0(void) {
 	MakeLocal(0XF0015B3C, 0XF0015B5C, "[bp-0X4]", "varg_r3");
 	MakeFunction    (0XF0015B5C,0XF0015B6C);
 	SetFunctionFlags(0XF0015B5C,0);
+	MakeFunction    (0XF0015B74,0XF0015C00);
+	SetFunctionFlags(0XF0015B74,0);
+	MakeFrame(0XF0015B74, 0X14, 0, 0);
+	MakeFunction    (0XF0015C14,0XF0015DC0);
+	SetFunctionFlags(0XF0015C14,0);
+	MakeFrame(0XF0015C14, 0X20, 0, 0);
+	MakeFunction    (0XF0015DF4,0XF0015E70);
+	SetFunctionFlags(0XF0015DF4,0);
+	MakeFrame(0XF0015DF4, 0X14, 0, 0);
+	MakeFunction    (0XF0015E80,0XF0015EB0);
+	SetFunctionFlags(0XF0015E80,0);
+	MakeFrame(0XF0015E80, 0XC, 0, 0);
+	MakeFunction    (0XF0015EB4,0XF0015EC8);
+	SetFunctionFlags(0XF0015EB4,0);
+	MakeFunction    (0XF0015EC8,0XF0015ED8);
+	SetFunctionFlags(0XF0015EC8,0);
 	MakeFunction    (0XF0015ED8,0XF0015F30);
 	SetFunctionFlags(0XF0015ED8,0);
 	MakeFrame(0XF0015ED8, 0X10, 0, 0);
@@ -20787,11 +21189,27 @@ static Functions_0(void) {
 	MakeFunction    (0XF0016210,0XF0016284);
 	SetFunctionFlags(0XF0016210,0);
 	MakeFrame(0XF0016210, 0XC, 0, 0);
+	MakeFunction    (0XF0016290,0XF0016394);
+	SetFunctionFlags(0XF0016290,0);
+	MakeFrame(0XF0016290, 0XC, 0, 0);
+	MakeFunction    (0XF00163B4,0XF00163BC);
+	SetFunctionFlags(0XF00163B4,0);
+	MakeFunction    (0XF00163BC,0XF00163C4);
+	SetFunctionFlags(0XF00163BC,0);
+	MakeFunction    (0XF00163C4,0XF00163F4);
+	SetFunctionFlags(0XF00163C4,0);
+	MakeFrame(0XF00163C4, 0X4, 0, 0);
 	MakeFunction    (0XF0016420,0XF0016488);
 	SetFunctionFlags(0XF0016420,0);
 	MakeFrame(0XF0016420, 0X8, 0, 0);
 	MakeFunction    (0XF0016490,0XF001649C);
 	SetFunctionFlags(0XF0016490,0);
+	MakeFunction    (0XF00164A8,0XF00164B8);
+	SetFunctionFlags(0XF00164A8,0);
+	MakeFunction    (0XF00164C0,0XF00164D0);
+	SetFunctionFlags(0XF00164C0,0);
+	MakeFunction    (0XF00164D8,0XF00164E8);
+	SetFunctionFlags(0XF00164D8,0);
 	MakeFunction    (0XF00164F0,0XF0016650);
 	SetFunctionFlags(0XF00164F0,0);
 	MakeFrame(0XF00164F0, 0X14, 0, 0);
@@ -20907,6 +21325,7 @@ static Functions_0(void) {
 	MakeFrame(0XF0018B6C, 0X20, 0, 0);
 	MakeFunction    (0XF0018CE4,0XF0018D0C);
 	SetFunctionFlags(0XF0018CE4,0);
+	SetType(0XF0018CE4, "int __cdecl add_mapping_init(void *pgdir, void *vaddr, void *paddr, int attrib);");
 	MakeFunction    (0XF0018D0C,0XF0018D2C);
 	SetFunctionFlags(0XF0018D0C,0);
 	MakeFunction    (0XF0018D2C,0XF0018E14);
@@ -20918,7 +21337,7 @@ static Functions_0(void) {
 	MakeFunction    (0XF0018ED8,0XF001926C);
 	SetFunctionFlags(0XF0018ED8,0x1);
 	MakeFrame(0XF0018ED8, 0X38, 0, 0);
-	MakeLocal(0XF0018ED8, 0XF001926C, "[bp-0X38]", "kernel");
+	MakeLocal(0XF0018ED8, 0XF001926C, "[bp-0X38]", "rwx");
 	MakeFunction    (0XF00193F4,0XF0019638);
 	SetFunctionFlags(0XF00193F4,0);
 	MakeFrame(0XF00193F4, 0XC, 0, 0);
@@ -20930,15 +21349,18 @@ static Functions_0(void) {
 	MakeFrame(0XF00196B4, 0X4, 0, 0);
 	MakeFunction    (0XF0019768,0XF0019818);
 	SetFunctionFlags(0XF0019768,0);
+	SetType(0XF0019768, "int __cdecl intctrl_t__init_cpu(struct intctrl_t *self);");
 	MakeFrame(0XF0019768, 0X2C, 0, 0);
+	MakeLocal(0XF0019768, 0XF0019818, "[bp-0X24]", "attrib");
 	MakeFunction    (0XF0019830,0XF0019C04);
 	SetFunctionFlags(0XF0019830,0);
 	MakeFrame(0XF0019830, 0X38, 0, 0);
 	MakeFunction    (0XF0019C34,0XF0019E24);
 	SetFunctionFlags(0XF0019C34,0);
 	MakeFrame(0XF0019C34, 0X28, 0, 0);
-	MakeLocal(0XF0019C34, 0XF0019E24, "[bp-0X28]", "kernel");
-	MakeLocal(0XF0019C34, 0XF0019E24, "[bp-0X24]", "attrib");
+	MakeLocal(0XF0019C34, 0XF0019E24, "[bp-0X28]", "rwx");
+	MakeLocal(0XF0019C34, 0XF0019E24, "[bp-0X24]", "kernel");
+	MakeLocal(0XF0019C34, 0XF0019E24, "[bp-0X20]", "attrib");
 	MakeFunction    (0XF0019E44,0XF0019F14);
 	SetFunctionFlags(0XF0019E44,0);
 	MakeFrame(0XF0019E44, 0X10, 0, 0);
