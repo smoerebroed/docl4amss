@@ -1,3 +1,8 @@
+Thu Apr  5 13:00:28 HST 2012
+  - pushed up latest idc for l4 and amss (some analysis is a bit older)
+  - recent work on tmc (task lifecycle management)
+    linked list primitives, heap allocators, filesystem code
+  - analyzing timer primitives
 
 Fri Mar 30 19:45:55 HST 2012
   - looking at partition table, efs
