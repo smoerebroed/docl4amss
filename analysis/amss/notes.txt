@@ -29,6 +29,9 @@ XXX fill out details of debugging flags
 storeErr
 
    dbgBuf , dbgBufPos, dbgBufPos2
+  reportErr*
+  die*
+  
 
 
 ----
@@ -38,6 +41,8 @@ global addr 0x1FFC000 ?
 0xC3300000
 0xC5000100
 0x1F00000
+0x01ffc000
+0xc5000100
 
 0xf910010c (in okl4)
 
