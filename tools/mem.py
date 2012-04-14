@@ -19,14 +19,15 @@ def cmd(s) :
     return buf[:-2]
 
 def byte(x) :
-    s = cmd('at@test=%d' % x).strip()
-    if s[:3] != '@: ' :
-         raise Exception('bad response!')
-    return int(s[3:], 16)
+    x = cmd('at@test=%d' % x).strip()
+    for s in x.split('\n') :
+        if s[:3] == '@: ' :
+            return int(s[3:], 16)
+    raise Exception('bad response: %r!' % x)
 
 def num(x) :
     if x[:2].lower() == '0x' :
-    	return int(x[2:], 16)
+        return int(x[2:], 16)
     return int(x)
     
 def dump(x, l) :
