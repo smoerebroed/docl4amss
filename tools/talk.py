@@ -29,11 +29,11 @@ def rawOff(fd) :
     termios.tcsetattr(fd, termios.TCSADRAIN, orig[fd])
     blocking(fd, 1)
 
-echo = True
+echo = False #True
 
 def copy(i, o, ctrl=False) :
     #print 'read from', i
-    buf = os.read(i, 1)
+    buf = os.read(i, 1024)
     if buf == '' :
         return 'eof'
     if ctrl :
@@ -42,8 +42,6 @@ def copy(i, o, ctrl=False) :
         if echo :
             os.write(i, buf)
         buf = buf.replace('\n', '\r')
-    else :
-        buf = buf.replace('\r', '\n')
     #print 'got %r' % buf
     os.write(o, buf)
     #print 'written'
@@ -60,9 +58,11 @@ def copier(x, y) :
     print 'done'
 
 def main() :
+    init = 'ate1v1\r'
+    
     fd1 = sys.stdin.fileno()
     fd2 = os.open('/dev/smd0', os.O_RDWR)
-    print fd1, fd2
+    os.write(fd2, init)
     try :
         rawOn(fd1)
         rawOn(fd2)
