@@ -1,0 +1,19 @@
+#!/system/bin/sh
+#
+# android helper to make it easy to run python scripts
+#
+# install http://android-scripting.googlecode.com/files/sl4a_r4.apk
+# and http://android-scripting.googlecode.com/files/PythonForAndroid_r4.apk
+# and then run the python app once from android to set up.
+# then put this in your PATH and run scripts as "py script.py"
+#
+
+export TEMP="/sdcard/com.googlecode.pythonforandroid/extras/python/tmp"
+export PYTHONPATH="/sdcard/com.googlecode.pythonforandroid/extras/python:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6/lib-dynload:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6"
+export PYTHONHOME="/data/data/com.googlecode.pythonforandroid/files/python"
+export LD_LIBRARY_PATH="/data/data/com.googlecode.pythonforandroid/files/python/lib"
+export PY4A_EXTRAS="/sdcard/com.googlecode.pythonforandroid/extras/"
+export ASEC_MOUNTPOINT="/asec"
+export PATH="/sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin:/data/data/com.googlecode.pythonforandroid/files/python/bin"
+python "$@"
+
