@@ -1,3 +1,21 @@
+Thu May 31 12:03:24 HST 2012
+  - slowly getting back into it after a long break
+  - built a map showing where filenames exist in the amss address space
+
+Mon Apr 16 19:20:05 HST 2012
+  - dumping out mem using at cmd: binary, smem, logging, etc.
+    not yet analyzed, but lines up nicely with radio image at least.
+
+Fri Apr 13 13:18:44 HST 2012
+  - worked on talking to the radio from android, looked at
+    some of the at cmd parsing.  found a way to dump mem
+    from radio commands and added a script for it.
+
+Mon Apr  9 13:42:24 HST 2012
+  - walking through lowest mem chunk doing minor cleanup
+    and looking for interesting blocks to investigate
+  - some very light wms and efs code exploration
+
 Thu Apr  5 13:00:28 HST 2012
   - pushed up latest idc for l4 and amss (some analysis is a bit older)
   - recent work on tmc (task lifecycle management)
