@@ -420,6 +420,7 @@ static Bytes_0(void) {
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeRptCmt	(0XB0000940,	"jumptable B0000368 case 8");
+	ExtLinA		(0XB0000940,	0,	"case 9, MAP");
 	MakeCode	(0XB0000940);
 	MakeCode	(x=0XB000095C);
 	OpStkvar	(x,	1);
@@ -437,6 +438,7 @@ static Bytes_0(void) {
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB00009B4);
 	OpStkvar	(x,	1);
+	MakeRptCmt	(0XB00009C8,	"crashes nested in this call");
 	MakeCode	(x=0XB00009E4);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB00009FC);
@@ -805,13 +807,16 @@ static Bytes_0(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XB00017C8);
+	MakeName	(0XB00017C8,	"mem_alloc_unboxed");
 	MakeCode	(x=0XB0001818);
 	OpHex		(x,	1);
 	MakeCode	(x=0XB0001834);
 	OpHex		(x,	1);
 	MakeCode	(0XB00018D0);
+	MakeRptCmt	(0XB00018D8,	"return -1");
 	MakeCode	(0XB00018D8);
 	MakeCode	(0XB00018E0);
+	MakeComm	(0XB0001904,	"cache");
 	MakeCode	(x=0XB0001904);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -850,7 +855,9 @@ static Bytes_0(void) {
 	MakeDword	(x=0XB0001B04);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+	MakeName	(0XB0001B04,	"cache");
 	MakeCode	(0XB0001B08);
+	MakeName	(0XB0001B08,	"mem_free");
 	MakeCode	(0XB0001B58);
 	MakeCode	(0XB0001B60);
 	MakeCode	(0XB0001B98);
@@ -864,6 +871,7 @@ static Bytes_0(void) {
 	OpHex		(x,	1);
 	MakeCode	(x=0XB0001C94);
 	OpHex		(x,	1);
+	MakeComm	(0XB0001C9C,	"cache");
 	MakeCode	(x=0XB0001C9C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -1698,7 +1706,7 @@ static Bytes_0(void) {
 	MakeRptCmt	(0XB000336C,	"jumptable B0003318 case 4");
 	MakeCode	(0XB000336C);
 	MakeCode	(0XB0003374);
-	MakeName	(0XB0003374,	"_main");
+	MakeName	(0XB0003374,	"main");
 	MakeCode	(x=0XB000337C);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB0003380);
@@ -1885,6 +1893,7 @@ static Bytes_0(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XB00036EC);
+	MakeComm	(0XB00036F0,	"cache");
 	MakeCode	(x=0XB00036F0);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -2361,6 +2370,7 @@ static Bytes_0(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XB00042CC);
+	MakeComm	(0XB00042FC,	"cache");
 	MakeCode	(x=0XB00042FC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -2405,13 +2415,17 @@ static Bytes_0(void) {
 	OpOff		(x,	128,	0);
 	MakeCode	(0XB00044B4);
 	MakeCode	(0XB00044E4);
-	MakeName	(0XB00044E4,	"_memsection_create_cache");
+	MakeName	(0XB00044E4,	"memsection_create_cache");
+	MakeComm	(0XB00044E8,	"size");
+	MakeComm	(0XB00044F4,	"pool");
 	MakeCode	(x=0XB00044F4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XB0004508,	"pool");
 	MakeCode	(x=0XB0004508);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XB000450C,	"size");
 	MakeCode	(x=0XB0004540);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -2429,6 +2443,7 @@ static Bytes_0(void) {
 	MakeComm	(0XB000458C,	"int");
 	MakeComm	(0XB0004590,	"void *");
 	MakeComm	(0XB0004594,	"size_t");
+	MakeComm	(0XB000459C,	"cache");
 	MakeCode	(x=0XB000459C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -2456,6 +2471,7 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB00046EC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeRptCmt	(0XB00046F4,	"return 0");
 	MakeCode	(0XB00046FC);
 	MakeCode	(x=0XB0004718);
 	OpOff		(x,	1,	0);
@@ -2466,6 +2482,7 @@ static Bytes_0(void) {
 	MakeDword	(x=0XB000473C);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+	MakeName	(0XB000473C,	"pool");
 	MakeDword	(x=0XB0004740);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -2502,17 +2519,23 @@ static Bytes_0(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XB00047E4);
+	MakeComm	(0XB00047EC,	"cache");
 	MakeCode	(x=0XB00047EC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeName	(0XB00047EC,	"ObjAllocPage");
 	MakeDword	(x=0XB00047F4);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(x=0XB00047F8);
 	OpStkvar	(x,	1);
+	MakeName	(0XB00047F8,	"objtable_insert");
 	MakeCode	(x=0XB00047FC);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XB0004804,	"obj");
+	MakeComm	(0XB0004808,	"retObj");
+	MakeComm	(0XB000480C,	"root");
 	MakeDword	(x=0XB0004824);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -2530,6 +2553,7 @@ static Bytes_0(void) {
 	MakeComm	(0XB00048B0,	"int");
 	MakeComm	(0XB00048B4,	"size_t");
 	MakeComm	(0XB00048B8,	"void *");
+	MakeComm	(0XB00048C0,	"memsect");
 	MakeCode	(x=0XB00048D8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -2581,6 +2605,7 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB0004960);
 	OpHex		(x,	1);
 	MakeName	(0XB0004960,	"_objtable_setup_fixed");
+	MakeComm	(0XB0004990,	"memsect");
 	MakeCode	(x=0XB00049A8);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -2651,6 +2676,7 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB0004AC0);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XB0004AD8,	"memsect");
 	MakeCode	(x=0XB0004AF4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -2682,6 +2708,7 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB0004B58);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XB0004B78,	"memsect");
 	MakeCode	(0XB0004B98);
 	MakeCode	(0XB0004B9C);
 	MakeCode	(0XB0004BA0);
@@ -2723,6 +2750,7 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB0004C1C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XB0004C34,	"memsect");
 	MakeCode	(x=0XB0004C5C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -2766,11 +2794,9 @@ static Bytes_0(void) {
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XB0004CF8);
-	OpOff		(x,	1,	0XB0041060);
-	OpOff		(x,	129,	0XB0041060);
+	OpStroffEx	(x,	1,	GetStrucIdByName("btree"),	0);
 	MakeCode	(x=0XB0004D00);
-	OpOff		(x,	1,	0XB0041060);
-	OpOff		(x,	129,	0XB0041060);
+	OpStroffEx	(x,	1,	GetStrucIdByName("btree"),	0);
 	MakeDword	(x=0XB0004D08);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -2782,6 +2808,9 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB0004D14);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XB0004D20,	"key");
+	MakeComm	(0XB0004D24,	"tree");
+	MakeComm	(0XB0004D28,	"ret");
 	MakeCode	(x=0XB0004D38);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB0004D40);
@@ -3239,6 +3268,7 @@ static Bytes_0(void) {
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeCode	(0XB0005984);
+	MakeComm	(0XB00059B4,	"cache");
 	MakeCode	(x=0XB00059B4);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -3345,6 +3375,7 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB0005E90);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeName	(0XB0005E90,	"pt_remove");
 	MakeDword	(x=0XB0005E9C);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
@@ -3371,9 +3402,12 @@ static Bytes_0(void) {
 	OpHex		(x,	1);
 	MakeCode	(x=0XB0005F10);
 	OpHex		(x,	1);
+	MakeRptCmt	(0XB0005F20,	"return");
+	MakeComm	(0XB0005F24,	"d");
 	MakeCode	(0XB0005F28);
 	MakeCode	(x=0XB0005F2C);
 	OpHex		(x,	1);
+	MakeComm	(0XB0005F38,	"cache");
 	MakeCode	(x=0XB0005F38);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
@@ -3390,6 +3424,11 @@ static Bytes_0(void) {
 	OpOff		(x,	129,	0);
 	MakeCode	(x=0XB0005F94);
 	OpHex		(x,	1);
+	MakeComm	(0XB0005FB0,	"ent");
+	MakeComm	(0XB0005FB4,	"addr");
+	MakeComm	(0XB0005FB8,	"bits");
+	MakeComm	(0XB0005FBC,	"phys");
+	MakeComm	(0XB0005FC0,	"d");
 	MakeCode	(x=0XB0005FC0);
 	OpStkvar	(x,	1);
 	MakeCode	(0XB0005FE4);
@@ -3428,17 +3467,25 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB0006034);
 	OpOff		(x,	1,	0XB0040098);
 	OpOff		(x,	129,	0XB0040098);
+	MakeComm	(0XB0006064,	"bits");
+	MakeComm	(0XB0006068,	"phys");
+	MakeComm	(0XB000606C,	"ent");
 	MakeCode	(x=0XB000606C);
 	OpOff		(x,	1,	0);
 	OpOff		(x,	129,	0);
+	MakeComm	(0XB0006070,	"addr");
+	MakeComm	(0XB0006084,	"d");
+	MakeComm	(0XB0006088,	"d");
 	MakeCode	(x=0XB0006088);
 	OpStkvar	(x,	1);
+	MakeRptCmt	(0XB000608C,	"crashes under this call");
 	MakeDword	(x=0XB0006098);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
 	MakeDword	(x=0XB000609C);
 	OpOff		(x,	0,	0);
 	OpOff		(x,	128,	0);
+	MakeName	(0XB000609C,	"ent");
 	MakeCode	(0XB00060A0);
 	MakeComm	(0XB00060B8,	"addr");
 	MakeCode	(x=0XB00060D8);
@@ -3741,12 +3788,14 @@ static Bytes_0(void) {
 	MakeCode	(0XB00067A4);
 	MakeCode	(0XB00067D0);
 	MakeCode	(0XB00067FC);
+	MakeName	(0XB00067FC,	"slab_cache_alloc");
 	MakeCode	(0XB000680C);
 	MakeComm	(0XB0006874,	"size_t");
 	MakeComm	(0XB0006878,	"void *");
 	MakeComm	(0XB000687C,	"int");
 	MakeCode	(0XB000688C);
 	MakeCode	(0XB0006898);
+	MakeName	(0XB0006898,	"slab_cache_free");
 	MakeCode	(0XB00068D4);
 	MakeName	(0XB00068D4,	"_thread_init");
 	MakeCode	(x=0XB00068DC);
@@ -5224,7 +5273,7 @@ static Bytes_0(void) {
 	MakeCode	(x=0XB000A3D8);
 	OpStkvar	(x,	1);
 	MakeCode	(0XB000A3DC);
-	MakeName	(0XB000A3DC,	"_printf");
+	MakeName	(0XB000A3DC,	"printf");
 	MakeCode	(x=0XB000A3E0);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB000A3E4);
@@ -5444,6 +5493,15 @@ static Bytes_0(void) {
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB000A9B8);
 	OpStkvar	(x,	1);
+}
+
+//------------------------------------------------------------------------
+// Information about bytes
+
+static Bytes_1(void) {
+        auto x;
+#define id x
+
 	MakeRptCmt	(0XB000A9C4,	"jumptable B000A818 cases 33,37,39,65,69-71");
 	MakeCode	(0XB000A9C4);
 	MakeCode	(x=0XB000A9C8);
@@ -5520,15 +5578,6 @@ static Bytes_0(void) {
 	OpStkvar	(x,	1);
 	MakeRptCmt	(0XB000AB34,	"jumptable B000A818 case 80");
 	MakeCode	(0XB000AB34);
-}
-
-//------------------------------------------------------------------------
-// Information about bytes
-
-static Bytes_1(void) {
-        auto x;
-#define id x
-
 	MakeCode	(x=0XB000AB48);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB000AB50);
@@ -6189,6 +6238,10 @@ static Bytes_1(void) {
 	MakeCode	(x=0XB000BD14);
 	OpEnumEx		(x,	1,	GetEnum("trapenum"),0);
 	MakeCode	(0XB000BD24);
+	MakeName	(0XB000BD24,	"ObjBTSearch");
+	MakeRptCmt	(0XB000BD3C,	"current = tree->root");
+	MakeComm	(0XB000BD4C,	"current->count");
+	MakeRptCmt	(0XB000BD5C,	"binary search");
 	MakeCode	(0XB000BDA0);
 	MakeCode	(0XB000BDE0);
 	MakeCode	(0XB000BDE4);
@@ -6217,6 +6270,7 @@ static Bytes_1(void) {
 	MakeCode	(0XB000C310);
 	MakeCode	(0XB000C334);
 	MakeCode	(0XB000C3B4);
+	MakeName	(0XB000C3B4,	"BTInsert");
 	MakeCode	(x=0XB000C3C4);
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB000C3D4);
@@ -6237,6 +6291,18 @@ static Bytes_1(void) {
 	MakeCode	(x=0XB000C6A8);
 	OpStkvar	(x,	1);
 	MakeCode	(0XB000C6B4);
+	MakeName	(0XB000C6B4,	"ObjBTIns");
+	MakeCode	(x=0XB000C6D0);
+	OpStroffEx	(x,	1,	GetStrucIdByName("btree"),	0);
+	MakeCode	(x=0XB000C6F4);
+	OpDecimal	(x,	1);
+	MakeRptCmt	(0XB000C6FC,	"child[i]");
+	MakeRptCmt	(0XB000C700,	"key[i]");
+	MakeRptCmt	(0XB000C714,	"child[0]");
+	MakeRptCmt	(0XB000C718,	"child[i]");
+	MakeRptCmt	(0XB000C71C,	"page count, isleaf");
+	MakeRptCmt	(0XB000C720,	"return arg");
+	MakeRptCmt	(0XB000C724,	"tree depth,root");
 	MakeCode	(0XB000C72C);
 	MakeCode	(x=0XB000C730);
 	OpStkvar	(x,	1);
@@ -6246,9 +6312,11 @@ static Bytes_1(void) {
 	OpStkvar	(x,	1);
 	MakeCode	(x=0XB000C744);
 	OpStkvar	(x,	1);
+	MakeRptCmt	(0XB000C754,	"return");
 	MakeCode	(0XB000C75C);
 	MakeCode	(x=0XB000C7B0);
 	OpStkvar	(x,	1);
+	MakeRptCmt	(0XB000C7C8,	"return 5");
 	MakeCode	(0XB000C7C8);
 	MakeCode	(0XB000C7D0);
 	MakeName	(0XB000C7D0,	"_l4e_min_pagebits");
@@ -7022,7 +7090,15 @@ static Bytes_1(void) {
 	MakeDword	(0XB0040044);
 	MakeDword	(0XB0040060);
 	MakeDword	(0XB0040064);
-	MakeDword	(0XB00400AC);
+	MakeName	(0XB0040068,	"bt_cache");
+	MakeDword	(0XB0040080);
+	MakeArray	(0XB0040080,	0X6);
+	MakeName	(0XB0040080,	"mask");
+	MakeDword	(x=0XB0040098);
+	MakeArray	(x,	0X6);
+	OpDecimal	(x,	0);
+	MakeName	(0XB0040098,	"level");
+	MakeName	(0XB00400B0,	"pt_cache");
 	MakeDword	(0XB00400BC);
 	MakeDword	(0XB00400C0);
 	MakeDword	(0XB00400C4);
@@ -7065,6 +7141,8 @@ static Bytes_1(void) {
 	MakeDword	(0XB00411A8);
 	MakeDword	(0XB00411AC);
 	MakeDword	(0XB00411B0);
+	MakeName	(0XB0042000,	"internal_physpool");
+	MakeName	(0XB0045000,	"internal_virtpool");
 	MakeStruct	(0XB004511C,	"thrTabEnt");
 	MakeArray	(0XB004511C,	0X40);
 	MakeName	(0XB004511C,	"someThreadTab");
@@ -7088,6 +7166,7 @@ static Functions_0(void) {
 	MakeFunction    (0XB0000000,0XB000004C);
 	SetFunctionFlags(0XB0000000,0x1);
 	MakeFrame(0XB0000000, 0, 0, 0);
+	MakeNameEx(0XB000A570, "__sys_entry", SN_LOCAL);
 	MakeFunction    (0XB000005C,0XB00000B0);
 	SetFunctionFlags(0XB000005C,0);
 	MakeFunction    (0XB00000BC,0XB00000F0);
@@ -7105,6 +7184,8 @@ static Functions_0(void) {
 	MakeFunction    (0XB0001014,0XB0001080);
 	SetFunctionFlags(0XB0001014,0);
 	MakeFrame(0XB0001014, 0X10, 0, 0);
+	MakeFunction    (0XB0001080,0XB0001098);
+	SetFunctionFlags(0XB0001080,0);
 	MakeFunction    (0XB0001098,0XB0001108);
 	SetFunctionFlags(0XB0001098,0);
 	MakeFrame(0XB0001098, 0XC, 0, 0);
@@ -7138,6 +7219,7 @@ static Functions_0(void) {
 	SetFunctionFlags(0XB00017B8,0);
 	MakeFunction    (0XB00017C8,0XB00018E0);
 	SetFunctionFlags(0XB00017C8,0);
+	SetType(0XB00017C8, "int __cdecl mem_alloc_unboxed(struct mem_pool *pool, size_t size);");
 	MakeFrame(0XB00017C8, 0X10, 0, 0);
 	MakeFunction    (0XB00018E0,0XB0001B04);
 	SetFunctionFlags(0XB00018E0,0);
@@ -7387,6 +7469,7 @@ static Functions_0(void) {
 	SetFunctionFlags(0XB00047EC,0);
 	MakeFunction    (0XB00047F8,0XB0004824);
 	SetFunctionFlags(0XB00047F8,0);
+	SetType(0XB00047F8, "int __cdecl objtable_insert(struct memsection *memsect);");
 	MakeFrame(0XB00047F8, 0X8, 0, 0);
 	MakeFunction    (0XB0004828,0XB0004948);
 	SetFunctionFlags(0XB0004828,0);
@@ -7476,10 +7559,13 @@ static Functions_0(void) {
 	SetFunctionFlags(0XB0005E90,0);
 	MakeFunction    (0XB0005EA0,0XB0006014);
 	SetFunctionFlags(0XB0005EA0,0);
+	SetType(0XB0005EA0, "int __cdecl r_insert(int addr, int bits, int phys, int ent, int d);");
 	MakeFrame(0XB0005EA0, 0X24, 0, 0);
+	MakeLocal(0XB0005EA0, 0XB0006014, "[bp+0]", "d");
 	MakeFunction    (0XB000602C,0XB0006098);
 	SetFunctionFlags(0XB000602C,0);
 	MakeFrame(0XB000602C, 0X18, 0, 0);
+	MakeLocal(0XB000602C, 0XB0006098, "[bp-0X18]", "d");
 	MakeFunction    (0XB00060A0,0XB0006184);
 	SetFunctionFlags(0XB00060A0,0);
 	MakeFrame(0XB00060A0, 0X1C, 0, 0);
@@ -7512,6 +7598,7 @@ static Functions_0(void) {
 	MakeFrame(0XB00067D0, 0XC, 0, 0);
 	MakeFunction    (0XB00067FC,0XB0006898);
 	SetFunctionFlags(0XB00067FC,0);
+	SetType(0XB00067FC, "void *__cdecl slab_cache_alloc(struct slab_cache *cache);");
 	MakeFrame(0XB00067FC, 0XC, 0, 0);
 	MakeFunction    (0XB0006898,0XB00068D4);
 	SetFunctionFlags(0XB0006898,0);
@@ -7621,7 +7708,7 @@ static Functions_0(void) {
 	MakeFrame(0XB000A344, 0X4, 0, 0);
 	MakeFunction    (0XB000A3DC,0XB000A404);
 	SetFunctionFlags(0XB000A3DC,0);
-	SetType(0XB000A3DC, "int printf(const char *, ...);");
+	SetType(0XB000A3DC, "int printf(const char *fmt, ...);");
 	MakeFrame(0XB000A3DC, 0X14, 0, 0);
 	MakeLocal(0XB000A3DC, 0XB000A404, "[bp-0X10]", "varg_r0");
 	MakeLocal(0XB000A3DC, 0XB000A404, "[bp-0XC]", "varg_r1");
@@ -7764,6 +7851,7 @@ static Functions_0(void) {
 	MakeFrame(0XB000BD0C, 0X8, 0, 0);
 	MakeFunction    (0XB000BD24,0XB000BDE0);
 	SetFunctionFlags(0XB000BD24,0);
+	SetType(0XB000BD24, "int __cdecl ObjBTSearch(struct btree *tree, int key, void *ret);");
 	MakeFrame(0XB000BD24, 0XC, 0, 0);
 	MakeFunction    (0XB000BDE0,0XB000BE04);
 	SetFunctionFlags(0XB000BDE0,0);
@@ -7784,6 +7872,7 @@ static Functions_0(void) {
 	MakeFrame(0XB000C3B4, 0X30, 0, 0);
 	MakeFunction    (0XB000C6B4,0XB000C7D0);
 	SetFunctionFlags(0XB000C6B4,0);
+	SetType(0XB000C6B4, "int __cdecl ObjBTIns(struct btree *root, void *obj, void **retObj);");
 	MakeFrame(0XB000C6B4, 0X24, 0, 0);
 	MakeFunction    (0XB000C7D0,0XB000C830);
 	SetFunctionFlags(0XB000C7D0,0);
