@@ -1,3 +1,6 @@
+Mon Dec 17 09:37:33 HST 2012
+  - push out some older changes that weren't commited earlier
+
 Thu May 31 12:03:24 HST 2012
   - slowly getting back into it after a long break
   - built a map showing where filenames exist in the amss address space
