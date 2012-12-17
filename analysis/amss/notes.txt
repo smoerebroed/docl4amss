@@ -30,8 +30,11 @@ storeErr
 
    dbgBuf , dbgBufPos, dbgBufPos2
   reportErr*
+  logErr*
   die*
+  logToDbgBuf*
   
+all around 17BFD000
 
 
 ----
@@ -43,6 +46,9 @@ global addr 0x1FFC000 ?
 0x1F00000
 0x01ffc000
 0xc5000100
+
+0xC4503700
+0xC3D05D80
 
 0xf910010c (in okl4)
 
@@ -67,4 +73,21 @@ ie. smd.c smem_alloc, smem_item and smem_find have
 direct correspondants in the amss code, though the
 amss code sets up some data structs with tables that
 are not needed inthe linux code...
+
+----
+
+GSM stuff around 0xbf.7xxx 
+- gprs_pdu.c
+
+- linked list pop head func is a good way to find dispatchers
+  for various components
+  - what about chasing down list inits to find the queues that
+    are important?
+
+  dl*.c functions lowest layer in the gsm stack?
+    has HW access to MDSP
+  l1*.c  
+
+- does sleepdrv.c hook up to provide timer notifications in rex?
+
 
