@@ -1,0 +1,545 @@
+Note: some commands only work if the device is marked unlocked.
+The memory image under analysis has the default being locked
+with a secret of 0xffffffff 0xffffffff, but in my memory dumps,
+it shows the device has been marked unlocked (still with the same
+secret key).
+
+
+refs:
+https://bitbucket.org/wkpark/optimusvu/src/f903fee0779d/lge/include/lg_diagcmd.h
+http://code.google.com/p/vm696-pernel/source/browse/drivers/char/diag/lge_diag_kernel_service.c
+
+http://code.google.com/p/vm696-pernel/source/browse/drivers/char/diag/
+http://code.google.com/p/vm696-pernel/source/browse/drivers/char/diag/lge_diag_kernel_service.h
+
+https://www.codeaurora.org/git/projects/ts7008/repository/revisions/db2575e163152f681668800744c99f287f77a8ef/entry/AMSS/products/7x30/core/api/services/diagcmd.h
+
+diagTabEnt <0, 0xFF, 8, 6, 0, stru_1751ADE8>
+   diagFuncTab <0, 0, sub_B3D58E+1>
+   diagFuncTab <1, 1, sub_B3D5B8+1>
+   diagFuncTab <2, 2, sub_B3D694+1>
+   diagFuncTab <3, 3, sub_B3D6CA+1>
+   diagFuncTab <4, 4, sub_B3D796+1>
+   diagFuncTab <5, 5, sub_B3D896+1>
+diagTabEnt <0, 0xFF, 0xF, 0x10, 0, stru_171FCE2C>
+   diagFuncTab <0, 0, sub_B55B8E+1>
+   diagFuncTab <1, 1, sub_B55C6C+1>
+   diagFuncTab <5, 5, sub_B56070+1>
+   diagFuncTab <6, 6, sub_B561CE+1>
+   diagFuncTab <0xA, 0xA, sub_B56A78+1>
+   diagFuncTab <9, 9, sub_B5693E+1>
+   diagFuncTab <0xB, 0xB, sub_B56B70+1>
+   diagFuncTab <8, 8, sub_B56ABE+1>
+   diagFuncTab <0xC, 0xC, sub_B56C7E+1>
+   diagFuncTab <0xD, 0xD, loc_B56354+1>
+   diagFuncTab <0xE, 0xE, sub_B56488+1>
+   diagFuncTab <4, 4, sub_B565C8+1>
+   diagFuncTab <7, 7, sub_B56550+1>
+   diagFuncTab <2, 2, sub_B55CCC+1>
+   diagFuncTab <0x10, 0x10, sub_B56CA6+1>
+   diagFuncTab <0x11, 0x11, sub_B56F08+1>
+diagTabEnt <0, 0xFF, 0x13, 0x25, 1, stru_1741FD88>
+   diagFuncTab <0, 0, sub_BD2C1C+1>
+   diagFuncTab <1, 1, sub_BD2EEC+1>
+   diagFuncTab <2, 2, sub_BD2F74+1>
+   diagFuncTab <3, 3, sub_BD317A+1>
+   diagFuncTab <4, 4, sub_BD326C+1>
+   diagFuncTab <5, 5, sub_BD34D6+1>
+   diagFuncTab <6, 6, sub_BD36CA+1>
+   diagFuncTab <7, 7, sub_BD380E+1>
+   diagFuncTab <8, 8, sub_BD3910+1>
+   diagFuncTab <9, 9, sub_BD3A08+1>
+   diagFuncTab <0xA, 0xA, sub_BD3B14+1>
+   diagFuncTab <0xB, 0xB, sub_BD3C2C+1>
+   diagFuncTab <0xC, 0xC, sub_BD3E8E+1>
+   diagFuncTab <0xD, 0xD, sub_BD40EE+1>
+   diagFuncTab <0xE, 0xE, sub_BD4248+1>
+   diagFuncTab <0xF, 0xF, sub_BD437E+1>
+   diagFuncTab <0x10, 0x10, sub_BD44F8+1>
+   diagFuncTab <0x11, 0x11, sub_BD4628+1>
+   diagFuncTab <0x12, 0x12, sub_BD47EE+1>
+   diagFuncTab <0x13, 0x13, sub_BD489A+1>
+   diagFuncTab <0x14, 0x14, sub_BD49CC+1>
+   diagFuncTab <0x15, 0x15, sub_BD4AB6+1>
+   diagFuncTab <0x1A, 0x1A, sub_BD4F88+1>
+   diagFuncTab <0x1B, 0x1B, sub_BD4E50+1>
+   diagFuncTab <0x1D, 0x1D, sub_BD5BDE+1>
+   diagFuncTab <0x1F, 0x1F, sub_BD52E0+1>
+   diagFuncTab <0x20, 0x20, sub_BD538E+1>
+   diagFuncTab <0x21, 0x21, sub_BD53C6+1>
+   diagFuncTab <0x1E, 0x1E, sub_BD53FA+1>
+   diagFuncTab <0x22, 0x22, sub_BD54CA+1>
+   diagFuncTab <0x23, 0x23, sub_BD5582+1>
+   diagFuncTab <0x24, 0x24, sub_BD563A+1>
+   diagFuncTab <0x25, 0x25, sub_BD5716+1>
+   diagFuncTab <0x26, 0x26, sub_BD51CE+1>
+   diagFuncTab <0x27, 0x27, sub_BD5086+1>
+   diagFuncTab <0x28, 0x28, sub_BD582C+1>
+   diagFuncTab <0x29, 0x29, sub_BD5918+1>
+diagTabEnt <0, 0xFF, 0x2A, 5, 0, stru_16FDA0EC>
+   diagFuncTab <1, 1, sub_B9D31C+1>
+   diagFuncTab <2, 2, sub_B9D3A6+1>
+   diagFuncTab <3, 3, sub_B9D46A+1>
+   diagFuncTab <4, 4, sub_B9D7B4+1>
+   diagFuncTab <5, 5, sub_B9DCF2+1>
+diagTabEnt <0, 0xFF, 0xD, 3, 0, stru_134F678>
+   diagFuncTab <0x64, 0x64, sub_CFE558+1>
+   diagFuncTab <8, 8, createThreadXXX+1>
+   diagFuncTab <0xC, 0xC, sub_CFE836+1>
+diagTabEnt <0, 0xFF, 0x32, 1, 0, stru_16FCE968>
+   diagFuncTab <0, 0, sub_16E0199C+1>
+diagTabEnt <0, 0xFF, 9, 4, 0, stru_16FD28C8>
+   diagFuncTab <0, 0, sub_16E07EF4+1>
+   diagFuncTab <9, 9, sub_1736ED14+1>
+   diagFuncTab <0xA, 0xA, sub_16E07F70+1>
+   diagFuncTab <0xB, 0xB, sub_16E07F98+1>
+diagTabEnt <0, 0xFF, 0, 6, 0, stru_17531260>
+   diagFuncTab <0, 0, sub_16E47FEC+1>
+   diagFuncTab <1, 1, sub_16E48B40+1>
+   diagFuncTab <2, 2, sub_16E48B98+1>
+   diagFuncTab <3, 3, sub_16E48B6C+1>
+   diagFuncTab <5, 5, sub_16E48C2C+1>
+   diagFuncTab <8, 8, sub_16E48012+1>
+diagTabEnt <0, 0xFF, 0x2D, 1, 0, stru_16FEC658>
+   diagFuncTab <0, 0, sub_16E54C04+1>
+diagTabEnt <0, 0xFF, 0xFF, 0x18, 0, stru_16FCE8A8>
+   diagFuncTab <0x1D, 0x1D, sub_16F137AC+1>
+   diagFuncTab <0x1C, 0x1C, sub_16F1372C+1>
+   diagFuncTab <0x46, 0x46, sub_16F13762+1>
+   diagFuncTab <0x51, 0x51, sub_16F13740+1>
+   diagFuncTab <0x7B, 0x7B, sub_16F13DC2+1>
+   diagFuncTab <0x2A, 0x2A, sub_16E42F2E+1>
+   diagFuncTab <0x2B, 0x2B, sub_16E42F98+1>
+   diagFuncTab <0x2F, 0x2F, sub_16F138EC+1>
+   diagFuncTab <0x30, 0x30, sub_16F13902+1>
+   diagFuncTab <0x65, 0x65, sub_16F139F8+1>
+   diagFuncTab <0x66, 0x66, sub_16F13B1A+1>
+   diagFuncTab <0x67, 0x67, sub_16F13C14+1>
+   diagFuncTab <0x69, 0x69, sub_16F13C2E+1>
+   diagFuncTab <0x6A, 0x6A, sub_16F13D00+1>
+   diagFuncTab <2, 2, sub_16F131A4+1>
+   diagFuncTab <3, 3, sub_16F1327C+1>
+   diagFuncTab <4, 4, sub_16F13362+1>
+   diagFuncTab <5, 5, sub_16F13462+1>
+   diagFuncTab <6, 6, sub_16F1353E+1>
+   diagFuncTab <7, 7, sub_16F13628+1>
+   diagFuncTab <8, 8, sub_16F137D0+1>
+   diagFuncTab <9, 9, sub_16F13816+1>
+   diagFuncTab <0xA, 0xA, sub_16F1386C+1>
+   diagFuncTab <0xB, 0xB, sub_16F138AA+1>
+diagTabEnt <0, 0xFF, 0xFF, 9, 2, stru_16FCE860>
+   diagFuncTab <0x1F, 0x1F, sub_B0D8EA+1>
+   diagFuncTab <0x7D, 0x7D, sub_B0D860+1>
+   diagFuncTab <0x73, 0x73, sub_B0C7F0+1>
+   diagFuncTab <0x78, 0x78, sub_B0CD8C+1>
+   diagFuncTab <0x5D, 0x5D, sub_B0CBF0+1>
+   diagFuncTab <0xF, 0xF, sub_B0CC9A+1>
+   diagFuncTab <0x60, 0x60, sub_1756EE70+1>
+   diagFuncTab <0x81, 0x81, sub_1756EED4+1>
+   diagFuncTab <0x82, 0x82, sub_1756EF1E+1>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, stru_171F9004>
+   diagFuncTab <0x31, 0x31, sub_16F14480+1>
+   diagFuncTab <0x32, 0x32, sub_16F1449C+1>
+diagTabEnt <0, 0xFF, 0x22, 1, 0, stru_1740C11C>
+   diagFuncTab <0, 1, sub_16F1CA14+1>
+diagTabEnt <0, 0xFF, 0xFF, 1, 0, stru_16E8BE88>
+   diagFuncTab <0x59, 0x59, sub_1702745E+1>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, stru_16E8BE90>
+   diagFuncTab <0x48, 0x48, sub_17027560+1>
+   diagFuncTab <0x49, 0x49, sub_170276DE+1>
+diagTabEnt <0, 0xFF, 0xFF, 4, 0, stru_17627D78>
+   diagFuncTab <0, 0, sub_1702783C+1>
+   diagFuncTab <0x7C, 0x7C, sub_170278F8+1>
+   diagFuncTab <1, 1, sub_170278C8+1>
+   diagFuncTab <0x3A, 0x3A, sub_17027968+1>
+diagTabEnt <0, 0xFF, 4, 0xF, 0, stru_171F9074>
+   diagFuncTab <0, 0, sub_170279D0+1>
+   diagFuncTab <8, 8, sub_170279F8+1>
+   diagFuncTab <0x11, 0x11, sub_17027A18+1>
+   diagFuncTab <0x12, 0x12, sub_17027D04+1>
+   diagFuncTab <0x13, 0x13, sub_17027D20+1>
+   diagFuncTab <0x14, 0x14, sub_17027D3E+1>
+   diagFuncTab <0xC, 0xC, sub_17027D58+1>
+   diagFuncTab <0xD, 0xD, sub_17027E24+1>
+   diagFuncTab <0xE, 0xE, sub_17027E8C+1>
+   diagFuncTab <0xF, 0xF, sub_17027EBA+1>
+   diagFuncTab <0x18, 0x18, sub_17027F30+1>
+   diagFuncTab <0x17, 0x17, sub_17027EE4+1>
+   diagFuncTab <0x19, 0x19, sub_17027F7C+1>
+   diagFuncTab <0x1A, 0x1A, sub_17027A34+1>
+   diagFuncTab <0x1B, 0x1B, sub_17027C28+1>
+diagTabEnt <0, 0xFF, 0x3C, 2, 0, stru_173FFF88>
+   diagFuncTab <1, 1, loc_170280BC+1>
+   diagFuncTab <2, 2, sub_17028122+1>
+diagTabEnt <0, 0xFF, 0xFF, 3, 0, stru_1740E4F0>
+   diagFuncTab <0x35, 0x35, sub_17030732+1>
+   diagFuncTab <0x36, 0x36, sub_1703073E+1>
+   diagFuncTab <0x29, 0x29, sub_17030694+1>
+diagTabEnt <0, 0xFF, 0xB, 1, 0, stru_1730EFE4>
+   diagFuncTab <0, 0xFFFF, sub_1703230A+1>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, aD_6>
+   diagFuncTab <0x44, 0x44, sub_17242474+1>
+   diagFuncTab <0x5C, 0x5C, sub_172422B6+1>
+diagTabEnt <0, 0xFF, 0x25, 6, 0, stru_16FCE830>
+   diagFuncTab <3, 3, sub_172429EA+1>
+   diagFuncTab <6, 6, sub_17242A0E+1>
+   diagFuncTab <7, 7, sub_17242B80+1>
+   diagFuncTab <8, 8, sub_17243148+1>
+   diagFuncTab <9, 9, sub_17243234+1>
+   diagFuncTab <0xA, 0xA, sub_17243314+1>
+diagTabEnt <0, 0xFF, 0x34, 1, 0, stru_16FDCB24>
+   diagFuncTab <0, 0, sub_1726D394+1>
+diagTabEnt <0, 0xFF, 0x21, 0x14, 0, stru_170F0484>
+   diagFuncTab <0, 0, sub_1727A708+1>
+   diagFuncTab <1, 1, sub_1727AA68+1>
+   diagFuncTab <2, 2, sub_1727B05E+1>
+   diagFuncTab <4, 4, sub_17275D98+1>
+   diagFuncTab <5, 5, sub_1727B2D0+1>
+   diagFuncTab <6, 6, sub_1727B436+1>
+   diagFuncTab <8, 8, sub_172811AE+1>
+   diagFuncTab <9, 9, sub_17281480+1>
+   diagFuncTab <0xA, 0xA, sub_172816FC+1>
+   diagFuncTab <0x12, 0x12, sub_17281D3E+1>
+   diagFuncTab <0x17, 0x17, sub_1728185E+1>
+   diagFuncTab <0x99, 0x99, sub_17281950+1>
+   diagFuncTab <0x40, 0x40, sub_1728221E+1>
+   diagFuncTab <0x41, 0x41, sub_172824F8+1>
+   diagFuncTab <0x42, 0x42, sub_172827D4+1>
+   diagFuncTab <0x43, 0x43, sub_1728296A+1>
+   diagFuncTab <0x44, 0x44, sub_17282EEC+1>
+   diagFuncTab <0x45, 0x45, sub_17282C26+1>
+   diagFuncTab <0x46, 0x46, sub_17283230+1>
+   diagFuncTab <0x47, 0x47, sub_172833DE+1>
+diagTabEnt <0, 0xFF, 0x2F, 7, 0, stru_1762AA04>
+   diagFuncTab <0xF1, 0xF1, sub_17358424+1>
+   diagFuncTab <0xF2, 0xF2, sub_173584AC+1>
+   diagFuncTab <0xF3, 0xF3, sub_173584D2+1>
+   diagFuncTab <0xF4, 0xF4, sub_1735852E+1>
+   diagFuncTab <0xF5, 0xF5, sub_173585B8+1>
+   diagFuncTab <0xF6, 0xF6, sub_1735860E+1>
+   diagFuncTab <0xF8, 0xF8, sub_1735874C+1>
+diagTabEnt <0, 0xFF, 0xC, 1, 0, stru_171FC190>
+   diagFuncTab <2, 2, sub_1735BC98+1>
+diagTabEnt <0, 0xFF, 0x23, 3, 0, stru_170F2F48>
+   diagFuncTab <0, 0, sub_173975D8+1>
+   diagFuncTab <1, 1, sub_173975F2+1>
+   diagFuncTab <2, 2, sub_17397624+1>
+diagTabEnt <0, 0xFF, 0x38, 3, 0, stru_171F8C88>
+   diagFuncTab <0, 0, sub_1745E550+1>
+   diagFuncTab <1, 1, sub_1745E596+1>
+   diagFuncTab <2, 2, sub_1745E5FE+1>
+diagTabEnt <0, 0xFF, 0x24, 2, 0, stru_171F9AD8>
+   diagFuncTab <0, 0, sub_17464808+1>
+   diagFuncTab <1, 1, sub_17464854+1>
+diagTabEnt <0, 0xFF, 0xE, 0xC, 0, stru_16FD877C>
+   diagFuncTab <0, 0, sub_1747E798+1>
+   diagFuncTab <1, 1, sub_1747E9E8+1>
+   diagFuncTab <2, 2, sub_1747EA38+1>
+   diagFuncTab <3, 3, sub_1747EA8A+1>
+   diagFuncTab <4, 4, sub_1747EBAA+1>
+   diagFuncTab <5, 5, sub_1747EB44+1>
+   diagFuncTab <6, 6, sub_1747EC1E+1>
+   diagFuncTab <7, 7, sub_1747ED68+1>
+   diagFuncTab <8, 8, sub_1747EDDE+1>
+   diagFuncTab <9, 9, sub_1747EE4C+1>
+   diagFuncTab <0xA, 0xA, sub_1747F1EE+1>
+   diagFuncTab <0xB, 0xB, sub_1747F34E+1>
+diagTabEnt <0, 0xFF, 0xFF, 5, 0, stru_17627D50>
+   diagFuncTab <0x26, 0x26, sub_1756F27E+1>
+   diagFuncTab <0x27, 0x27, sub_1756F46C+1>
+   diagFuncTab <0x11, 0x11, sub_1756EFDC+1>
+   diagFuncTab <0x12, 0x12, sub_1756F048+1>
+   diagFuncTab <0x41, 0x41, sub_1756F73C+1>
+diagTabEnt <0, 0xFF, 0x30, 1, 0, stru_175189AC>
+   diagFuncTab <0, 0, sub_1756F608+1>
+diagTabEnt <0, 0xFF, 0xFF, 1, 0, stru_1742ECD0>
+   diagFuncTab <0x6C, 0x6C, sub_1760DC56+1>
+diagTabEnt <0, 0xFF, 0xD, 9, 0, stru_1732E0A8>
+   diagFuncTab <1, 1, sub_1760D62C+1>
+   diagFuncTab <2, 2, sub_1760D6C0+1>
+   diagFuncTab <3, 3, sub_1760D6FA+1>
+   diagFuncTab <4, 4, sub_1760D75A+1>
+   diagFuncTab <5, 5, sub_1760D778+1>
+   diagFuncTab <6, 6, sub_1760D796+1>
+   diagFuncTab <0x18, 0x18, sub_1760D8C0+1>
+   diagFuncTab <0x65, 0x65, sub_1760D8E2+1>
+   diagFuncTab <0x66, 0x66, sub_1760D92C+1>
+diagTabEnt <1, 0x80, 0xD, 1, 0, stru_1764FFAC>
+   diagFuncTab <0x69, 0x69, sub_1760DA28+1>
+diagTabEnt <1, 0x80, 0xE, 4, 0, stru_16ED0390>
+   diagFuncTab <0xC, 0xC, sub_1747F4C8+1>
+   diagFuncTab <0xF, 0xF, sub_1747F5D8+1>
+   diagFuncTab <0x12, 0x12, sub_1747F66A+1>
+   diagFuncTab <0x13, 0x13, sub_1747F6FC+1>
+diagTabEnt <1, 0x80, 0x21, 1, 0, stru_17207EB4>
+   diagFuncTab <0x48, 0x48, sub_172808E6+1>
+diagTabEnt <1, 0x80, 0x35, 1, 0, stru_140E6B0>; qdiag data
+   diagFuncTab <1, 0xFFFF, sub_16F58C56+1>
+
+
+
+
+-----
+somewhat sorted:
+
+diagTabEnt <0, 0xFF, 0, 6, 0, stru_17531260>
+   diagFuncTab <0, 0, sub_16E47FEC+1>
+   diagFuncTab <1, 1, sub_16E48B40+1>
+   diagFuncTab <2, 2, sub_16E48B98+1>
+   diagFuncTab <3, 3, sub_16E48B6C+1>
+   diagFuncTab <5, 5, sub_16E48C2C+1>
+   diagFuncTab <8, 8, sub_16E48012+1>
+diagTabEnt <0, 0xFF, 4, 0xF, 0, stru_171F9074>
+   diagFuncTab <0, 0, sub_170279D0+1>
+   diagFuncTab <8, 8, sub_170279F8+1>
+   diagFuncTab <0xC, 0xC, sub_17027D58+1>
+   diagFuncTab <0xD, 0xD, sub_17027E24+1>
+   diagFuncTab <0xE, 0xE, sub_17027E8C+1>
+   diagFuncTab <0xF, 0xF, sub_17027EBA+1>
+   diagFuncTab <0x11, 0x11, sub_17027A18+1>
+   diagFuncTab <0x12, 0x12, sub_17027D04+1>
+   diagFuncTab <0x13, 0x13, sub_17027D20+1>
+   diagFuncTab <0x14, 0x14, sub_17027D3E+1>
+   diagFuncTab <0x17, 0x17, sub_17027EE4+1>
+   diagFuncTab <0x18, 0x18, sub_17027F30+1>
+   diagFuncTab <0x19, 0x19, sub_17027F7C+1>
+   diagFuncTab <0x1A, 0x1A, sub_17027A34+1>
+   diagFuncTab <0x1B, 0x1B, sub_17027C28+1>
+diagTabEnt <0, 0xFF, 8, 6, 0, stru_1751ADE8>
+   diagFuncTab <0, 0, sub_B3D58E+1>
+   diagFuncTab <1, 1, sub_B3D5B8+1>
+   diagFuncTab <2, 2, sub_B3D694+1>
+   diagFuncTab <3, 3, sub_B3D6CA+1>
+   diagFuncTab <4, 4, sub_B3D796+1>
+   diagFuncTab <5, 5, sub_B3D896+1>
+diagTabEnt <0, 0xFF, 9, 4, 0, stru_16FD28C8>
+   diagFuncTab <0, 0, sub_16E07EF4+1>
+   diagFuncTab <9, 9, sub_1736ED14+1>
+   diagFuncTab <0xA, 0xA, sub_16E07F70+1>
+   diagFuncTab <0xB, 0xB, sub_16E07F98+1>
+diagTabEnt <0, 0xFF, 0xB, 1, 0, stru_1730EFE4>
+   diagFuncTab <0, 0xFFFF, sub_1703230A+1>
+diagTabEnt <0, 0xFF, 0xC, 1, 0, stru_171FC190>
+   diagFuncTab <2, 2, sub_1735BC98+1>
+diagTabEnt <0, 0xFF, 0xD, 3, 0, stru_134F678>
+   diagFuncTab <0x64, 0x64, sub_CFE558+1>
+   diagFuncTab <8, 8, createThreadXXX+1>
+   diagFuncTab <0xC, 0xC, sub_CFE836+1>
+diagTabEnt <0, 0xFF, 0xD, 9, 0, stru_1732E0A8>
+   diagFuncTab <1, 1, sub_1760D62C+1>
+   diagFuncTab <2, 2, sub_1760D6C0+1>
+   diagFuncTab <3, 3, sub_1760D6FA+1>
+   diagFuncTab <4, 4, sub_1760D75A+1>
+   diagFuncTab <5, 5, sub_1760D778+1>
+   diagFuncTab <6, 6, sub_1760D796+1>
+   diagFuncTab <0x18, 0x18, sub_1760D8C0+1>
+   diagFuncTab <0x65, 0x65, sub_1760D8E2+1>
+   diagFuncTab <0x66, 0x66, sub_1760D92C+1>
+diagTabEnt <0, 0xFF, 0xE, 0xC, 0, stru_16FD877C>
+   diagFuncTab <0, 0, sub_1747E798+1>
+   diagFuncTab <1, 1, sub_1747E9E8+1>
+   diagFuncTab <2, 2, sub_1747EA38+1>
+   diagFuncTab <3, 3, sub_1747EA8A+1>
+   diagFuncTab <4, 4, sub_1747EBAA+1>
+   diagFuncTab <5, 5, sub_1747EB44+1>
+   diagFuncTab <6, 6, sub_1747EC1E+1>
+   diagFuncTab <7, 7, sub_1747ED68+1>
+   diagFuncTab <8, 8, sub_1747EDDE+1>
+   diagFuncTab <9, 9, sub_1747EE4C+1>
+   diagFuncTab <0xA, 0xA, sub_1747F1EE+1>
+   diagFuncTab <0xB, 0xB, sub_1747F34E+1>
+diagTabEnt <0, 0xFF, 0xF, 0x10, 0, stru_171FCE2C>
+   diagFuncTab <0, 0, sub_B55B8E+1>
+   diagFuncTab <1, 1, sub_B55C6C+1>
+   diagFuncTab <2, 2, sub_B55CCC+1>
+   diagFuncTab <4, 4, sub_B565C8+1>
+   diagFuncTab <7, 7, sub_B56550+1>
+   diagFuncTab <5, 5, sub_B56070+1>
+   diagFuncTab <6, 6, sub_B561CE+1>
+   diagFuncTab <8, 8, sub_B56ABE+1>
+   diagFuncTab <9, 9, sub_B5693E+1>
+   diagFuncTab <0xA, 0xA, sub_B56A78+1>
+   diagFuncTab <0xB, 0xB, sub_B56B70+1>
+   diagFuncTab <0xC, 0xC, sub_B56C7E+1>
+   diagFuncTab <0xD, 0xD, loc_B56354+1>
+   diagFuncTab <0xE, 0xE, sub_B56488+1>
+   diagFuncTab <0x10, 0x10, sub_B56CA6+1>
+   diagFuncTab <0x11, 0x11, sub_B56F08+1>
+diagTabEnt <0, 0xFF, 0x13, 0x25, 1, stru_1741FD88>
+   diagFuncTab <0, 0, sub_BD2C1C+1>
+   diagFuncTab <1, 1, sub_BD2EEC+1>
+   diagFuncTab <2, 2, sub_BD2F74+1>
+   diagFuncTab <3, 3, sub_BD317A+1>
+   diagFuncTab <4, 4, sub_BD326C+1>
+   diagFuncTab <5, 5, sub_BD34D6+1>
+   diagFuncTab <6, 6, sub_BD36CA+1>
+   diagFuncTab <7, 7, sub_BD380E+1>
+   diagFuncTab <8, 8, sub_BD3910+1>
+   diagFuncTab <9, 9, sub_BD3A08+1>
+   diagFuncTab <0xA, 0xA, sub_BD3B14+1>
+   diagFuncTab <0xB, 0xB, sub_BD3C2C+1>
+   diagFuncTab <0xC, 0xC, sub_BD3E8E+1>
+   diagFuncTab <0xD, 0xD, sub_BD40EE+1>
+   diagFuncTab <0xE, 0xE, sub_BD4248+1>
+   diagFuncTab <0xF, 0xF, sub_BD437E+1>
+   diagFuncTab <0x10, 0x10, sub_BD44F8+1>
+   diagFuncTab <0x11, 0x11, sub_BD4628+1>
+   diagFuncTab <0x12, 0x12, sub_BD47EE+1>
+   diagFuncTab <0x13, 0x13, sub_BD489A+1>
+   diagFuncTab <0x14, 0x14, sub_BD49CC+1>
+   diagFuncTab <0x15, 0x15, sub_BD4AB6+1>
+   diagFuncTab <0x1A, 0x1A, sub_BD4F88+1>
+   diagFuncTab <0x1B, 0x1B, sub_BD4E50+1>
+   diagFuncTab <0x1D, 0x1D, sub_BD5BDE+1>
+   diagFuncTab <0x1F, 0x1F, sub_BD52E0+1>
+   diagFuncTab <0x20, 0x20, sub_BD538E+1>
+   diagFuncTab <0x21, 0x21, sub_BD53C6+1>
+   diagFuncTab <0x1E, 0x1E, sub_BD53FA+1>
+   diagFuncTab <0x22, 0x22, sub_BD54CA+1>
+   diagFuncTab <0x23, 0x23, sub_BD5582+1>
+   diagFuncTab <0x24, 0x24, sub_BD563A+1>
+   diagFuncTab <0x25, 0x25, sub_BD5716+1>
+   diagFuncTab <0x26, 0x26, sub_BD51CE+1>
+   diagFuncTab <0x27, 0x27, sub_BD5086+1>
+   diagFuncTab <0x28, 0x28, sub_BD582C+1>
+   diagFuncTab <0x29, 0x29, sub_BD5918+1>
+diagTabEnt <0, 0xFF, 0x21, 0x14, 0, stru_170F0484>
+   diagFuncTab <0, 0, sub_1727A708+1>
+   diagFuncTab <1, 1, sub_1727AA68+1>
+   diagFuncTab <2, 2, sub_1727B05E+1>
+   diagFuncTab <4, 4, sub_17275D98+1>
+   diagFuncTab <5, 5, sub_1727B2D0+1>
+   diagFuncTab <6, 6, sub_1727B436+1>
+   diagFuncTab <8, 8, sub_172811AE+1>
+   diagFuncTab <9, 9, sub_17281480+1>
+   diagFuncTab <0xA, 0xA, sub_172816FC+1>
+   diagFuncTab <0x12, 0x12, sub_17281D3E+1>
+   diagFuncTab <0x17, 0x17, sub_1728185E+1>
+   diagFuncTab <0x40, 0x40, sub_1728221E+1>
+   diagFuncTab <0x41, 0x41, sub_172824F8+1>
+   diagFuncTab <0x42, 0x42, sub_172827D4+1>
+   diagFuncTab <0x43, 0x43, sub_1728296A+1>
+   diagFuncTab <0x44, 0x44, sub_17282EEC+1>
+   diagFuncTab <0x45, 0x45, sub_17282C26+1>
+   diagFuncTab <0x46, 0x46, sub_17283230+1>
+   diagFuncTab <0x47, 0x47, sub_172833DE+1>
+   diagFuncTab <0x99, 0x99, sub_17281950+1>
+diagTabEnt <0, 0xFF, 0x22, 1, 0, stru_1740C11C>
+   diagFuncTab <0, 1, sub_16F1CA14+1>
+diagTabEnt <0, 0xFF, 0x23, 3, 0, stru_170F2F48>
+   diagFuncTab <0, 0, sub_173975D8+1>
+   diagFuncTab <1, 1, sub_173975F2+1>
+   diagFuncTab <2, 2, sub_17397624+1>
+diagTabEnt <0, 0xFF, 0x24, 2, 0, stru_171F9AD8>
+   diagFuncTab <0, 0, sub_17464808+1>
+   diagFuncTab <1, 1, sub_17464854+1>
+diagTabEnt <0, 0xFF, 0x25, 6, 0, stru_16FCE830>
+   diagFuncTab <3, 3, sub_172429EA+1>
+   diagFuncTab <6, 6, sub_17242A0E+1>
+   diagFuncTab <7, 7, sub_17242B80+1>
+   diagFuncTab <8, 8, sub_17243148+1>
+   diagFuncTab <9, 9, sub_17243234+1>
+   diagFuncTab <0xA, 0xA, sub_17243314+1>
+diagTabEnt <0, 0xFF, 0x2A, 5, 0, stru_16FDA0EC>
+   diagFuncTab <1, 1, sub_B9D31C+1>
+   diagFuncTab <2, 2, sub_B9D3A6+1>
+   diagFuncTab <3, 3, sub_B9D46A+1>
+   diagFuncTab <4, 4, sub_B9D7B4+1>
+   diagFuncTab <5, 5, sub_B9DCF2+1>
+diagTabEnt <0, 0xFF, 0x2D, 1, 0, stru_16FEC658>
+   diagFuncTab <0, 0, sub_16E54C04+1>
+diagTabEnt <0, 0xFF, 0x2F, 7, 0, stru_1762AA04>
+   diagFuncTab <0xF1, 0xF1, sub_17358424+1>
+   diagFuncTab <0xF2, 0xF2, sub_173584AC+1>
+   diagFuncTab <0xF3, 0xF3, sub_173584D2+1>
+   diagFuncTab <0xF4, 0xF4, sub_1735852E+1>
+   diagFuncTab <0xF5, 0xF5, sub_173585B8+1>
+   diagFuncTab <0xF6, 0xF6, sub_1735860E+1>
+   diagFuncTab <0xF8, 0xF8, sub_1735874C+1>
+diagTabEnt <0, 0xFF, 0x30, 1, 0, stru_175189AC>
+   diagFuncTab <0, 0, sub_1756F608+1>
+diagTabEnt <0, 0xFF, 0x32, 1, 0, stru_16FCE968>
+   diagFuncTab <0, 0, sub_16E0199C+1>
+diagTabEnt <0, 0xFF, 0x34, 1, 0, stru_16FDCB24>
+   diagFuncTab <0, 0, sub_1726D394+1>
+diagTabEnt <0, 0xFF, 0x38, 3, 0, stru_171F8C88>
+   diagFuncTab <0, 0, sub_1745E550+1>
+   diagFuncTab <1, 1, sub_1745E596+1>
+   diagFuncTab <2, 2, sub_1745E5FE+1>
+diagTabEnt <0, 0xFF, 0x3C, 2, 0, stru_173FFF88>
+   diagFuncTab <1, 1, loc_170280BC+1>
+   diagFuncTab <2, 2, sub_17028122+1>
+diagTabEnt <0, 0xFF, 0xFF, 1, 0, stru_16E8BE88>
+   diagFuncTab <0x59, 0x59, sub_1702745E+1>
+diagTabEnt <0, 0xFF, 0xFF, 1, 0, stru_1742ECD0>
+   diagFuncTab <0x6C, 0x6C, sub_1760DC56+1>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, stru_171F9004>
+   diagFuncTab <0x31, 0x31, sub_16F14480+1>
+   diagFuncTab <0x32, 0x32, sub_16F1449C+1>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, stru_16E8BE90>
+   diagFuncTab <0x48, 0x48, sub_17027560+1>
+   diagFuncTab <0x49, 0x49, sub_170276DE+1>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, aD_6>
+   diagFuncTab <0x44, 0x44, sub_17242474+1>
+   diagFuncTab <0x5C, 0x5C, sub_172422B6+1>
+diagTabEnt <0, 0xFF, 0xFF, 3, 0, stru_1740E4F0>
+   diagFuncTab <0x35, 0x35, sub_17030732+1>
+   diagFuncTab <0x36, 0x36, sub_1703073E+1>
+   diagFuncTab <0x29, 0x29, sub_17030694+1>
+diagTabEnt <0, 0xFF, 0xFF, 4, 0, stru_17627D78>
+   diagFuncTab <0, 0, sub_1702783C+1>
+   diagFuncTab <0x7C, 0x7C, sub_170278F8+1>
+   diagFuncTab <1, 1, sub_170278C8+1>
+   diagFuncTab <0x3A, 0x3A, sub_17027968+1>
+diagTabEnt <0, 0xFF, 0xFF, 5, 0, stru_17627D50>
+   diagFuncTab <0x26, 0x26, sub_1756F27E+1>
+   diagFuncTab <0x27, 0x27, sub_1756F46C+1>
+   diagFuncTab <0x11, 0x11, sub_1756EFDC+1>
+   diagFuncTab <0x12, 0x12, sub_1756F048+1>
+   diagFuncTab <0x41, 0x41, sub_1756F73C+1>
+diagTabEnt <0, 0xFF, 0xFF, 9, 2, stru_16FCE860>
+   diagFuncTab <0x1F, 0x1F, sub_B0D8EA+1>
+   diagFuncTab <0x7D, 0x7D, sub_B0D860+1>
+   diagFuncTab <0x73, 0x73, sub_B0C7F0+1>
+   diagFuncTab <0x78, 0x78, sub_B0CD8C+1>
+   diagFuncTab <0x5D, 0x5D, sub_B0CBF0+1>
+   diagFuncTab <0xF, 0xF, sub_B0CC9A+1>
+   diagFuncTab <0x60, 0x60, sub_1756EE70+1>
+   diagFuncTab <0x81, 0x81, sub_1756EED4+1>
+   diagFuncTab <0x82, 0x82, sub_1756EF1E+1>
+diagTabEnt <0, 0xFF, 0xFF, 0x18, 0, stru_16FCE8A8>
+   diagFuncTab <2, 2, sub_16F131A4+1>           peek bytes
+   diagFuncTab <3, 3, sub_16F1327C+1>           peek words
+   diagFuncTab <4, 4, sub_16F13362+1>           peek doubles
+   diagFuncTab <5, 5, sub_16F13462+1>           poke bytes
+   diagFuncTab <6, 6, sub_16F1353E+1>           poke words
+   diagFuncTab <7, 7, sub_16F13628+1>           poke doubles
+   diagFuncTab <8, 8, sub_16F137D0+1>           write byte lowaddr
+   diagFuncTab <9, 9, sub_16F13816+1>           write word lowaddr
+   diagFuncTab <0x1D, 0x1D, sub_16F137AC+1>
+   diagFuncTab <0x1C, 0x1C, sub_16F1372C+1>
+   diagFuncTab <0x46, 0x46, sub_16F13762+1>     unlock with password
+   diagFuncTab <0x51, 0x51, sub_16F13740+1>
+   diagFuncTab <0x7B, 0x7B, sub_16F13DC2+1>
+   diagFuncTab <0x2A, 0x2A, sub_16E42F2E+1>
+   diagFuncTab <0x2B, 0x2B, sub_16E42F98+1>
+   diagFuncTab <0x2F, 0x2F, sub_16F138EC+1>
+   diagFuncTab <0x30, 0x30, sub_16F13902+1>
+   diagFuncTab <0x65, 0x65, sub_16F139F8+1>
+   diagFuncTab <0x66, 0x66, sub_16F13B1A+1>
+   diagFuncTab <0x67, 0x67, sub_16F13C14+1>
+   diagFuncTab <0x69, 0x69, sub_16F13C2E+1>
+   diagFuncTab <0x6A, 0x6A, sub_16F13D00+1>
+   diagFuncTab <0xA, 0xA, sub_16F1386C+1>
+   diagFuncTab <0xB, 0xB, sub_16F138AA+1>
+diagTabEnt <1, 0x80, 0xD, 1, 0, stru_1764FFAC>
+   diagFuncTab <0x69, 0x69, sub_1760DA28+1>
+diagTabEnt <1, 0x80, 0xE, 4, 0, stru_16ED0390>
+   diagFuncTab <0xC, 0xC, sub_1747F4C8+1>
+   diagFuncTab <0xF, 0xF, sub_1747F5D8+1>
+   diagFuncTab <0x12, 0x12, sub_1747F66A+1>
+   diagFuncTab <0x13, 0x13, sub_1747F6FC+1>
+diagTabEnt <1, 0x80, 0x21, 1, 0, stru_17207EB4>
+   diagFuncTab <0x48, 0x48, sub_172808E6+1>
+diagTabEnt <1, 0x80, 0x35, 1, 0, stru_140E6B0>; qdiag data
+   diagFuncTab <1, 0xFFFF, sub_16F58C56+1>
