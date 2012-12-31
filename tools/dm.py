@@ -8,8 +8,8 @@ serial cable) to the adp1 after setting it up properly:
    - run "screen /dev/ttyUSB0 115200" 
    - power off phone
    - boot into "blue led" mode by holding trackball while powering on
-   - in serial console type "GO2AMSS"
-   - after AT-command prompt appears type "AT$QCDMG"
+   - in serial console type: GO2AMSS
+   - after AT-command prompt appears type: AT$QCDMG
    - quit screen (ctrl-a k)
    - run this program
 
@@ -20,6 +20,7 @@ XXX still lots to do.. just got the first command running so far..
 import os, struct, sys, tty
 
 debug = 0
+quiet = 0
 
 crcTab = [
     0x0000, 0x1189, 0x2312, 0x329b, 0x4624, 0x57ad, 0x6536, 0x74bf,
@@ -142,20 +143,22 @@ class Decoder(object) :
     """
     __fields__ = []
     __name__ = 'Decoder'
-    def __init__(self, s=None) :
+    def __init__(self, *args, **kw) :
         self.fields = [nm for nm,ty in self.__fields__]
         self.fmt = '<' + ''.join(ty for nm,ty in self.__fields__)
-        try :
+        try : 
             self.sz = struct.calcsize(self.fmt)
         except :
-            pass
+            self.sz = None
 
-        if s :
-            self.__parse__(s)
+        if args :
+            self.__parse__(*args)
+        elif kw :
+            self.__set__(**kw)
 
-    def __set__(self, *kw) :
-        for nm,val in self.kw() :
-            if nm not in self.__fields__ :
+    def __set__(self, **kw) :
+        for nm,val in kw.items() :
+            if nm not in self.fields :
                 raise Exception("bad field: %s" % nm)
             setattr(self, nm, val)
         return self
@@ -183,16 +186,25 @@ def initDev() :
     global dev
     dev = Ser()
 
-def cmd(*bytes) :
-    msg = ''.join(chr(b) for b in bytes)
+def cmdMsg(msg) :
+    """Send a command msg, return its decoded response..."""
     dev.sendCmd(msg)
     r = dev.recvResp()
     r2 = decode(r)
-    print repr(r2)
+    if not quiet :
+        print repr(r2)
     return r2
     
-# commands and responses
+def cmd(*bytes) :
+    """Send a command from bytes..."""
+    msg = ''.join(chr(b) for b in bytes)
+    return cmdMsg(msg)
+
+def cmdObj(obj) :
+    return cmdMsg(obj.__blob__())
+    
 def version() :
+    """Fetch the version"""
     return cmd(0,0,0) # DIAG_CMD_VERSION_INFO
 
 class respVersion(Decoder) :
@@ -214,6 +226,7 @@ class respVersion(Decoder) :
     ]
 
 def esn() :
+    """Fetch the ESN"""
     return cmd(1)
 
 class respEsn(Decoder) :
@@ -234,20 +247,52 @@ class respErr(Decoder) :
         self.pkt = s[1:]
 
 def err(nm) :
+    """Create an error parser with a given name"""
     def wrap(*args) :
         x = respErr(*args)
         x.__name__ = nm
         return x
     return wrap
 
-def le16(x) :
-    return tuple(((x >> sh) & 0xff) for sh in (0,8))
-def le32(x) :
-    return tuple(((x >> sh) & 0xff) for sh in (0,8,16,24))
+class cmdPeekB(Decoder) :
+    __name__ = 'PeekB'
+    __fields__ = [
+        ('code', 'B'),
+        ('addr', 'I'),
+        ('cnt', 'H'),
+    ]
+
+class respPeekB(Decoder) :
+    __name__ = 'PeekB'
+    __fields__ = [
+        ('code', 'B'),
+        ('addr', 'I'),
+        ('cnt', 'H'),
+        ('data', '16s'),
+    ]
 
 def peekb(cnt, addr) :
-    arr = le32(addr) + le16(cnt)
-    return cmd (2, *arr)
+    """Peek bytes at addr"""
+    return cmdObj(cmdPeekB(code=2, addr=addr, cnt=cnt))
+
+class cmdPokeB(Decoder) :
+    __name__ = 'PokeB'
+    __fields__ = [
+        ('code', 'B'),
+        ('addr', 'I'),
+        ('cnt', 'B'),
+        ('data', '4s'),
+    ]
+
+class respPokeB(cmdPokeB) :
+    __name__ = 'PokeB'
+
+def pokeb(addr, dat) :
+    """Poke bytes at addr"""
+    cnt = len(dat)
+    while len(dat) < 4 :
+        dat += '\0'
+    return cmdObj(cmdPokeB(code=5, addr=addr, cnt=cnt, data=dat))
 
 # log mask 15 ,  ('code','B'),('len','H'),('mask','512s')
 # log 16     
@@ -261,6 +306,12 @@ decodeTab = {
     71: err("BadSec"),
     0: respVersion,
     1: respEsn,
+    2: respPeekB,
+    #3: respPeekW,
+    #4: respPeekD,
+    5: respPokeB,
+    #6: respPokeW,
+    #7: respPokeD,
 }
 
 def decode(x) :
@@ -284,6 +335,9 @@ def main() :
     initDev()
     version()
     esn()
-    #peekb(1, 0x16F131A4)
+    peekb(16, 0xc0000000)
+    pokeb(0xc0000000, "AAAA")
+    peekb(16, 0xc0000000)
 
-main()
+if __name__ == '__main__' :
+    main()
