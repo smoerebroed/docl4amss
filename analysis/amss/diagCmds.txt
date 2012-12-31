@@ -554,3 +554,25 @@ diagTabEnt <1, 0x80, 0x21, 1, 0, stru_17207EB4>
    diagFuncTab <0x48, 0x48, sub_172808E6+1>
 diagTabEnt <1, 0x80, 0x35, 1, 0, stru_140E6B0>; qdiag data
    diagFuncTab <1, 0xFFFF, sub_16F58C56+1>
+
+
+
+notes:
+peek/poke ranges are checked. Validation specifics depends on
+the exact firmware.  For our firmware the ranges are:
+    1767e000 - 176ab1a4
+    17713e78 - 17bfbe88
+    01414eb8 - 01e48020
+    013f5bb8 - 01414eb8
+    c0000000 - c5600000
+    c0000000 - c0d00000 <- handled special, read qdsp mem
+    c4300000 - c5000000
+
+experimentally the following blocks are readable:
+    01400000 01e40000
+    17680000 176a0000
+    17720000 17bf0000
+    c0000000 c0cf0000
+    [crash here]
+
+
