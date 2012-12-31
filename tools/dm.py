@@ -9,7 +9,7 @@ serial cable) to the adp1 after setting it up properly:
    - power off phone
    - boot into "blue led" mode by holding trackball while powering on
    - in serial console type "GO2AMSS"
-   - after AT-command prompt appears type "AT$QCDM"
+   - after AT-command prompt appears type "AT$QCDMG"
    - quit screen (ctrl-a k)
    - run this program
 
@@ -17,7 +17,9 @@ serial cable) to the adp1 after setting it up properly:
 XXX still lots to do.. just got the first command running so far..
 """
 
-import os, struct, sys
+import os, struct, sys, tty
+
+debug = 0
 
 crcTab = [
     0x0000, 0x1189, 0x2312, 0x329b, 0x4624, 0x57ad, 0x6536, 0x74bf,
@@ -89,15 +91,20 @@ def encap(buf) :
     crcBuf = struct.pack("<H", crc)
     return esc(buf + crcBuf) + CTRL
 
-def decap(buf) :
-    # note: CTRL has already been removed
+def decap(obuf) :
+    if debug :
+        print "decap %r" % obuf
+    if obuf and obuf[-1] != CTRL :
+        raise Exception("bad argument: %r" % obuf)
+    buf = obuf[:-1]
     if buf :
         buf2 = unesc(buf)
         crc = struct.unpack("<H", buf2[-2:])[0]
         dat = buf2[:-2]
         crc2 = crc16(dat)
         if crc2 != crc :
-            print "bad crc!", crc, crc2
+            print crc, crc2, repr(dat)
+            print "bad crc!", crc, crc2, repr(obuf)
             return None
         return dat
 
@@ -107,20 +114,163 @@ class Ser(object) :
         # the serial device, so we dont need to do any fancy
         # termios setup here...
         self.fd = os.open("/dev/ttyUSB0", os.O_RDWR)
+        tty.setraw(self.fd)
+
     def read(self, n) :
         return os.read(self.fd, n)
     def write(self, buf) :
         return os.write(self.fd, buf)
     def sendCmd(self, cmd) :
-        return self.write(encap(cmd))
+        b = encap(cmd)
+        if debug :
+            print "send: %r" % b
+        return self.write(b)
     def recvBuf(self) :
         r = []
         while not r or r[-1] != CTRL :
             r.append(self.read(1))
+        if debug :
+            print "received %r" % r
         return ''.join(r)
     def recvResp(self) :
         buf = self.recvBuf()
-        return decap(buf[:-1])
+        return decap(buf)
+
+class Decoder(object) :
+    """
+    A base class for objects that can be serialized.
+    """
+    __fields__ = []
+    __name__ = 'Decoder'
+    def __init__(self, s=None) :
+        self.fields = [nm for nm,ty in self.__fields__]
+        self.fmt = '<' + ''.join(ty for nm,ty in self.__fields__)
+        try :
+            self.sz = struct.calcsize(self.fmt)
+        except :
+            pass
+
+        if s :
+            self.__parse__(s)
+
+    def __set__(self, *kw) :
+        for nm,val in self.kw() :
+            if nm not in self.__fields__ :
+                raise Exception("bad field: %s" % nm)
+            setattr(self, nm, val)
+        return self
+    def __parse__(self, s) :
+        if len(s) != self.sz :
+            raise Exception("got %d wanted %d: %r" % (len(s), self.sz, s))
+    
+        buf = s
+        #buf = s[:self.sz]
+        for nm,val in zip(self.fields, struct.unpack(self.fmt, buf)) :
+            setattr(self, nm, val)
+        return self
+    def __blob__(self) :
+        vals = [getattr(self,nm) for nm in self.fields]
+        return struct.pack(self.fmt, *vals)
+    def __str__(self) :
+        fs = ', '.join('%s=%s' % (nm, getattr(self, nm)) for nm in self.fields)
+        return '[%s %s]' % (self.__name__, fs)
+    def __repr__(self) :
+        fs = ', '.join('%s=%r' % (nm, getattr(self, nm)) for nm in self.fields)
+        return '[%s %s]' % (self.__name__, fs)
+
+dev = None
+def initDev() :
+    global dev
+    dev = Ser()
+
+def cmd(*bytes) :
+    msg = ''.join(chr(b) for b in bytes)
+    dev.sendCmd(msg)
+    r = dev.recvResp()
+    r2 = decode(r)
+    print repr(r2)
+    return r2
+    
+# commands and responses
+def version() :
+    return cmd(0,0,0) # DIAG_CMD_VERSION_INFO
+
+class respVersion(Decoder) :
+    __name__ = 'Version'
+    __fields__ = [
+        ('code', 'B'),
+        ('date', '11s'),
+        ('time', '8s'),
+        ('reldate', '11s'),
+        ('reltime', '8s'),
+        ('model', '8s'),
+        ('scm', 'B'),
+        ('mob_cai_rev', 'B'),
+        ('mob_model', 'B'),
+        ('mob_firmware_rev', 'H'),
+        ('slot_cycle_index', 'B'),
+        ('msm_ver', 'B'),
+        ('xxx', 'B'),
+    ]
+
+def esn() :
+    return cmd(1)
+
+class respEsn(Decoder) :
+    __name__ = 'ESN'
+    __fields__ = [
+        ('code', 'B'),
+        ('esn', 'I'),
+    ]
+
+class respErr(Decoder) :
+    __name__ = 'ERR'
+    __fields__ = [
+        ('code', 'B'),
+        ('pkt', 'X'),
+    ]
+    def __parse__(self, s) :
+        self.code = ord(s[0])
+        self.pkt = s[1:]
+
+def err(nm) :
+    def wrap(*args) :
+        x = respErr(*args)
+        x.__name__ = nm
+        return x
+    return wrap
+
+def le16(x) :
+    return tuple(((x >> sh) & 0xff) for sh in (0,8))
+def le32(x) :
+    return tuple(((x >> sh) & 0xff) for sh in (0,8,16,24))
+
+def peekb(cnt, addr) :
+    arr = le32(addr) + le16(cnt)
+    return cmd (2, *arr)
+
+# log mask 15 ,  ('code','B'),('len','H'),('mask','512s')
+# log 16     
+# diag msg 31
+
+decodeTab = {
+    19: err("BadCmd"),
+    20: err("BadParam"),
+    21: err("BadLen"),
+    22: err("BadDev"),
+    71: err("BadSec"),
+    0: respVersion,
+    1: respEsn,
+}
+
+def decode(x) :
+    if debug :
+        print "decode: %r" % x
+    if x :
+        n = ord(x[0])
+        if n in decodeTab :
+            return decodeTab[n](x)
+    return x
 
 def test() :
     d = "testing\x7dthis\x7eout"
@@ -131,15 +281,9 @@ def test() :
     print d == d2
 
 def main() :
-    s = Ser()
-    if 0 :   #  you should do this before running me!
-        s.write("AT$QCDMG\r")
-        for n in xrange(2) :
-            print repr(s.read(1)),
-        print
-
-    cmd = '\0\0\0' # DIAG_CMD_VERSION_INFO
-    s.sendCmd(cmd)
-    print "version", repr(s.recvResp())
+    initDev()
+    version()
+    esn()
+    #peekb(1, 0x16F131A4)
 
 main()
