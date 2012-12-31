@@ -1,0 +1,110 @@
+
+serial device at 115200
+  - blue led mode: talk to oemsbl
+    - GO2AMSS command -> talk to amss
+  - hboot mode: talk to hboot
+  - normal mode: /dev/ttyMSM2 linux
+
+
+-------
+OEMSBL commands
+Accessible from blue-led mode or from "rtask a" from hboot.
+Not all of these are enabled on locked devices.
+blue led: hold trackball while powering on.
+
+radata
+readadc
+platformid
+setatcmd
+setoffmode
+setdiag
+battchg
+setmpatch
+oscchk
+skuchk
+eraseall
+checksum
+version
+partition
+powerdown  - power off
+setinfo
+cego
+getgpio
+setgpio
+setfaketemp
+setsmdloop
+format
+setiot
+setboot     - with no args reports "ARM9BootMode:0"
+wpmic
+GO2AMSS    - boots AMSS, leaves you at AT cmd interpretter. type AT$QCDMG to get to DIAG interpretter
+rseed
+pmic_vib_off
+pmic_vreg
+pmic_level
+pmic_vib_on
+rpass
+
+-------
+HBOOT commands:
+hboot mode: hold camera while powering on
+
+(note: some commands taken from analysis of different phones..
+might be different for htc dream)
+
+"""
+boot reason: PM_KPD_PWR_KEY_ON_RT_ST
+
+(PowerOn Status,Boot Reason)=(1,1)
+NAND_FLASH_READ_ID : HYNIX_256MB_FLASH_128MB_SDRAM
+
+ARM9_BOOT_MODE0, Boot Android
+ss
+UART0:Cmd>
+"""
+
+error: "Command error !!!"
+
+keytest
+heap
+boot
+reset
+powerdown
+rebootRUU
+heap_test
+rtask
+task
+enableqxdm
+gencheckpt
+list_partition_emmc
+load_emmc
+check_emmc
+check_emmc_mid
+read_emmc
+get_wp_info_emmc
+send_wp_info_emmc
+get_ext_csd_emmc
+get_sector_info_emmc
+
+
+ - task
+   task 8 - reset
+   task 28 - format user data
+   task 29 - format bin-fs (system/cache/userdata)
+   task 32 - check security level
+ - rtask
+   rtask 3 - switch serial to arm9 ? (unresponsive)
+             "Ent"
+   rtask a - go to oemsbl command interpretter
+   rtask b - rtask 3 then ... ?  (unresponsive, not DM or AT)
+             "Ente"
+   rtask c - rtask 3 then AT cmd interpretter
+            "Calibration
+            HTEnter Radio Image
+            AT-Command Interpreter ready "
+
+
+----------
+Linux:
+
+  pc, reqgs, reboot, irqs, kmsg, version, sysreq ?

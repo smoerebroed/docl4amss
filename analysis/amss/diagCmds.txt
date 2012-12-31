@@ -6,6 +6,10 @@ secret key).
 
 
 refs:
+http://blogs.gnome.org/dcbw/2010/04/15/mobile-broadband-and-qualcomm-proprietary-protocols/
+git://anongit.freedesktop.org/ModemManager/ModemManager
+  GPL project that has already RE'd some of the diag protocol
+
 https://bitbucket.org/wkpark/optimusvu/src/f903fee0779d/lge/include/lg_diagcmd.h
 http://code.google.com/p/vm696-pernel/source/browse/drivers/char/diag/lge_diag_kernel_service.c
 
@@ -13,6 +17,13 @@ http://code.google.com/p/vm696-pernel/source/browse/drivers/char/diag/
 http://code.google.com/p/vm696-pernel/source/browse/drivers/char/diag/lge_diag_kernel_service.h
 
 https://www.codeaurora.org/git/projects/ts7008/repository/revisions/db2575e163152f681668800744c99f287f77a8ef/entry/AMSS/products/7x30/core/api/services/diagcmd.h
+
+
+I'm seeing good agreement with 
+https://bitbucket.org/wkpark/optimusvu/src/f903fee0779d/lge/include/lg_diagcmd.h?at=opvu
+ie. for: #define DIAG_PEEKB_F    2
+we have: diagFuncTab <2, 2, sub_16F131A4+1>           peek bytes
+
 
 diagTabEnt <0, 0xFF, 8, 6, 0, stru_1751ADE8>
    diagFuncTab <0, 0, sub_B3D58E+1>
