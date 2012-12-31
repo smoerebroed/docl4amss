@@ -1,3 +1,9 @@
+Mon Dec 31 13:04:02 HST 2012
+  - been investigating the DIAG (QCDM) commands.  Got PEEKB and several
+    other commands working.  Some investigation of various boot mode
+    options and interaction via the serial port (including QCDM from AMSS).
+  - some RE of the GPS processes, but nothing worth documenting yet
+
 Wed Dec 19 16:57:25 HST 2012
   - added my mem dumps to the repo
   - figuring out some of the diagnostic command processing
