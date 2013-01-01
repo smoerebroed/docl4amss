@@ -15,6 +15,11 @@ serial cable) to the adp1 after setting it up properly:
 
 
 XXX still lots to do.. just got the first command running so far..
+
+
+TODO:
+   - password cmd 70.  not needed on my device...
+   - get prop/set prop, and perm props
 """
 
 import os, struct, sys, tty
@@ -205,7 +210,7 @@ def cmdObj(obj) :
     
 def version() :
     """Fetch the version"""
-    return cmd(0,0,0) # DIAG_CMD_VERSION_INFO
+    return cmd(0) # DIAG_CMD_VERSION_INFO
 
 class respVersion(Decoder) :
     __name__ = 'Version'
@@ -227,7 +232,7 @@ class respVersion(Decoder) :
 
 def esn() :
     """Fetch the ESN"""
-    return cmd(1)
+    return cmd(1) # DIAG_CMD_ESN
 
 class respEsn(Decoder) :
     __name__ = 'ESN'
@@ -284,8 +289,7 @@ class cmdPokeB(Decoder) :
         ('data', '4s'),
     ]
 
-class respPokeB(cmdPokeB) :
-    __name__ = 'PokeB'
+respPokeB = cmdPokeB
 
 def pokeb(addr, dat) :
     """Poke bytes at addr"""
@@ -293,6 +297,112 @@ def pokeb(addr, dat) :
     while len(dat) < 4 :
         dat += '\0'
     return cmdObj(cmdPokeB(code=5, addr=addr, cnt=cnt, data=dat))
+
+
+class respDiagVer(Decoder) :
+    __name__ = 'DiagVer'
+    __fields__ = [
+        ('code', 'B'),
+        ('ver1', 'B'),
+        ('ver2', 'B'),
+    ]
+
+def diagVer() :
+    return cmd(28)
+
+class respTs(Decoder) :
+    __name__ = 'Ts'
+    __fields__ = [
+        ('code', 'B'),
+        ('ts', 'Q'),
+    ]
+
+def ts() :
+    return cmd(29)
+
+class ErrEnt(Decoder) :
+    # dont know what these are yet...
+    __name__ = 'ErrEnt'
+    __fields__ = [
+        ('x0', 'B'),
+        ('x1', 'B'),
+        ('x2', '8s'),
+        ('x3', 'H'),
+        ('x4', 'B'),
+    ]
+    
+class respErrRead(Decoder) :
+    __name__ = 'ErrRead'
+    __fields__ = [
+        ('code', 'B'),
+        ('xxx', 'H'),
+        ('xxx2', 'H'),
+        ('arr', 'X'), # 20 x 13bytes
+    ]
+    def __parse__(self, s) :
+        def decEnt(n) :
+            p = 5 + n * 13
+            return ErrEnt(s[p : p + 13])
+        self.code, self.xxx, self.xxx2 = struct.unpack('<BHH', s[:5])
+        self.arr = [decEnt(n) for n in xrange(20)]
+
+def errRead() :
+    return cmd(42)
+
+class cmdErrClear(Decoder) :
+    __name__ = 'ErrClear'
+    __fields__ = [
+        ('code', 'B'),
+        ('idx', 'B'), # 255 for all, else 0..20 for slot number
+    ]
+
+respErrClear = cmdErrClear
+
+def errClear(idx=255) :
+    return cmdObj(cmdErrClear(code=43, idx=idx))
+
+class respGetDipsw(Decoder) :
+    __name__ = 'GetDispw'
+    __fields__ = [
+        ('code', 'B'),
+        ('val', 'H'),
+    ]
+
+def getDipsw() :
+    return cmd(47)
+    
+class cmdSetDipsw(respGetDipsw) :
+    __name__ = 'SetDispw'
+respSetDipsw = cmdSetDipsw
+
+def setDipsw(val) :
+    return cmdObj(cmdSetDipsw(code=48, val=val))
+
+class respFeatQuery(Decoder) :
+    __name__ = 'FeatQuery'
+    __fields__ = [
+        ('code', 'B'),
+        ('sz', 'H'),
+        ('feat', 'X'),
+    ]
+    def __parse__(self, s) :
+        hdr = s[:3]
+        self.code, self.sz = struct.unpack('<BH', hdr)
+        self.feat = s[3:]
+
+def featQuery() :
+    return cmd(81)
+
+class respGuid(Decoder) :
+    __name__ = 'Guid'
+    __fields__ = [
+        ('code', 'B'),
+        ('guid', '16s'),
+    ]
+
+def guid() :
+    return cmd(103)
+
 
 # log mask 15 ,  ('code','B'),('len','H'),('mask','512s')
 # log 16     
@@ -304,6 +414,7 @@ decodeTab = {
     21: err("BadLen"),
     22: err("BadDev"),
     71: err("BadSec"),
+
     0: respVersion,
     1: respEsn,
     2: respPeekB,
@@ -312,6 +423,15 @@ decodeTab = {
     5: respPokeB,
     #6: respPokeW,
     #7: respPokeD,
+
+    28: respDiagVer,
+    29: respTs,
+    42: respErrRead,
+    43: respErrClear,
+    47: respGetDipsw,
+    48: respSetDipsw,
+    81: respFeatQuery,
+    103: respGuid,
 }
 
 def decode(x) :
@@ -339,5 +459,18 @@ def main() :
     pokeb(0xc0000000, "AAAA")
     peekb(16, 0xc0000000)
 
+    diagVer()
+    ts()
+
+    errRead()
+    errClear(2)
+
+    getDipsw()
+    setDipsw(2)
+    featQuery()
+    guid()
+
+
 if __name__ == '__main__' :
     main()
+
