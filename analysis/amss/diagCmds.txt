@@ -25,6 +25,10 @@ ie. for: #define DIAG_PEEKB_F    2
 we have: diagFuncTab <2, 2, sub_16F131A4+1>           peek bytes
 
 
+See ../../tools/dm.py for details on protocol messages.
+Many of the QCDM messages have been discovered and implemented in dm.py.
+
+
 diagTabEnt <0, 0xFF, 8, 6, 0, stru_1751ADE8>
    diagFuncTab <0, 0, sub_B3D58E+1>
    diagFuncTab <1, 1, sub_B3D5B8+1>
