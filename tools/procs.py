@@ -36,15 +36,14 @@ class Proc(object) :
         self.l4tid = self.getNum(0xa8)
         """
         # for adp1
-        # XXX not all of these have been sorted out yet... fix me!
         self.name = self.getName(0x70)
-        self.id = self.getNum(0)
+        self.id = self.getNum(0xa4)
         self.prev = self.getNum(0x34)
         self.next = self.getNum(0x38)
         self.stacklim = self.getNum(0xc)
         self.stack = self.getNum(0x10)
         self.stacksz = self.getNum(0xc0)
-        self.utcb = self.getNum(0xb0)
+        self.utcb = self.getNum(0x4)
         self.l4tid = self.getNum(0x7c)
 
         #self.sp = self.getNumAbs(self.utcb + 0x54)
