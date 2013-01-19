@@ -43,4 +43,5 @@ def main() :
     l = num(sys.argv[2])
     dump(start, l)
 
-main() 
+if __name__ == '__main__' :
+    main() 
