@@ -79,7 +79,10 @@ def stack(p) :
         sp += 4
     print
 
-def procs(addr=0x13a3758) :
+#start = 0x13a3758      # gobi3k 2010
+start = 0x1a1bbb4       # adp1
+
+def procs(addr=None) :
     """
     print 'find first...'
     while 1 :
@@ -89,6 +92,8 @@ def procs(addr=0x13a3758) :
         addr = p.prev
     print 'found...'
     """
+    if addr is None :
+        addr = start
     while addr :
         p = Proc(addr)
         yield p
@@ -104,7 +109,5 @@ def dump(start) :
 
 if __name__ == '__main__' :
     #start = int(sys.argv[1], 16)
-    #start = 0x13a3758      # gobi3k 2010
-    start = 0x1a1bbb4       # adp1
     dump(start)
 
