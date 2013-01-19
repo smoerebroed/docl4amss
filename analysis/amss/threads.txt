@@ -101,3 +101,106 @@ or
   threadMainTask 0x00B285C0 "Main Task" by 0x00B23118
       by calling 0xb41d04
 
+
+------
+output of procs.py:
+
+Task '' id:0 tcb:1a1bbb4 next:18ecbc8 prev:0 stack:0 stacksz:0 stacklim:0 utcb:0 l4tid:0
+Task 'SLEEP' id:10c tcb:18ecbc8 next:1771f688 prev:1a1bbb4 stack:18ecdd0 stacksz:0 stacklim:18ed5c0 utcb:17714f00 l4tid:f4001
+Task 'GCThread' id:159 tcb:1771f688 next:17726cd0 prev:18ecbc8 stack:1771edc0 stacksz:0 stacklim:1771f5a0 utcb:1771f608 l4tid:234001
+Task 'Mailbox_Rou' id:15b tcb:17726cd0 next:17728418 prev:1771f688 stack:17725c00 stacksz:0 stacklim:17726be0 utcb:17726c50 l4tid:23c001
+Task 'gwWorker' id:15c tcb:17728418 next:17729920 prev:17726cd0 stack:17727380 stacksz:0 stacklim:17728360 utcb:17728398 l4tid:240001
+Task 'gwWorker' id:15d tcb:17729920 next:1772ae28 prev:17728418 stack:17728888 stacksz:0 stacklim:17729868 utcb:177298a0 l4tid:244001
+Task 'gwWorker' id:15e tcb:1772ae28 next:1772c330 prev:17729920 stack:17729d90 stacksz:0 stacklim:1772ad70 utcb:1772ada8 l4tid:248001
+Task 'gwWorker' id:15f tcb:1772c330 next:17718680 prev:1772ae28 stack:1772b298 stacksz:0 stacklim:1772c278 utcb:1772c2b0 l4tid:24c001
+Task 'k1Timer' id:158 tcb:17718680 next:195f230 prev:1772c330 stack:17ae7be0 stacksz:0 stacklim:17ae8bd0 utcb:17718600 l4tid:230001
+Task 'GPS_FS' id:14c tcb:195f230 next:194ac18 prev:17718680 stack:195f438 stacksz:0 stacklim:1961428 utcb:17717b00 l4tid:200001
+Task 'GPSFFT' id:14d tcb:194ac18 next:1905428 prev:195f230 stack:194ae20 stacksz:0 stacklim:194ce10 utcb:17717bb0 l4tid:204001
+Task 'SECCRYPTARM' id:126 tcb:1905428 next:19325e0 prev:194ac18 stack:1905630 stacksz:0 stacklim:1907620 utcb:177160e0 l4tid:168001
+Task 'cb' id:138 tcb:19325e0 next:18fee10 prev:1905428 stack:19327e8 stacksz:0 stacklim:19347d8 utcb:17716d40 l4tid:1b0001
+Task 'SEC' id:124 tcb:18fee10 next:1907630 prev:19325e0 stack:18ff018 stacksz:0 stacklim:1901008 utcb:17715f80 l4tid:160001
+Task 'SECSSL' id:128 tcb:1907630 next:1903220 prev:18fee10 stack:1907838 stacksz:0 stacklim:1909828 utcb:17716240 l4tid:170001
+Task 'SFSsvc' id:127 tcb:1903220 next:1901018 prev:1907630 stack:1903428 stacksz:0 stacklim:1905418 utcb:17716190 l4tid:16c001
+Task 'SECRND' id:125 tcb:1901018 next:18edfd8 prev:1903220 stack:1901220 stacksz:0 stacklim:1903210 utcb:17716030 l4tid:164001
+Task 'PS ' id:141 tcb:18edfd8 next:1979680 prev:1901018 stack:1981298 stacksz:0 stacklim:1983288 utcb:17717370 l4tid:1d4001
+Task 'IXTIME' id:123 tcb:1979680 next:18f23e8 prev:18edfd8 stack:1979888 stacksz:0 stacklim:197b878 utcb:17715ed0 l4tid:15c001
+Task 'DS ' id:142 tcb:18f23e8 next:1913a68 prev:1979680 stack:18f25f0 stacksz:0 stacklim:18f45e0 utcb:17717420 l4tid:1d8001
+Task 'GSTK' id:12b tcb:1913a68 next:1911860 prev:18f23e8 stack:1913c70 stacksz:0 stacklim:1915c60 utcb:17716450 l4tid:17c001
+Task 'GSDI' id:12a tcb:1911860 next:197c888 prev:1913a68 stack:1911a68 stacksz:0 stacklim:1913a58 utcb:177163a0 l4tid:178001
+Task 'HTC' id:155 tcb:197c888 next:1973660 prev:1911860 stack:197b888 stacksz:0 stacklim:197c878 utcb:17718130 l4tid:224001
+Task 'PBM' id:153 tcb:1973660 next:1aa6fb0 prev:197c888 stack:1973868 stacksz:0 stacklim:1975858 utcb:17717fd0 l4tid:21c001
+Task 'FS Compat T' id:11b tcb:1aa6fb0 next:18da788 prev:1973660 stack:1aa71b8 stacksz:0 stacklim:1aa81a8 utcb:17715950 l4tid:13c001
+Task 'FS ' id:11a tcb:18da788 next:1978c78 prev:1aa6fb0 stack:18da990 stacksz:0 stacklim:18db980 utcb:177158a0 l4tid:138001
+Task 'IXFILE' id:11c tcb:1978c78 next:18d9580 prev:18da788 stack:1978e80 stacksz:0 stacklim:1979670 utcb:17715a00 l4tid:140001
+Task 'NV ' id:11d tcb:18d9580 next:1909838 prev:1978c78 stack:18d9788 stacksz:0 stacklim:18da778 utcb:17715ab0 l4tid:144001
+Task 'UIM' id:129 tcb:1909838 next:194ce20 prev:18d9580 stack:1909a40 stacksz:0 stacklim:190aa30 utcb:177162f0 l4tid:174001
+Task 'CD ' id:14a tcb:194ce20 next:18e51b0 prev:1909838 stack:194d028 stacksz:0 stacklim:1953018 utcb:177179a0 l4tid:1f8001
+Task 'UI ' id:120 tcb:18e51b0 next:17718310 prev:194ce20 stack:18e53b8 stacksz:0 stacklim:18e93a8 utcb:17715cc0 l4tid:150001
+Task 'k1ExHandler' id:157 tcb:17718310 next:1953028 prev:18e51b0 stack:17813ed8 stacksz:0 stacklim:17814ec8 utcb:17718290 l4tid:22c001
+Task 'NF ' id:14b tcb:1953028 next:18e93b8 prev:17718310 stack:1953230 stacksz:0 stacklim:195f220 utcb:17717a50 l4tid:1fc001
+Task 'WMS' id:139 tcb:18e93b8 next:1971c58 prev:1953028 stack:18e95c0 stacksz:0 stacklim:18eb9b0 utcb:17716df0 l4tid:1b4001
+Task 'FTM' id:152 tcb:1971c58 next:18e2fa8 prev:18e93b8 stack:1971e60 stacksz:0 stacklim:1973650 utcb:17717f20 l4tid:218001
+Task 'CM ' id:11e tcb:18e2fa8 next:18e0da0 prev:1971c58 stack:18e31b0 stacksz:0 stacklim:18e51a0 utcb:17715b60 l4tid:148001
+Task 'QDIAG' id:122 tcb:18e0da0 next:18dcb98 prev:18e2fa8 stack:18e0fa8 stacksz:0 stacklim:18e2f98 utcb:17715e20 l4tid:158001
+Task 'DIAG' id:121 tcb:18dcb98 next:18d7170 prev:18e0da0 stack:18dcda0 stacksz:0 stacklim:18e0d90 utcb:17715d70 l4tid:154001
+Task 'VOC' id:118 tcb:18d7170 next:1781e6a4 prev:18dcb98 stack:18d7378 stacksz:0 stacklim:18d8368 utcb:17715740 l4tid:130001
+Task 'PING_MDM' id:114 tcb:1781e6a4 next:1971a50 prev:18d7170 stack:1781e8b0 stacksz:0 stacklim:178228a0 utcb:17715480 l4tid:120001
+Task 'PDCOMM_WMS' id:151 tcb:1971a50 next:196d848 prev:1781e6a4 stack:196da50 stacksz:0 stacklim:1971a40 utcb:17717e70 l4tid:214001
+Task 'PDCOMM_TCP' id:150 tcb:196d848 next:1965640 prev:1971a50 stack:1969848 stacksz:0 stacklim:196d838 utcb:17717dc0 l4tid:210001
+Task 'SM_TM' id:14f tcb:1965640 next:1961438 prev:196d848 stack:1965848 stacksz:0 stacklim:1969838 utcb:17717d10 l4tid:20c001
+Task 'LM' id:14e tcb:1961438 next:193e600 prev:1965640 stack:1961640 stacksz:0 stacklim:1965630 utcb:17717c60 l4tid:208001
+Task 'MGPMC' id:147 tcb:193e600 next:18ed5d0 prev:1961438 stack:193e808 stacksz:0 stacklim:19427f8 utcb:17717790 l4tid:1ec001
+Task 'DEM' id:10d tcb:18ed5d0 next:197da90 prev:193e600 stack:18ed7d8 stacksz:0 stacklim:18edfc8 utcb:17714fb0 l4tid:104001
+Task 'HTC_BATT' id:156 tcb:197da90 next:190b248 prev:18ed5d0 stack:197ca90 stacksz:0 stacklim:197da80 utcb:177181e0 l4tid:228001
+Task 'USBDC' id:12c tcb:190b248 next:190b450 prev:197da90 stack:1983298 stacksz:0 stacklim:1984288 utcb:17716500 l4tid:180001
+Task 'MMOC' id:11f tcb:190b450 next:193cbf8 prev:190b248 stack:190b658 stacksz:0 stacklim:190d648 utcb:17715c10 l4tid:14c001
+Task 'MN CNM MAIN' id:136 tcb:193cbf8 next:19347e8 prev:190b450 stack:193ce00 stacksz:0 stacklim:193e5f0 utcb:17716be0 l4tid:1a8001
+Task 'SM' id:137 tcb:19347e8 next:192f9d0 prev:193cbf8 stack:19349f0 stacksz:0 stacklim:19389e0 utcb:17716c90 l4tid:1ac001
+Task 'TC' id:140 tcb:192f9d0 next:19389f0 prev:19347e8 stack:192fbd8 stacksz:0 stacklim:19303c8 utcb:177172c0 l4tid:1d0001
+Task 'REG' id:135 tcb:19389f0 next:19303d8 prev:192f9d0 stack:1938bf8 stacksz:0 stacklim:193cbe8 utcb:17716b30 l4tid:1a4001
+Task 'MM' id:134 tcb:19303d8 next:18ee1e0 prev:19389f0 stack:19305e0 stacksz:0 stacklim:19325d0 utcb:17716a80 l4tid:1a0001
+Task 'COMP ' id:143 tcb:18ee1e0 next:192d7c8 prev:19303d8 stack:18ee3e8 stacksz:0 stacklim:18f23d8 utcb:177174d0 l4tid:1dc001
+Task 'GPRS LLC' id:133 tcb:192d7c8 next:18f8a00 prev:18ee1e0 stack:192d9d0 stacksz:0 stacklim:192f9c0 utcb:177169d0 l4tid:19c001
+Task 'DS GCSD' id:144 tcb:18f8a00 next:18f67f8 prev:192d7c8 stack:18f8c08 stacksz:0 stacklim:18fabf8 utcb:17717580 l4tid:1e0001
+Task 'DSWCSD DL' id:146 tcb:18f67f8 next:18f45f0 prev:18f8a00 stack:18f6a00 stacksz:0 stacklim:18f89f0 utcb:177176e0 l4tid:1e8001
+Task 'DSWCSD UI' id:145 tcb:18f45f0 next:1923128 prev:18f67f8 stack:18f47f8 stacksz:0 stacklim:18f67e8 utcb:17717630 l4tid:1e4001
+Task 'GSM RR' id:12f tcb:1923128 next:1916c90 prev:18f45f0 stack:1923330 stacksz:0 stacklim:19271a0 utcb:17716710 l4tid:18c001
+Task 'RRC' id:13f tcb:1916c90 next:19293b8 prev:1923128 stack:1916e98 stacksz:0 stacklim:191ee88 utcb:17717210 l4tid:1cc001
+Task 'GPRS RLC UL' id:131 tcb:19293b8 next:192b5c0 prev:1916c90 stack:19295c0 stacksz:0 stacklim:192b5b0 utcb:17716870 l4tid:194001
+Task 'GPRS RLC DL' id:132 tcb:192b5c0 next:19271b0 prev:19293b8 stack:192b7c8 stacksz:0 stacklim:192d7b8 utcb:17716920 l4tid:198001
+Task 'GPRS MAC' id:130 tcb:19271b0 next:1920fe0 prev:192b5c0 stack:19273b8 stacksz:0 stacklim:19293a8 utcb:177167c0 l4tid:190001
+Task 'GSM L2' id:12e tcb:1920fe0 next:1916080 prev:19271b0 stack:19211e8 stacksz:0 stacklim:1923118 utcb:17716660 l4tid:188001
+Task 'WCDMA L2 DL' id:13d tcb:1916080 next:1916288 prev:1920fe0 stack:1980098 stacksz:0 stacklim:1981288 utcb:177170b0 l4tid:1c4001
+Task 'WMAC HS DL' id:13e tcb:1916288 next:1915e78 prev:1916080 stack:1916490 stacksz:0 stacklim:1916c80 utcb:17717160 l4tid:1c8001
+Task 'WCDMA L2 UL' id:13c tcb:1915e78 next:1942808 prev:1916288 stack:197ee98 stacksz:0 stacklim:1980088 utcb:17717000 l4tid:1c0001
+Task 'PP' id:149 tcb:1942808 next:190d658 prev:1915e78 stack:1942a10 stacksz:0 stacklim:1946a00 utcb:177178f0 l4tid:1f4001
+Task 'Main Task' id:101 tcb:190d658 next:17720b68 prev:1942808 stack:190d860 stacksz:0 stacklim:1911850 utcb:17714770 l4tid:c8001
+Task 'CSKernelDis' id:15a tcb:17720b68 next:18fac08 prev:190d658 stack:1771fad0 stacksz:0 stacklim:17720ab0 utcb:17720ae8 l4tid:238001
+Task 'ONCR' id:10f tcb:18fac08 next:179b2368 prev:17720b68 stack:18fae10 stacksz:0 stacklim:18fee00 utcb:17715110 l4tid:10c001
+Task 'PROXY_00' id:112 tcb:179b2368 next:1798a368 prev:18fac08 stack:179b2578 stacksz:0 stacklim:179b6568 utcb:17715320 l4tid:118001
+Task 'PROXY_01' id:160 tcb:1798a368 next:179aa368 prev:179b2368 stack:1798a578 stacksz:0 stacklim:1798e568 utcb:1772d678 l4tid:250001
+Task 'PROXY_DFR' id:111 tcb:179aa368 next:179ca71c prev:1798a368 stack:179aa578 stacksz:0 stacklim:179ae568 utcb:17715270 l4tid:114001
+Task 'ONCRPC_RDR' id:113 tcb:179ca71c next:17ac90cc prev:179aa368 stack:179ca928 stacksz:0 stacklim:179cc918 utcb:177153d0 l4tid:11c001
+Task 'SMDED_MEMO' id:10e tcb:17ac90cc next:179de61c prev:179ca71c stack:17ac92e8 stacksz:0 stacklim:17acb2d8 utcb:17715060 l4tid:108001
+Task 'ROUTER_READ' id:110 tcb:179de61c next:1946a10 prev:17ac90cc stack:179de828 stacksz:0 stacklim:179e0818 utcb:177151c0 l4tid:110001
+Task 'CC' id:148 tcb:1946a10 next:18d5d60 prev:179de61c stack:1946c18 stacksz:0 stacklim:194ac08 utcb:17717840 l4tid:1f0001
+Task 'QDSP' id:116 tcb:18d5d60 next:191ee98 prev:1946a10 stack:18d5f68 stacksz:0 stacklim:18d6758 utcb:177155e0 l4tid:128001
+Task 'GSM L1' id:12d tcb:191ee98 next:1915c70 prev:18d5d60 stack:191f0a0 stacksz:0 stacklim:1920fd0 utcb:177165b0 l4tid:184001
+Task 'WCDMA L1' id:13b tcb:1915c70 next:1977a70 prev:191ee98 stack:197dc98 stacksz:0 stacklim:197ee88 utcb:17716f50 l4tid:1bc001
+Task 'FC' id:154 tcb:1977a70 next:18d5358 prev:1915c70 stack:1977c78 stacksz:0 stacklim:1978c68 utcb:17718080 l4tid:220001
+Task 'MDSP' id:13a tcb:18d5358 next:18d8378 prev:1977a70 stack:18d5560 stacksz:0 stacklim:18d5d50 utcb:17716ea0 l4tid:1b8001
+Task 'SND' id:119 tcb:18d8378 next:18d6768 prev:18d5358 stack:18d8580 stacksz:0 stacklim:18d9570 utcb:177157f0 l4tid:134001
+Task 'ADSPOS' id:117 tcb:18d6768 next:18eb9c0 prev:18d8378 stack:18d6970 stacksz:0 stacklim:18d7160 utcb:17715690 l4tid:12c001
+Task 'TIMER' id:10b tcb:18eb9c0 next:18d4150 prev:18d6768 stack:18ebbc8 stacksz:0 stacklim:18ecbb8 utcb:17714e50 l4tid:f0001
+Task 'DOG ' id:115 tcb:18d4150 next:1a1c5bc prev:18eb9c0 stack:18d4358 stacksz:0 stacklim:18d5348 utcb:17715530 l4tid:124001
+Task 'DPC Task' id:100 tcb:1a1c5bc next:17841550 prev:18d4150 stack:1a1c7c8 stacksz:0 stacklim:1a1cbb8 utcb:177146c0 l4tid:c4001
+Task 'IST0' id:102 tcb:17841550 next:17841758 prev:1a1c5bc stack:1783cd50 stacksz:0 stacklim:1783d540 utcb:17714820 l4tid:cc001
+Task 'IST1' id:103 tcb:17841758 next:17841960 prev:17841550 stack:1783d550 stacksz:0 stacklim:1783dd40 utcb:177148d0 l4tid:d0001
+Task 'IST2' id:104 tcb:17841960 next:17841b68 prev:17841758 stack:1783dd50 stacksz:0 stacklim:1783e540 utcb:17714980 l4tid:d4001
+Task 'IST3' id:105 tcb:17841b68 next:17841d70 prev:17841960 stack:1783e550 stacksz:0 stacklim:1783ed40 utcb:17714a30 l4tid:d8001
+Task 'IST4' id:106 tcb:17841d70 next:17841f78 prev:17841b68 stack:1783ed50 stacksz:0 stacklim:1783f540 utcb:17714ae0 l4tid:dc001
+Task 'IST5' id:107 tcb:17841f78 next:17842180 prev:17841d70 stack:1783f550 stacksz:0 stacklim:1783fd40 utcb:17714b90 l4tid:e0001
+Task 'IST6' id:108 tcb:17842180 next:17842388 prev:17841f78 stack:1783fd50 stacksz:0 stacklim:17840540 utcb:17714c40 l4tid:e4001
+Task 'IST7' id:109 tcb:17842388 next:17842590 prev:17842180 stack:17840550 stacksz:0 stacklim:17840d40 utcb:17714cf0 l4tid:e8001
+Task 'FIQ' id:10a tcb:17842590 next:1a1b184 prev:17842388 stack:17840d50 stacksz:0 stacklim:17841540 utcb:17714da0 l4tid:ec001
+Task '' id:0 tcb:1a1b184 next:0 prev:17842590 stack:0 stacksz:0 stacklim:0 utcb:0 l4tid:0
