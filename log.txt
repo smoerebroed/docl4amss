@@ -1,3 +1,7 @@
+Fri Jan 18 18:43:21 HST 2013
+  - add procs.py tool. include its output in amss/analysis/threads.txt
+    and document some of the fields in amss/analysis/tcb.txt
+
 Mon Dec 31 13:04:02 HST 2012
   - been investigating the DIAG (QCDM) commands.  Got PEEKB and several
     other commands working.  Some investigation of various boot mode
