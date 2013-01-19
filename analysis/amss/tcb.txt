@@ -1,0 +1,77 @@
+
+sp
+stack_limit
+slices
+sigs
+wait
+pri
+link.next_ptr
+link.prev_ptr
+   profilfe: time_samples, max_intlock_time
+num_apcs
+
+cs_link
+cs_stack[...]
+cs_sp
+
+task_name[...]
+ext
+
+thread_id
+stack_size
+stack_wm
+bsdcb_ptr
+err_num
+dog_report_val
+autodog_enabled
+is_dynamic
+ipc_info
+
+
+
+----------------
+
+HS handset services
+SND sound services
+UI user interface
+DS data services
+CM call manager
+PS protocol services
+MC main control
+SRCH CDMA searcher
+RXTX layer 2
+RX receive processing
+TX transmit processing
+DOG watchdog
+DIAG diagnostics
+NV 
+EFS embedded filesystem
+SLEEP
+
+
+---------------
+
+Task 'SLEEP' id:f4001 tcb:18ecbc8 next:1771f688 prev:1a1bbb4 stack:18ecdd0 stacksz:0 stacklim:18ed5c0 utcb:0 l4tid:f4001
+off 0: f4001                l4tid
+off 4: 17714f00             utcb
+off 8: 17714f80             utcb + 80
+off c: 18ed5c0              stack top
+off 10: 18ecdd0             stack
+off 18: 4008a               sigs
+off 1c                      prev sigs
+off 20: 2                   prio
+off 34: 1a1bbb4             prev
+off 38: 1771f688            next
+off 64: 18ecc08             points to off 40
+off 70: 45454c53            name
+off 74: 50                  ... name
+off 7c: f4001               l4tid
+off 80                      arg
+off 84: d1b01200
+off 88:                     (0 or 1)
+off 94: 7fc                 stack sz
+off 98:                     (0, 2, 6, 16)
+off 9c: f                   dog report val
+off a4: 10c                 tid?  tcb tab index,
+off b8: 18ecc84             points to off bc 
+
