@@ -36,6 +36,7 @@ class Proc(object) :
         self.l4tid = self.getNum(0xa8)
         """
         # for adp1
+        # XXX not all of these have been sorted out yet... fix me!
         self.name = self.getName(0x70)
         self.id = self.getNum(0)
         self.prev = self.getNum(0x34)
@@ -99,8 +100,8 @@ def procs(addr=None) :
         yield p
         addr = p.next
 
-def dump(start) :
-    for p in procs(start) :
+def dump() :
+    for p in procs() :
         print p
         #print '%x %x %s' % (p.getNum(0xe0), p.getNum(0xdc), p)
         if 0 :
@@ -108,6 +109,7 @@ def dump(start) :
             stack(p)
 
 if __name__ == '__main__' :
+    #global start
     #start = int(sys.argv[1], 16)
-    dump(start)
+    dump()
 
