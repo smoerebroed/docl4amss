@@ -297,14 +297,14 @@ diagTabEnt <1, 0x80, 0x35, 1, 0, stru_140E6B0>; qdiag data
 -----
 somewhat sorted:
 
-diagTabEnt <0, 0xFF, 0, 6, 0, stru_17531260>
+diagTabEnt <0, 0xFF, 0, 6, 0, stru_17531260>        OEM
    diagFuncTab <0, 0, sub_16E47FEC+1>
    diagFuncTab <1, 1, sub_16E48B40+1>
    diagFuncTab <2, 2, sub_16E48B98+1>
    diagFuncTab <3, 3, sub_16E48B6C+1>
    diagFuncTab <5, 5, sub_16E48C2C+1>
    diagFuncTab <8, 8, sub_16E48012+1>
-diagTabEnt <0, 0xFF, 4, 0xF, 0, stru_171F9074>
+diagTabEnt <0, 0xFF, 4, 0xF, 0, stru_171F9074>      WCDMA
    diagFuncTab <0, 0, sub_170279D0+1>
    diagFuncTab <8, 8, sub_170279F8+1>
    diagFuncTab <0xC, 0xC, sub_17027D58+1>
@@ -320,27 +320,27 @@ diagTabEnt <0, 0xFF, 4, 0xF, 0, stru_171F9074>
    diagFuncTab <0x19, 0x19, sub_17027F7C+1>
    diagFuncTab <0x1A, 0x1A, sub_17027A34+1>
    diagFuncTab <0x1B, 0x1B, sub_17027C28+1>
-diagTabEnt <0, 0xFF, 8, 6, 0, stru_1751ADE8>
+diagTabEnt <0, 0xFF, 8, 6, 0, stru_1751ADE8>        GSM
    diagFuncTab <0, 0, sub_B3D58E+1>
    diagFuncTab <1, 1, sub_B3D5B8+1>
    diagFuncTab <2, 2, sub_B3D694+1>
    diagFuncTab <3, 3, sub_B3D6CA+1>
    diagFuncTab <4, 4, sub_B3D796+1>
    diagFuncTab <5, 5, sub_B3D896+1>
-diagTabEnt <0, 0xFF, 9, 4, 0, stru_16FD28C8>
+diagTabEnt <0, 0xFF, 9, 4, 0, stru_16FD28C8>        UMTS
    diagFuncTab <0, 0, sub_16E07EF4+1>
    diagFuncTab <9, 9, sub_1736ED14+1>
    diagFuncTab <0xA, 0xA, sub_16E07F70+1>
    diagFuncTab <0xB, 0xB, sub_16E07F98+1>
-diagTabEnt <0, 0xFF, 0xB, 1, 0, stru_1730EFE4>
+diagTabEnt <0, 0xFF, 0xB, 1, 0, stru_1730EFE4>      FTM
    diagFuncTab <0, 0xFFFF, sub_1703230A+1>
-diagTabEnt <0, 0xFF, 0xC, 1, 0, stru_171FC190>
+diagTabEnt <0, 0xFF, 0xC, 1, 0, stru_171FC190>      REX/OS
    diagFuncTab <2, 2, sub_1735BC98+1>
-diagTabEnt <0, 0xFF, 0xD, 3, 0, stru_134F678>
+diagTabEnt <0, 0xFF, 0xD, 3, 0, stru_134F678>       GPS
    diagFuncTab <0x64, 0x64, sub_CFE558+1>
    diagFuncTab <8, 8, createThreadXXX+1>
    diagFuncTab <0xC, 0xC, sub_CFE836+1>
-diagTabEnt <0, 0xFF, 0xD, 9, 0, stru_1732E0A8>
+diagTabEnt <0, 0xFF, 0xD, 9, 0, stru_1732E0A8>      GPS
    diagFuncTab <1, 1, sub_1760D62C+1>
    diagFuncTab <2, 2, sub_1760D6C0+1>
    diagFuncTab <3, 3, sub_1760D6FA+1>
@@ -350,7 +350,7 @@ diagTabEnt <0, 0xFF, 0xD, 9, 0, stru_1732E0A8>
    diagFuncTab <0x18, 0x18, sub_1760D8C0+1>
    diagFuncTab <0x65, 0x65, sub_1760D8E2+1>
    diagFuncTab <0x66, 0x66, sub_1760D92C+1>
-diagTabEnt <0, 0xFF, 0xE, 0xC, 0, stru_16FD877C>
+diagTabEnt <0, 0xFF, 0xE, 0xC, 0, stru_16FD877C>    WMS/SMS
    diagFuncTab <0, 0, sub_1747E798+1>
    diagFuncTab <1, 1, sub_1747E9E8+1>
    diagFuncTab <2, 2, sub_1747EA38+1>
@@ -363,7 +363,7 @@ diagTabEnt <0, 0xFF, 0xE, 0xC, 0, stru_16FD877C>
    diagFuncTab <9, 9, sub_1747EE4C+1>
    diagFuncTab <0xA, 0xA, sub_1747F1EE+1>
    diagFuncTab <0xB, 0xB, sub_1747F34E+1>
-diagTabEnt <0, 0xFF, 0xF, 0x10, 0, stru_171FCE2C>
+diagTabEnt <0, 0xFF, 0xF, 0x10, 0, stru_171FCE2C>   CM
    diagFuncTab <0, 0, sub_B55B8E+1>
    diagFuncTab <1, 1, sub_B55C6C+1>
    diagFuncTab <2, 2, sub_B55CCC+1>
@@ -380,7 +380,7 @@ diagTabEnt <0, 0xFF, 0xF, 0x10, 0, stru_171FCE2C>
    diagFuncTab <0xE, 0xE, sub_B56488+1>
    diagFuncTab <0x10, 0x10, sub_B56CA6+1>
    diagFuncTab <0x11, 0x11, sub_B56F08+1>
-diagTabEnt <0, 0xFF, 0x13, 0x25, 1, stru_1741FD88>
+diagTabEnt <0, 0xFF, 0x13, 0x25, 1, stru_1741FD88>  FS
    diagFuncTab <0, 0, sub_BD2C1C+1>
    diagFuncTab <1, 1, sub_BD2EEC+1>
    diagFuncTab <2, 2, sub_BD2F74+1>
@@ -418,7 +418,7 @@ diagTabEnt <0, 0xFF, 0x13, 0x25, 1, stru_1741FD88>
    diagFuncTab <0x27, 0x27, sub_BD5086+1>
    diagFuncTab <0x28, 0x28, sub_BD582C+1>
    diagFuncTab <0x29, 0x29, sub_BD5918+1>
-diagTabEnt <0, 0xFF, 0x21, 0x14, 0, stru_170F0484>
+diagTabEnt <0, 0xFF, 0x21, 0x14, 0, stru_170F0484>  PORTMAP
    diagFuncTab <0, 0, sub_1727A708+1>
    diagFuncTab <1, 1, sub_1727AA68+1>
    diagFuncTab <2, 2, sub_1727B05E+1>
@@ -439,31 +439,31 @@ diagTabEnt <0, 0xFF, 0x21, 0x14, 0, stru_170F0484>
    diagFuncTab <0x46, 0x46, sub_17283230+1>
    diagFuncTab <0x47, 0x47, sub_172833DE+1>
    diagFuncTab <0x99, 0x99, sub_17281950+1>
-diagTabEnt <0, 0xFF, 0x22, 1, 0, stru_1740C11C>
+diagTabEnt <0, 0xFF, 0x22, 1, 0, stru_1740C11C>     TMC
    diagFuncTab <0, 1, sub_16F1CA14+1>
-diagTabEnt <0, 0xFF, 0x23, 3, 0, stru_170F2F48>
+diagTabEnt <0, 0xFF, 0x23, 3, 0, stru_170F2F48>     USB
    diagFuncTab <0, 0, sub_173975D8+1>
    diagFuncTab <1, 1, sub_173975F2+1>
    diagFuncTab <2, 2, sub_17397624+1>
-diagTabEnt <0, 0xFF, 0x24, 2, 0, stru_171F9AD8>
+diagTabEnt <0, 0xFF, 0x24, 2, 0, stru_171F9AD8>     PM
    diagFuncTab <0, 0, sub_17464808+1>
    diagFuncTab <1, 1, sub_17464854+1>
-diagTabEnt <0, 0xFF, 0x25, 6, 0, stru_16FCE830>
+diagTabEnt <0, 0xFF, 0x25, 6, 0, stru_16FCE830>     DEBUG
    diagFuncTab <3, 3, sub_172429EA+1>
    diagFuncTab <6, 6, sub_17242A0E+1>
    diagFuncTab <7, 7, sub_17242B80+1>
    diagFuncTab <8, 8, sub_17243148+1>
    diagFuncTab <9, 9, sub_17243234+1>
    diagFuncTab <0xA, 0xA, sub_17243314+1>
-diagTabEnt <0, 0xFF, 0x2A, 5, 0, stru_16FDA0EC>
+diagTabEnt <0, 0xFF, 0x2A, 5, 0, stru_16FDA0EC>     LOGGING
    diagFuncTab <1, 1, sub_B9D31C+1>
    diagFuncTab <2, 2, sub_B9D3A6+1>
    diagFuncTab <3, 3, sub_B9D46A+1>
    diagFuncTab <4, 4, sub_B9D7B4+1>
    diagFuncTab <5, 5, sub_B9DCF2+1>
-diagTabEnt <0, 0xFF, 0x2D, 1, 0, stru_16FEC658>
+diagTabEnt <0, 0xFF, 0x2D, 1, 0, stru_16FEC658>     RRC
    diagFuncTab <0, 0, sub_16E54C04+1>
-diagTabEnt <0, 0xFF, 0x2F, 7, 0, stru_1762AA04>
+diagTabEnt <0, 0xFF, 0x2F, 7, 0, stru_1762AA04>     TCXOMGR
    diagFuncTab <0xF1, 0xF1, sub_17358424+1>
    diagFuncTab <0xF2, 0xF2, sub_173584AC+1>
    diagFuncTab <0xF3, 0xF3, sub_173584D2+1>
@@ -471,48 +471,48 @@ diagTabEnt <0, 0xFF, 0x2F, 7, 0, stru_1762AA04>
    diagFuncTab <0xF5, 0xF5, sub_173585B8+1>
    diagFuncTab <0xF6, 0xF6, sub_1735860E+1>
    diagFuncTab <0xF8, 0xF8, sub_1735874C+1>
-diagTabEnt <0, 0xFF, 0x30, 1, 0, stru_175189AC>
+diagTabEnt <0, 0xFF, 0x30, 1, 0, stru_175189AC>     NV
    diagFuncTab <0, 0, sub_1756F608+1>
-diagTabEnt <0, 0xFF, 0x32, 1, 0, stru_16FCE968>
+diagTabEnt <0, 0xFF, 0x32, 1, 0, stru_16FCE968>     PARAMS/DEBUG
    diagFuncTab <0, 0, sub_16E0199C+1>
-diagTabEnt <0, 0xFF, 0x34, 1, 0, stru_16FDCB24>
+diagTabEnt <0, 0xFF, 0x34, 1, 0, stru_16FDCB24>     DS_ATCOP
    diagFuncTab <0, 0, sub_1726D394+1>
-diagTabEnt <0, 0xFF, 0x38, 3, 0, stru_171F8C88>
+diagTabEnt <0, 0xFF, 0x38, 3, 0, stru_171F8C88>     APIONE
    diagFuncTab <0, 0, sub_1745E550+1>
    diagFuncTab <1, 1, sub_1745E596+1>
    diagFuncTab <2, 2, sub_1745E5FE+1>
-diagTabEnt <0, 0xFF, 0x3C, 2, 0, stru_173FFF88>
+diagTabEnt <0, 0xFF, 0x3C, 2, 0, stru_173FFF88>     FC
    diagFuncTab <1, 1, loc_170280BC+1>
    diagFuncTab <2, 2, sub_17028122+1>
-diagTabEnt <0, 0xFF, 0xFF, 1, 0, stru_16E8BE88>
+diagTabEnt <0, 0xFF, 0xFF, 1, 0, stru_16E8BE88>     LEGACY
    diagFuncTab <0x59, 0x59, sub_1702745E+1>
-diagTabEnt <0, 0xFF, 0xFF, 1, 0, stru_1742ECD0>
+diagTabEnt <0, 0xFF, 0xFF, 1, 0, stru_1742ECD0>     LEGACY
    diagFuncTab <0x6C, 0x6C, sub_1760DC56+1>
-diagTabEnt <0, 0xFF, 0xFF, 2, 0, stru_171F9004>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, stru_171F9004>     LEGACY
    diagFuncTab <0x31, 0x31, sub_16F14480+1>
    diagFuncTab <0x32, 0x32, sub_16F1449C+1>
-diagTabEnt <0, 0xFF, 0xFF, 2, 0, stru_16E8BE90>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, stru_16E8BE90>     LEGACY
    diagFuncTab <0x48, 0x48, sub_17027560+1>
    diagFuncTab <0x49, 0x49, sub_170276DE+1>
-diagTabEnt <0, 0xFF, 0xFF, 2, 0, aD_6>
+diagTabEnt <0, 0xFF, 0xFF, 2, 0, aD_6>              LEGACY
    diagFuncTab <0x44, 0x44, sub_17242474+1>
    diagFuncTab <0x5C, 0x5C, sub_172422B6+1>
-diagTabEnt <0, 0xFF, 0xFF, 3, 0, stru_1740E4F0>
+diagTabEnt <0, 0xFF, 0xFF, 3, 0, stru_1740E4F0>     LEGACY
    diagFuncTab <0x35, 0x35, sub_17030732+1>
    diagFuncTab <0x36, 0x36, sub_1703073E+1>
    diagFuncTab <0x29, 0x29, sub_17030694+1>
-diagTabEnt <0, 0xFF, 0xFF, 4, 0, stru_17627D78>
+diagTabEnt <0, 0xFF, 0xFF, 4, 0, stru_17627D78>     LEGACY
    diagFuncTab <0, 0, sub_1702783C+1>
    diagFuncTab <0x7C, 0x7C, sub_170278F8+1>
    diagFuncTab <1, 1, sub_170278C8+1>
    diagFuncTab <0x3A, 0x3A, sub_17027968+1>
-diagTabEnt <0, 0xFF, 0xFF, 5, 0, stru_17627D50>
+diagTabEnt <0, 0xFF, 0xFF, 5, 0, stru_17627D50>     LEGACY
    diagFuncTab <0x26, 0x26, sub_1756F27E+1>
    diagFuncTab <0x27, 0x27, sub_1756F46C+1>
    diagFuncTab <0x11, 0x11, sub_1756EFDC+1>
    diagFuncTab <0x12, 0x12, sub_1756F048+1>
    diagFuncTab <0x41, 0x41, sub_1756F73C+1>
-diagTabEnt <0, 0xFF, 0xFF, 9, 2, stru_16FCE860>
+diagTabEnt <0, 0xFF, 0xFF, 9, 2, stru_16FCE860>     LEGACY
    diagFuncTab <0x1F, 0x1F, sub_B0D8EA+1>
    diagFuncTab <0x7D, 0x7D, sub_B0D860+1>
    diagFuncTab <0x73, 0x73, sub_B0C7F0+1>
@@ -522,7 +522,7 @@ diagTabEnt <0, 0xFF, 0xFF, 9, 2, stru_16FCE860>
    diagFuncTab <0x60, 0x60, sub_1756EE70+1>
    diagFuncTab <0x81, 0x81, sub_1756EED4+1>
    diagFuncTab <0x82, 0x82, sub_1756EF1E+1>
-diagTabEnt <0, 0xFF, 0xFF, 0x18, 0, stru_16FCE8A8>
+diagTabEnt <0, 0xFF, 0xFF, 0x18, 0, stru_16FCE8A8>      LEGACY
    diagFuncTab <2, 2, sub_16F131A4+1>           peek bytes
    diagFuncTab <3, 3, sub_16F1327C+1>           peek words
    diagFuncTab <4, 4, sub_16F13362+1>           peek doubles
@@ -547,16 +547,16 @@ diagTabEnt <0, 0xFF, 0xFF, 0x18, 0, stru_16FCE8A8>
    diagFuncTab <0x6A, 0x6A, sub_16F13D00+1>
    diagFuncTab <0xA, 0xA, sub_16F1386C+1>
    diagFuncTab <0xB, 0xB, sub_16F138AA+1>
-diagTabEnt <1, 0x80, 0xD, 1, 0, stru_1764FFAC>
+diagTabEnt <1, 0x80, 0xD, 1, 0, stru_1764FFAC>      GPS?  (delayed response?)
    diagFuncTab <0x69, 0x69, sub_1760DA28+1>
-diagTabEnt <1, 0x80, 0xE, 4, 0, stru_16ED0390>
+diagTabEnt <1, 0x80, 0xE, 4, 0, stru_16ED0390>      WMS? (delayed?)
    diagFuncTab <0xC, 0xC, sub_1747F4C8+1>
    diagFuncTab <0xF, 0xF, sub_1747F5D8+1>
    diagFuncTab <0x12, 0x12, sub_1747F66A+1>
    diagFuncTab <0x13, 0x13, sub_1747F6FC+1>
-diagTabEnt <1, 0x80, 0x21, 1, 0, stru_17207EB4>
+diagTabEnt <1, 0x80, 0x21, 1, 0, stru_17207EB4>     GSDI? (delayed?)
    diagFuncTab <0x48, 0x48, sub_172808E6+1>
-diagTabEnt <1, 0x80, 0x35, 1, 0, stru_140E6B0>; qdiag data
+diagTabEnt <1, 0x80, 0x35, 1, 0, stru_140E6B0>      L4LINUX? (delayed?)
    diagFuncTab <1, 0xFFFF, sub_16F58C56+1>
 
 
