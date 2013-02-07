@@ -129,3 +129,29 @@ offset = ent->offset * 64 * 2048
 sz = ent->length * 64 * 2048
 
 
+-----
+In linux, the smd driver finds available smem channels
+and connects to them.  These are:
+
+smd_alloc_channel() 'SMD_RPCCALL' cid=2, shared=e010d9a0
+smd_alloc_channel() 'SMD_DATA5' cid=11, shared=e0119a18
+smd_alloc_channel() 'SMD_DATA6' cid=12, shared=e011da40
+smd_alloc_channel() 'SMD_DATA7' cid=13, shared=e0121a68
+smd_alloc_channel() 'SMD_DATA11' cid=17, shared=e01119c8
+smd_alloc_channel() 'SMD_CS_A2M' cid=33, shared=e01159f0
+smd_alloc_channel() 'SMD_DATA5_CNTL' cid=38, shared=e0125a90
+smd_alloc_channel() 'SMD_DATA6_CNTL' cid=39, shared=e0129ab8
+smd_alloc_channel() 'SMD_DATA7_CNTL' cid=40, shared=e012dae0
+smd_alloc_channel() 'SMD_GPSNMEA' cid=27, shared=e0131b10
+smd_alloc_channel() 'SMD_DS' cid=0, shared=e0135b38
+smd_alloc_channel() 'SMD_DATA1' cid=7, shared=e0139b60
+smd_alloc_channel() 'SMD_DATA2' cid=8, shared=e013db88
+smd_alloc_channel() 'SMD_DATA3' cid=9, shared=e0141bb0
+smd_alloc_channel() 'SMD_DATA4' cid=10, shared=e0145bd8
+
+note: head of htc's kernel git repo has a full list of 58 channels.
+https://www.codeaurora.org/gitweb/quic/la/?p=kernel/msm.git;a=blob_plain;f=arch/arm/mach-msm/smd_tty.c;hb=HEAD
+apparently these aren't all enabled on the adp1 amss, as only
+the above are provided by the amss in smem to the linux kernel.
+
+
